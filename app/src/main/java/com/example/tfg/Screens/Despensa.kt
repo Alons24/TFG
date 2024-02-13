@@ -61,9 +61,6 @@
 
         var productosEncontrados by remember { mutableStateOf(false) }
 
-
-
-
         var datos by remember { mutableStateOf("") }
         val scaffoldState = rememberScrollState()
         val scope = rememberCoroutineScope()
@@ -313,7 +310,7 @@
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .padding(16.dp)
-                                        .height(140.dp),
+                                        .height(390.dp),
                                 ) {
                                     Column(
                                         modifier = Modifier
@@ -322,20 +319,28 @@
                                         verticalArrangement = Arrangement.spacedBy(4.dp)
                                     ) {
                                         Text(
-                                            text = "despensa ${index + 1}",
+                                            text = "DESPENSA: ",
+                                            //${index + 1}
                                             style = TextStyle(
-                                                fontSize = 18.sp,
+                                                fontSize = 30.sp,
                                                 fontWeight = FontWeight.Bold
                                             )
+
+
                                         )
+
                                         Text(
-                                            text = "Tomates: ${producto["Calorias"]}",
-                                            style = TextStyle(fontSize = 16.sp)
+
+                                            text = "Cantidad Tarta: ${producto["CantidadTarta"]}",
+                                            style = TextStyle(fontSize = 20.sp)
                                         )
+
                                         Text(
-                                            text = "Manzana: ${producto["Proteninas"]}",
-                                            style = TextStyle(fontSize = 16.sp)
+                                            text = "Cantidad Tarta: ${producto["CantidadTarta"]}",
+                                            style = TextStyle(fontSize = 20.sp)
                                         )
+
+
 
                                     }
                                 }
