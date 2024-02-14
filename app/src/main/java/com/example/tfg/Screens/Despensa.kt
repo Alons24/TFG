@@ -336,9 +336,15 @@
                                         )
 
                                         Text(
-                                            text = "Cantidad Tarta: ${producto["CantidadTarta"]}",
+                                            text = "Cantidad Patata: ${producto["CantidadPatatas"]}",
+                                        style = TextStyle(fontSize = 20.sp)
+                                        )
+
+                                        Text(
+                                            text = "Cantidad Pimientos: ${producto["CantidadPimientos"]}",
                                             style = TextStyle(fontSize = 20.sp)
                                         )
+
 
 
 
