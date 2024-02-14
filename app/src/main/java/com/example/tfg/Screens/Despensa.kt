@@ -319,7 +319,7 @@
                                         verticalArrangement = Arrangement.spacedBy(4.dp)
                                     ) {
                                         Text(
-                                            text = "DESPENSA: ",
+                                            text = "Cantidad de productos: ",
                                             //${index + 1}
                                             style = TextStyle(
                                                 fontSize = 30.sp,
