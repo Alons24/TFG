@@ -48,16 +48,9 @@ fun MenuPrimero(navController: NavHostController) {
         )
 
 
-        CustomMenuButton("Inicia sesión") {
-            navController.navigate("Despensa")
+        CustomMenuButton("MENU GENERAL") {
+            navController.navigate("MenuBotones")
         }
-
-        Spacer(modifier = Modifier.height(30.dp))
-
-                CustomMenuButton2("Registrate") {
-            navController.navigate("MenuInicio2")
-        }
-
     }
 }
 
@@ -75,21 +68,6 @@ fun CustomMenuButton(text: String, onClickAction: () -> Unit) {
         Text(
             text = text,
             fontSize = 40.sp,
-        )
-    }
-}
-
-@Composable
-fun CustomMenuButton2(text: String, onClickAction: () -> Unit) {
-    Button(
-        onClick = onClickAction,
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(60.dp)
-    ) {
-        Text(
-            text = text,
-            fontSize = 30.sp,
         )
     }
 }

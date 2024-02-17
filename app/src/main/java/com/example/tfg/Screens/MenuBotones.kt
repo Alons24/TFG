@@ -1,5 +1,8 @@
 package com.example.tfg.Screens
 
+import com.example.tfg.navigation.AppScreens
+
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.padding
@@ -17,12 +20,10 @@ import androidx.navigation.NavHostController
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.tfg.navigation.AppScreens
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MenuGeneral(navController: NavHostController) {
+fun MenuBotones(navController: NavHostController) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -53,23 +54,50 @@ fun MenuGeneral(navController: NavHostController) {
         },
         content = { innerPadding ->
             Column(
-                //NO SE PORQUE NO SE PONE EL FONDO NEGRO
-                //PREGUNTAR AL PROFE
                 modifier = Modifier
                     .padding(innerPadding)
-                    .fillMaxSize() // Para ocupar todo el espacio disponible
-                    .padding(16.dp) // Puedes ajustar el valor según tus necesidades
-                    .background(MaterialTheme.colorScheme.background.copy(alpha = 0.8f)) // Color de fondo negro con opacidad
+                    .fillMaxSize()
+                    .padding(16.dp)
+                    .background(MaterialTheme.colorScheme.background.copy(alpha = 0.8f))
                     .padding(16.dp),
                 verticalArrangement = Arrangement.spacedBy(30.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-
-
-
                 Spacer(modifier = Modifier.height(15.dp))
 
 
+                //AÑADIR PRODUCTOS
+                Button(onClick = { navController.navigate(AppScreens.AnadirProducto.ruta) },
+                    modifier = Modifier.width(300.dp)
+                ) {
+                    Text(
+                        text = "AÑADIR PRODUCTOS",
+                        fontSize = 25.sp,
+                    )
+                }
+                //
+                Spacer(modifier = Modifier.height(15.dp))
+
+                Button(
+                    onClick = { navController.navigate("Despensa") },
+                    modifier = Modifier.width(300.dp)
+                ) {
+                    Text(
+                        text = "DESPENSA",
+                        fontSize = 25.sp,
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(15.dp))
+
+                Button(onClick = { navController.navigate(AppScreens.MESAS.ruta) },
+                    modifier = Modifier.width(300.dp)
+                ) {
+                    Text(
+                        text = "MESAS",
+                        fontSize = 25.sp,
+                    )
+                }
 
             }
         }

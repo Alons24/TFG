@@ -36,11 +36,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import com.example.tfg.navigation.AppScreens
 import com.google.firebase.firestore.FirebaseFirestore
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AnadirCliente(navController: NavHostController){
+fun AnadirProducto(navController: NavHostController){
     var id by remember { mutableStateOf("") }
     var nombre by remember { mutableStateOf("") }
 
