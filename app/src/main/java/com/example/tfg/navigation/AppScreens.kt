@@ -11,6 +11,7 @@ sealed class AppScreens(val ruta: String) {
     object Despensa: AppScreens("Despensa")
     object MESAS: AppScreens("MESAS")
     object AnadirProducto:AppScreens("AnadirProducto")
+    object Mesa1:AppScreens("Mesa1")
 
 
 }
