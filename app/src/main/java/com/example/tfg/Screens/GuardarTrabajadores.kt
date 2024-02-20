@@ -1,29 +1,12 @@
-package com.example.tfg.Screens
-
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.*
+
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -32,25 +15,25 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
-import com.example.tfg.navigation.AppScreens
 import com.google.firebase.firestore.FirebaseFirestore
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AnadirProducto(navController: NavHostController){
+fun AnadirTrabajador(navController: NavHostController) {
+
+
     var id by remember { mutableStateOf("") }
     var nombre by remember { mutableStateOf("") }
+    var apellido by remember { mutableStateOf("") }
 
     var mensajeConfirmacion by remember { mutableStateOf("") }
+
     val db = FirebaseFirestore.getInstance()
-    val coleccion = "despensa"
-
-
-/*TENGO QUE METER EL CAJÓN LATERAL*/
+    val coleccion = "trabajadores"
 
     Scaffold(
         topBar = {
@@ -60,12 +43,12 @@ fun AnadirProducto(navController: NavHostController){
                     titleContentColor = Color.Black, // Cambia el color del título
                 ),
                 title = {
-                    Text("GUARDAR PRODUCTOS")
+                    Text("GUARDAR TRABAJADORES")
                 },
                 navigationIcon = {
                     IconButton(onClick = { navController.navigate("MenuInicio") }) {
                         Icon(
-                            imageVector = Icons.Filled.ArrowBack,
+                            imageVector = Icons.Default.ArrowBack,
                             contentDescription = "Localized description"
                         )
                     }
@@ -73,7 +56,7 @@ fun AnadirProducto(navController: NavHostController){
                 actions = {
                     IconButton(onClick = { navController.navigate("MenuInicio") }) {
                         Icon(
-                            imageVector = Icons.Filled.Menu,
+                            imageVector = Icons.Default.Menu,
                             contentDescription = "Localized description"
                         )
                     }
@@ -89,6 +72,7 @@ fun AnadirProducto(navController: NavHostController){
                     modifier = Modifier.fillMaxWidth(),
                     textAlign = TextAlign.Center,
                     text = " FÁCIL, PERSONAL, CONFIABLE",
+                    //style = MaterialTheme.typography.caption
                 )
             }
         },
@@ -96,6 +80,7 @@ fun AnadirProducto(navController: NavHostController){
         Column(
             modifier = Modifier
                 .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background)
                 .padding(innerPadding),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
@@ -105,61 +90,75 @@ fun AnadirProducto(navController: NavHostController){
                 onValueChange = { id = it },
                 singleLine = true,
                 label = {
-                    Text("Introduzca su id")
-                }
+                    Text("Introduzca su ID")
+                },
+                keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number)
             )
 
-            Spacer(modifier = Modifier.height(15.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
             OutlinedTextField(
                 value = nombre,
                 onValueChange = { nombre = it },
                 singleLine = true,
                 label = {
-                    Text("Introduzca su nombre")
+                    Text("Introduzca su Nombre")
                 }
             )
 
+            Spacer(modifier = Modifier.height(16.dp))
 
-            Spacer(modifier = Modifier.height(15.dp))
+            OutlinedTextField(
+                value = apellido,
+                onValueChange = { apellido = it },
+                singleLine = true,
+                label = {
+                    Text("Introduzca su Apellido")
+                }
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
 
             Button(
-
                 onClick = {
-
                     db.collection(coleccion)
                         .document(id)
-                        .set(hashMapOf(
-                            "id" to id,
-                            "nombre" to nombre,
-
-                        ))
+                        .set(
+                            hashMapOf(
+                                "id" to id,
+                                "nombre" to nombre,
+                                "apellido" to apellido,
+                            )
+                        )
                         .addOnSuccessListener {
                             mensajeConfirmacion = "Datos guardados correctamente :)"
                             id = ""
                             nombre = ""
-
+                            apellido = ""
                         }
                         .addOnFailureListener {
                             mensajeConfirmacion = "No se ha podido guardar :("
                             id = ""
                             nombre = ""
-
+                            apellido = ""
                         }
                 },
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFF4CAF50),
+                    //backgroundColor = Color(0xFF4CAF50),
                     contentColor = Color.Yellow
                 ),
                 border = BorderStroke(1.dp, Color.Black)
             ) {
-                Text(text = "Guardar")
+                Text(text = "Guardar Trabajador")
             }
 
-            Spacer(modifier = Modifier.size(10.dp))
-            Text(text = mensajeConfirmacion)
+            Spacer(modifier = Modifier.size(16.dp))
+            Text(
+                text = mensajeConfirmacion,
+                //style = MaterialTheme.typography.caption,
+                color = Color.Red
+            )
+
         }
     }
-
-
 }

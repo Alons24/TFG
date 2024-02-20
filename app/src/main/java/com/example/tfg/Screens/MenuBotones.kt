@@ -71,7 +71,7 @@ fun MenuBotones(navController: NavHostController) {
                     modifier = Modifier.width(300.dp)
                 ) {
                     Text(
-                        text = "AÑADIR PRODUCTOS",
+                        text = "AÑADIR TRABAJADORES",
                         fontSize = 25.sp,
                     )
                 }
@@ -81,6 +81,7 @@ fun MenuBotones(navController: NavHostController) {
                 Button(
                     onClick = { navController.navigate("Despensa") },
                     modifier = Modifier.width(300.dp)
+
                 ) {
                     Text(
                         text = "DESPENSA",

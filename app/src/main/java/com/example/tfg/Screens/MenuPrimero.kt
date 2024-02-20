@@ -48,7 +48,7 @@ fun MenuPrimero(navController: NavHostController) {
         )
 
 
-        CustomMenuButton("MENU GENERAL") {
+        CustomMenuButton("ACCEDER") {
             navController.navigate("MenuBotones")
         }
     }
