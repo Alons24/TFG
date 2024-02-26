@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ExitToApp
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.Menu
@@ -59,29 +60,41 @@ fun Despensa(navController: NavHostController) {
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ){
                     // Opciones de navegación
-                    Icon(
-                        imageVector = Icons.Default.Person,
-                        contentDescription = "Profile",
-                        modifier = Modifier.size(24.dp)
-                    )
-                    Text("Perfil")
 
-                    Icon(
-                        imageVector = Icons.Default.Settings,
-                        contentDescription = "Settings",
-                        modifier = Modifier.size(24.dp)
-                    )
-                    Text("Configuración")
+                    //Icono del perfil
+                    IconButton(onClick = { navController.navigate("MenuBotones") }) {
+                        Icon(
+                            imageVector = Icons.Default.Person,
+                            contentDescription = "Profile",
+                            modifier = Modifier.size(24.dp)
+                        )
+                        Text("Perfil")
+                    }
+
+                    //Icono Configuración
+                    IconButton(onClick = {navController.navigate("MenuBotones")}) {
+                        Icon(
+                            imageVector = Icons.Default.Settings,
+                            contentDescription = "Settings",
+                            modifier = Modifier.size(24.dp)
+                        )
+                        Text("Configuración")
+                    }
 
 
 
-                    // Opción para cerrar sesión u otra acción
-                    Icon(
-                        imageVector = Icons.Default.ExitToApp,
-                        contentDescription = "Logout",
-                        modifier = Modifier.size(24.dp)
-                    )
-                    Text("Cerrar sesión")
+                    IconButton(onClick = {"MenuBotones"}) {
+                        // Opción para cerrar sesión u otra acción
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ExitToApp,
+                            contentDescription = "Logout",
+                            modifier = Modifier.size(24.dp)
+                        )
+                        Text("Cerrar sesión")
+                    }
+
+
+
                 }
             }
 
