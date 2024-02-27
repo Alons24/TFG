@@ -1,4 +1,4 @@
-package com.example.tfg.Screens
+package com.example.tfg.Screens.Trabajadores
 
 import androidx.navigation.NavHostController
 import com.example.tfg.navigation.AppScreens
