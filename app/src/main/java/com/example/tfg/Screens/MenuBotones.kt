@@ -1,8 +1,6 @@
 package com.example.tfg.Screens
 
 import com.example.tfg.navigation.AppScreens
-
-
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.padding
@@ -21,12 +19,17 @@ import androidx.navigation.NavHostController
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.ExitToApp
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -77,8 +80,6 @@ fun MenuBotones(navController: NavHostController) {
                         Text("Configuración")
                     }
 
-
-
                     IconButton(onClick = { "MenuBotones" }) {
                         // Opción para cerrar sesión u otra acción
                         Icon(
@@ -88,93 +89,131 @@ fun MenuBotones(navController: NavHostController) {
                         )
                         Text("Cerrar sesión")
                     }
-
-
                 }
             }
-
         },
     ) {
         Scaffold(
             topBar = {
                 CenterAlignedTopAppBar(
                     colors = TopAppBarDefaults.mediumTopAppBarColors(
-                        containerColor = MaterialTheme.colorScheme.primaryContainer,
-                        titleContentColor = MaterialTheme.colorScheme.primary,
+                        containerColor = Color.Blue, // Cambia el color de fondo
+                        titleContentColor = Color.White, // Cambia el color del título
                     ),
                     title = {
-                        Text("MENÚ DE CLIENTES 1")
+                        Text("MENU")
                     },
                     navigationIcon = {
-                        IconButton(onClick = { navController.navigate("Menu") }) {
+                        IconButton(onClick = { navController.navigate("Acceso") }) {
                             Icon(
                                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                                contentDescription = "Localized description"
+                                contentDescription = "Localized description",
+                                tint=Color.White
                             )
                         }
                     },
                     actions = {
-                        IconButton(onClick = { navController.navigate("Menu") }) {
+                        IconButton(onClick = { scope.launch { drawerState.open() } }) {
                             Icon(
                                 imageVector = Icons.Filled.Menu,
-                                contentDescription = "Localized description"
+                                contentDescription = "Menu",
+                                tint=Color.White
                             )
                         }
                     }
                 )
             },
-            content = { innerPadding ->
-                Column(
-                    modifier = Modifier
-                        .padding(innerPadding)
-                        .fillMaxSize()
-                        .padding(16.dp)
-                        .background(MaterialTheme.colorScheme.background.copy(alpha = 0.8f))
-                        .padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(30.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally,
+            bottomBar = {
+                BottomAppBar(
+                    containerColor = Color.Blue,
+                    contentColor = MaterialTheme.colorScheme.primary,
                 ) {
-                    Spacer(modifier = Modifier.height(15.dp))
+                    // Icono
+                    BottomNavigationItem(
+                        selected = false,
+                        onClick = {/*QUE HAGA ALGOOOOOOOOOOOOOOOO*/},
+                        modifier = Modifier.weight(1f),
+                        icon = {
+                            Icon(imageVector = Icons.Default.DateRange, contentDescription = "Search", tint = Color.White)
+                        },
+                    )
 
+                    // Icono Adicional
+                    BottomNavigationItem(
+                        selected = false,
+                        onClick = {
+                            /* Código para la acción del segundo ícono */
+                        },
+                        modifier = Modifier.weight(1f),
+                        icon = {
+                            Icon(imageVector = Icons.Default.AccountCircle, contentDescription = "YourIcon", tint = Color.White)
+                        },
+                    )
+                }
+            },
+        ) { innerPadding ->
+            Column(
+                modifier = Modifier
+                    .padding(innerPadding)
+                    .fillMaxSize()
+                    .padding(16.dp)
+                    .background(MaterialTheme.colorScheme.background.copy(alpha = 0.8f))
+                    .padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(30.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                Spacer(modifier = Modifier.height(15.dp))
 
-                    //AÑADIR PRODUCTOS
-                    Button(
-                        onClick = { navController.navigate(AppScreens.AnadirTrabajador.ruta) },
-                        modifier = Modifier.width(300.dp)
-                    ) {
-                        Text(
-                            text = "AÑADIR TRABAJADORES",
-                            fontSize = 25.sp,
-                        )
-                    }
-                    //
-                    Spacer(modifier = Modifier.height(15.dp))
+                //AÑADIR PRODUCTOS
+                Button(
+                    onClick = { navController.navigate(AppScreens.AnadirTrabajador.ruta) },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .width(300.dp)
+                        .height(100.dp),
+                    shape = RectangleShape,
+                    colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
+                ) {
+                    Text(
+                        text = "AÑADIR TRABAJADORES",
+                        fontSize = 25.sp,
+                    )
+                }
 
-                    Button(
-                        onClick = { navController.navigate("Despensa") },
-                        modifier = Modifier.width(300.dp)
+                Spacer(modifier = Modifier.height(15.dp))
 
-                    ) {
-                        Text(
-                            text = "DESPENSA",
-                            fontSize = 25.sp,
-                        )
-                    }
+                Button(
+                    onClick = { navController.navigate(AppScreens.Despensa.ruta) },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .width(300.dp)
+                        .height(100.dp),
+                    shape = RectangleShape,
+                    colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
+                ) {
+                    Text(
+                        text = "DESPENSA",
+                        fontSize = 25.sp,
+                    )
+                }
 
-                    Spacer(modifier = Modifier.height(15.dp))
+                Spacer(modifier = Modifier.height(15.dp))
 
-                    Button(
-                        onClick = { navController.navigate(AppScreens.MESAS.ruta) },
-                        modifier = Modifier.width(300.dp)
-                    ) {
-                        Text(
-                            text = "MESAS",
-                            fontSize = 25.sp,
-                        )
-                    }
-
+                Button(
+                    onClick = { navController.navigate(AppScreens.MESAS.ruta) },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .width(300.dp)
+                        .height(100.dp),
+                    shape = RectangleShape,
+                    colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
+                ) {
+                    Text(
+                        text = "MESAS",
+                        fontSize = 25.sp,
+                    )
                 }
             }
-        )
+        }
     }
 }

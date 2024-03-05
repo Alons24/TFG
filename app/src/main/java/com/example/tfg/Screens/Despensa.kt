@@ -179,8 +179,6 @@ fun Despensa(navController: NavHostController) {
 
 
 
-                    // Resto del contenido de la pantalla...
-
                     if (productosEncontrados) {
                         productos.value.forEachIndexed { index, producto ->
                             Card(
@@ -202,11 +200,8 @@ fun Despensa(navController: NavHostController) {
                                             fontWeight = FontWeight.Bold
                                         )
                                     )
-
-                                    Text(
-                                        text = "Cantidad Tarta: ${producto["CantidadTarta"]}",
-                                        style = TextStyle(fontSize = 25.sp)
-                                    )
+                                    /*DEBERÍAMOS PONER SOLO COSAS SLOTEBALES*/
+                                    //Como por ejemplo Cervezas o botellas de Cocacolas
 
                                     Text(
                                         text = "Cantidad Patata: ${producto["CantidadPatatas"]}",

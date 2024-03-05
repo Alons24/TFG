@@ -19,12 +19,12 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 
 import androidx.compose.foundation.layout.height
+import androidx.compose.material3.ButtonDefaults
 
 import androidx.compose.runtime.Composable
-
-
-
-
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
+import com.example.tfg.navigation.AppScreens
 
 
 @Composable
@@ -47,28 +47,22 @@ fun MenuPrimero(navController: NavHostController) {
                 .width(300.dp)
         )
 
-
-        CustomMenuButton("ACCEDER") {
-            navController.navigate("MenuBotones")
+        Button(
+            onClick = { navController.navigate(AppScreens.MenuBotones.ruta) },
+            modifier = Modifier
+                .fillMaxWidth()
+                .width(300.dp)
+                .height(100.dp),
+            shape = RectangleShape,
+            colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
+        ) {
+            Text(
+                text = "ACCEDER",
+                fontSize = 25.sp,
+            )
         }
+
     }
 }
 
-
-
-
-@Composable
-fun CustomMenuButton(text: String, onClickAction: () -> Unit) {
-    Button(
-        onClick = onClickAction,
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(60.dp)
-    ) {
-        Text(
-            text = text,
-            fontSize = 40.sp,
-        )
-    }
-}
 

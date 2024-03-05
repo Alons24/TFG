@@ -35,7 +35,6 @@ fun AppNavigation() {
         composable(AppScreens.Mesa2.ruta){Mesa2(navigationController)}
         composable(AppScreens.Mesa2.ruta){AnadirTrabajador(navigationController)}
 
-
         }
 
 }
