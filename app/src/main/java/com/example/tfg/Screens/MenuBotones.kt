@@ -196,7 +196,7 @@ fun MenuBotones(navController: NavHostController) {
                 }
 
                 Button(
-                    onClick = { navController.navigate(AppScreens.Despensa.ruta) },
+                    onClick = { navController.navigate(AppScreens.InicioSesion.ruta) },
                     modifier = Modifier
                         .fillMaxWidth()
                         .width(300.dp)
@@ -205,7 +205,7 @@ fun MenuBotones(navController: NavHostController) {
                     colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
                 ) {
                     Text(
-                        text = "DESPENSA",
+                        text = "INICIO DE SESIÓN",
                         fontSize = 25.sp,
                     )
                 }
