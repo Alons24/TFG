@@ -39,60 +39,43 @@ fun MenuBotones(navController: NavHostController) {
     val scope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
 
+    /*Inicio del cajón lateral*/
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
-            // Contenido del cajón de navegación
-            Box(
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .background(Color.Gray) // Puedes cambiar el color o usar otra imagen como fondo
-                    .padding(16.dp)
-                    .width(200.dp) // Ancho del cajón lateral
-                    .offset(x = if (drawerState.isOpen) 0.dp else (-200).dp) // Desplazar hacia la izquierda cuando está cerrado
-            ) {
+            ModalDrawerSheet {
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(Color.Gray) // Puedes cambiar el color o usar otra imagen como fondo
                         .padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                    verticalArrangement = Arrangement.spacedBy(16.dp),
                 ) {
-                    // Opciones de navegación
-
-                    //Icono del perfil
-                    IconButton(onClick = { navController.navigate("MenuBotones") }) {
-                        Icon(
-                            imageVector = Icons.Default.Person,
-                            contentDescription = "Profile",
-                            modifier = Modifier.size(24.dp)
+                    //BOTÓN PARA BOLVER AL MENÚ DE INICIO
+                    // Otros elementos del menú lateral
+                    Button(
+                        onClick = { navController.navigate(AppScreens.Despensa.ruta) },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .width(300.dp)
+                            .height(100.dp),
+                        shape = RectangleShape,
+                        colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
+                    ) {
+                        Text(
+                            text = "DESPENSA",
+                            fontSize = 25.sp,
                         )
-                        Text("Perfil")
                     }
 
-                    //Icono Configuración
-                    IconButton(onClick = { navController.navigate("MenuBotones") }) {
-                        Icon(
-                            imageVector = Icons.Default.Settings,
-                            contentDescription = "Settings",
-                            modifier = Modifier.size(24.dp)
-                        )
-                        Text("Configuración")
-                    }
 
-                    IconButton(onClick = { "MenuBotones" }) {
-                        // Opción para cerrar sesión u otra acción
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ExitToApp,
-                            contentDescription = "Logout",
-                            modifier = Modifier.size(24.dp)
-                        )
-                        Text("Cerrar sesión")
-                    }
+
+
+                    //FIN DE LOS BOTONES DEL MENÚ LATERAL
                 }
             }
         },
     ) {
+        //Fin del cajón lateral y enpieza el Scaffold
         Scaffold(
             topBar = {
                 CenterAlignedTopAppBar(
@@ -104,7 +87,7 @@ fun MenuBotones(navController: NavHostController) {
                         Text("MENU")
                     },
                     navigationIcon = {
-                        IconButton(onClick = { navController.navigate("Acceso") }) {
+                        IconButton(onClick = { navController.navigate("MenuPrimero") }) {
                             Icon(
                                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                                 contentDescription = "Localized description",
@@ -164,7 +147,7 @@ fun MenuBotones(navController: NavHostController) {
             ) {
                 Spacer(modifier = Modifier.height(15.dp))
 
-                //AÑADIR PRODUCTOS
+                //AÑADIR TRABAJADORES
                 Button(
                     onClick = { navController.navigate(AppScreens.AnadirTrabajador.ruta) },
                     modifier = Modifier
@@ -196,6 +179,54 @@ fun MenuBotones(navController: NavHostController) {
                         fontSize = 25.sp,
                     )
                 }
+
+                Button(
+                    onClick = { navController.navigate(AppScreens.Despensa.ruta) },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .width(300.dp)
+                        .height(100.dp),
+                    shape = RectangleShape,
+                    colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
+                ) {
+                    Text(
+                        text = "DESPENSA",
+                        fontSize = 25.sp,
+                    )
+                }
+
+                Button(
+                    onClick = { navController.navigate(AppScreens.Despensa.ruta) },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .width(300.dp)
+                        .height(100.dp),
+                    shape = RectangleShape,
+                    colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
+                ) {
+                    Text(
+                        text = "DESPENSA",
+                        fontSize = 25.sp,
+                    )
+                }
+
+
+                Button(
+                    onClick = { navController.navigate(AppScreens.Despensa.ruta) },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .width(300.dp)
+                        .height(100.dp),
+                    shape = RectangleShape,
+                    colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
+                ) {
+                    Text(
+                        text = "DESPENSA",
+                        fontSize = 25.sp,
+                    )
+                }
+
+
 
                 Spacer(modifier = Modifier.height(15.dp))
 
