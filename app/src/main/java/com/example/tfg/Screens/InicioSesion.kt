@@ -32,7 +32,7 @@ fun InicioSesion(navController: NavHostController, viewModel: LoginViewModel) {
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        Login(Modifier.align(Alignment.Center), viewModel)
+                Login(Modifier.align(Alignment.Center), viewModel)
     }
 }
 

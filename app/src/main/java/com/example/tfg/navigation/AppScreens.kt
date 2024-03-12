@@ -13,9 +13,9 @@ sealed class AppScreens(val ruta: String) {
     object AnadirTrabajador:AppScreens("AnadirProducto")
     object Mesa1:AppScreens("Mesa1")
     object Mesa2:AppScreens("Mesa2")
-    object InicioSesion:AppScreens("InicioSesion")
+    object InicioSesion:AppScreens("Mesa2")
 
-    //Falta crear el objeto de inicio de Sesion en El AppScreens y en AppNavigation.
+
 
 
 }

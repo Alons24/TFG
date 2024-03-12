@@ -1,8 +1,8 @@
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 
 import com.example.tfg.Screens.Despensa
@@ -24,6 +24,7 @@ import com.example.tfg.navigation.AppScreens
 @Composable
 fun AppNavigation() {
     val navigationController = rememberNavController()
+    //val viewModel= NavHostController()
     //Declaramos en startDestination la pantalla en la que va a empezar.
     NavHost(navController = navigationController, startDestination = AppScreens.MenuPrimero.ruta)
     {
@@ -34,9 +35,13 @@ fun AppNavigation() {
         composable(AppScreens.Mesa1.ruta){Mesa1(navigationController)}
         composable(AppScreens.Mesa2.ruta){Mesa2(navigationController)}
         composable(AppScreens.Mesa2.ruta){AnadirTrabajador(navigationController)}
+        //composable(AppScreens.InicioSesion.ruta){ InicioSesion(navigationController)}
 
         }
 
 }
+
+
+
 
 

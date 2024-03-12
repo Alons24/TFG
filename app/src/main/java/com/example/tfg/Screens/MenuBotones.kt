@@ -145,7 +145,8 @@ fun MenuBotones(navController: NavHostController) {
                 verticalArrangement = Arrangement.spacedBy(30.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                Spacer(modifier = Modifier.height(15.dp))
+
+                /*
 
                 //AÑADIR TRABAJADORES
                 Button(
@@ -164,9 +165,10 @@ fun MenuBotones(navController: NavHostController) {
                 }
 
                 Spacer(modifier = Modifier.height(15.dp))
+                */
 
                 Button(
-                    onClick = { navController.navigate(AppScreens.Despensa.ruta) },
+                    onClick = { navController.navigate(AppScreens.MESAS.ruta) },
                     modifier = Modifier
                         .fillMaxWidth()
                         .width(300.dp)
@@ -175,7 +177,7 @@ fun MenuBotones(navController: NavHostController) {
                     colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
                 ) {
                     Text(
-                        text = "DESPENSA",
+                        text = "MESAS",
                         fontSize = 25.sp,
                     )
                 }
@@ -194,6 +196,14 @@ fun MenuBotones(navController: NavHostController) {
                         fontSize = 25.sp,
                     )
                 }
+                /*
+                no lo dudo jajajajaja
+
+                les debes de tener acojonados a los pobres
+
+
+
+                * */
 
                 Button(
                     onClick = { navController.navigate(AppScreens.InicioSesion.ruta) },
@@ -210,40 +220,6 @@ fun MenuBotones(navController: NavHostController) {
                     )
                 }
 
-
-                Button(
-                    onClick = { navController.navigate(AppScreens.Despensa.ruta) },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .width(300.dp)
-                        .height(100.dp),
-                    shape = RectangleShape,
-                    colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
-                ) {
-                    Text(
-                        text = "DESPENSA",
-                        fontSize = 25.sp,
-                    )
-                }
-
-
-
-                Spacer(modifier = Modifier.height(15.dp))
-
-                Button(
-                    onClick = { navController.navigate(AppScreens.MESAS.ruta) },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .width(300.dp)
-                        .height(100.dp),
-                    shape = RectangleShape,
-                    colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
-                ) {
-                    Text(
-                        text = "MESAS",
-                        fontSize = 25.sp,
-                    )
-                }
             }
         }
     }
