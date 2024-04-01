@@ -1,4 +1,4 @@
-package com.example.tfg.Screens.Trabajadores
+package com.example.tfg.Screens.PantallasTrabajadores.Trabajadores
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height

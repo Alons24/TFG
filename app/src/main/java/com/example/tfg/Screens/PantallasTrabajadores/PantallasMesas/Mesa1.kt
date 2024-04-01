@@ -1,4 +1,4 @@
-package com.example.tfg.Screens.PantallasMesas
+package com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas
 
 import android.util.Log
 import androidx.compose.foundation.Image

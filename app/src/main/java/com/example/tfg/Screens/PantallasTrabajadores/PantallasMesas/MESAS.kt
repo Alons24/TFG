@@ -1,4 +1,4 @@
-package com.example.tfg.Screens.PantallasMesas
+package com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
