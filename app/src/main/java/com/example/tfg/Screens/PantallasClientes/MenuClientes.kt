@@ -64,7 +64,7 @@ fun MenuClientes(navController: NavHostController) {
                     //BOTÓN PARA BOLVER AL MENÚ DE INICIO
                     // Otros elementos del menú lateral
                     Button(
-                        onClick = { navController.navigate(AppScreens.Despensa.ruta) },
+                        onClick = { navController.navigate(AppScreens.DejarResena.ruta) },
                         modifier = Modifier
                             .fillMaxWidth()
                             .width(300.dp)
@@ -73,10 +73,11 @@ fun MenuClientes(navController: NavHostController) {
                         colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
                     ) {
                         Text(
-                            text = "DESPENSA",
+                            text = "EJEMPLO",
                             fontSize = 25.sp,
                         )
                     }
+
 
                     //FIN DE LOS BOTONES DEL MENÚ LATERAL
                 }
@@ -93,7 +94,7 @@ fun MenuClientes(navController: NavHostController) {
                         titleContentColor = Color.White, // Cambia el color del título
                     ),
                     title = {
-                        Text("MENU")
+                        Text("MENU CLIENTES")
                     },
                     navigationIcon = {
                         IconButton(onClick = { navController.navigate("MenuPrimero") }) {
@@ -134,9 +135,7 @@ fun MenuClientes(navController: NavHostController) {
                     // Icono Adicional
                     BottomNavigationItem(
                         selected = false,
-                        onClick = {
-                            /* Código para la acción del segundo ícono */
-                        },
+                        onClick = {/* Código para la acción del segundo ícono */},
                         modifier = Modifier.weight(1f),
                         icon = {
                             Icon(imageVector = Icons.Default.AccountCircle, contentDescription = "YourIcon", tint = Color.White)
@@ -158,7 +157,7 @@ fun MenuClientes(navController: NavHostController) {
 
 
                 Button(
-                    onClick = { navController.navigate(AppScreens.MESAS.ruta) },
+                    onClick = { navController.navigate(AppScreens.DejarResena.ruta) },
                     modifier = Modifier
                         .fillMaxWidth()
                         .width(300.dp)
@@ -167,7 +166,7 @@ fun MenuClientes(navController: NavHostController) {
                     colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
                 ) {
                     Text(
-                        text = "MESAS",
+                        text = "Escaner QR",
                         fontSize = 25.sp,
                     )
                 }
@@ -182,7 +181,23 @@ fun MenuClientes(navController: NavHostController) {
                     colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
                 ) {
                     Text(
-                        text = "DESPENSA",
+                        text = "MENÚ PLATOS",
+                        fontSize = 25.sp,
+                    )
+                }
+
+
+                Button(
+                    onClick = { /*navController.navigate(AppScreens.Despensa.ruta)*/ },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .width(300.dp)
+                        .height(100.dp),
+                    shape = RectangleShape,
+                    colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
+                ) {
+                    Text(
+                        text = "DEJAR RESEÑA",
                         fontSize = 25.sp,
                     )
                 }

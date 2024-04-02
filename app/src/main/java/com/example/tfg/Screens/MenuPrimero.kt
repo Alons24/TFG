@@ -66,7 +66,7 @@ fun MenuPrimero(navController: NavHostController) {
         /*HACER ALGO DE CONTACTLESS*/
         // Botón 2: ACCEDER CLIENTES
         Button(
-            onClick = { navController.navigate(AppScreens.MenuBotones.ruta) },
+            onClick = { navController.navigate(AppScreens.MenuClientes.ruta) },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(100.dp)
