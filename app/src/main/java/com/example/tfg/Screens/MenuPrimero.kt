@@ -56,7 +56,7 @@ fun MenuPrimero(navController: NavHostController) {
             colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
         ) {
             Text(
-                text = "ACCEDER TRABAJADORES",
+                text = "ACCEDER ALONSADORES",
                 fontSize = 25.sp,
             )
         }
