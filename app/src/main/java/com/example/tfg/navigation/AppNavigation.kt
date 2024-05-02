@@ -39,7 +39,7 @@ fun AppNavigation() {
 
         composable(AppScreens.MenuClientes.ruta){MenuClientes(navigationController)}
         composable(AppScreens.InicioSesion.ruta){InicioSesion(navigationController)}
-        composable(AppScreens.Login.ruta){ Login(navigationController)}
+
 
 
 
