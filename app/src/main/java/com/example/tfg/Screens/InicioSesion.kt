@@ -24,7 +24,7 @@ import com.example.tfg.modelo.LoginViewModel
 import kotlinx.coroutines.launch
 
 
-
+/*
 @Composable
 fun InicioSesion(navController: NavHostController, viewModel: LoginViewModel) {
     Box(
@@ -37,7 +37,7 @@ fun InicioSesion(navController: NavHostController, viewModel: LoginViewModel) {
 }
 
 @Composable
-fun Login(modifier: Modifier, viewModel: LoginViewModel) {
+fun Login(modifier: NavHostController, viewModel: LoginViewModel) {
 
     val email: String by viewModel.email.observeAsState(initial = "")
     val password: String by viewModel.password.observeAsState(initial = "")
@@ -147,3 +147,4 @@ fun HeaderImage(modifier: Modifier) {
     )
 }
 
+    */  //Fin de la clase InicioSesion

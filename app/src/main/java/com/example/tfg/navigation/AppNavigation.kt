@@ -1,9 +1,10 @@
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.tfg.Screens.Login
+
 
 
 import com.example.tfg.Screens.PantallasTrabajadores.Trabajadores.Despensa
@@ -12,11 +13,11 @@ import com.example.tfg.Screens.MenuBotones
 
 
 import com.example.tfg.Screens.MenuPrimero
+import com.example.tfg.Screens.PantallasClientes.Login
 import com.example.tfg.Screens.PantallasClientes.MenuClientes
 import com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas.Mesa
 import com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas.Mesa1
 import com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas.Mesa2
-
 import com.example.tfg.navigation.AppScreens
 
 
@@ -25,7 +26,6 @@ import com.example.tfg.navigation.AppScreens
 @Composable
 fun AppNavigation() {
     val navigationController = rememberNavController()
-    //val viewModel= NavHostController()
     //Declaramos en startDestination la pantalla en la que va a empezar.
     NavHost(navController = navigationController, startDestination = AppScreens.MenuPrimero.ruta)
     {
@@ -36,10 +36,9 @@ fun AppNavigation() {
         composable(AppScreens.Mesa1.ruta){ Mesa1(navigationController) }
         composable(AppScreens.Mesa2.ruta){ Mesa2(navigationController) }
         composable(AppScreens.Mesa2.ruta){AnadirTrabajador(navigationController)}
-
         composable(AppScreens.MenuClientes.ruta){MenuClientes(navigationController)}
         composable(AppScreens.InicioSesion.ruta){InicioSesion(navigationController)}
-
+        composable(AppScreens.Login.ruta){Login(navigationController)}
 
 
 
@@ -48,6 +47,7 @@ fun AppNavigation() {
         }
 
 }
+
 
 
 
