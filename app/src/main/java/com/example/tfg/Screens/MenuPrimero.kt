@@ -98,7 +98,7 @@ fun MenuPrimero(navController: NavHostController) {
 
         // Botón 4: REGISTRO
         Button(
-            onClick = { navController.navigate(AppScreens.Login.ruta) },
+            onClick = { navController.navigate(AppScreens.pantallaLogin.ruta) },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(100.dp)
