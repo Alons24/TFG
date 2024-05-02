@@ -40,7 +40,7 @@ fun AppNavigation() {
         composable(AppScreens.MenuClientes.ruta){MenuClientes(navigationController)}
         composable(AppScreens.InicioSesion.ruta){InicioSesion(navigationController)}
         composable(AppScreens.pantallaLogin.ruta){pantallaLogin(navigationController) }
-
+    //alonso bujarron
 
 
 
