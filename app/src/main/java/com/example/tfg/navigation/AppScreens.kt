@@ -20,7 +20,7 @@ sealed class AppScreens(val ruta: String) {
 
     object InicioSesion:AppScreens("InicioSesion")
 
-    object Login:AppScreens("Login")
+    object pantallaLogin:AppScreens("pantallaLogin")
 
 
 

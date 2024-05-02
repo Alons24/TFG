@@ -13,6 +13,7 @@ import com.example.tfg.Screens.MenuBotones
 
 import com.example.tfg.Screens.MenuPrimero
 import com.example.tfg.Screens.PantallasClientes.MenuClientes
+import com.example.tfg.Screens.PantallasClientes.pantallaLogin
 import com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas.Mesa
 import com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas.Mesa1
 import com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas.Mesa2
@@ -40,6 +41,7 @@ fun AppNavigation() {
         composable(AppScreens.MenuClientes.ruta){MenuClientes(navigationController)}
         composable(AppScreens.InicioSesion.ruta){InicioSesion(navigationController)}
 
+        composable(AppScreens.pantallaLogin.ruta){pantallaLogin(navigationController)}
 
 
 

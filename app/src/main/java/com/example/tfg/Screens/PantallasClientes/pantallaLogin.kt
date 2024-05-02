@@ -1,4 +1,4 @@
-package com.example.tfg.Screens
+package com.example.tfg.Screens.PantallasClientes
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -27,7 +27,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import com.example.tfg.navigation.AppScreens
 
 @Composable
-fun MenuPrimero(navController: NavHostController) {
+fun pantallaLogin(navController: NavHostController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -61,57 +61,7 @@ fun MenuPrimero(navController: NavHostController) {
             )
         }
 
-        // Botón 2: ACCEDER CLIENTES
-        Button(
-            onClick = { navController.navigate(AppScreens.MenuClientes.ruta) },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(100.dp)
-                .padding(vertical = 15.dp)
-                .weight(1f),  // Ajusta el tamaño del botón en relación con otros elementos
-            shape = RectangleShape,
-            colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
-        ) {
-            Text(
-                text = "ACCEDER CLIENTES",
-                fontSize = 25.sp,
-            )
-        }
 
-        // Botón 3: INICIO DE SESIÓN
-        Button(
-            onClick = { navController.navigate(AppScreens.InicioSesion.ruta) },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(100.dp)
-                .padding(vertical = 15.dp)
-                .weight(1f),  // Ajusta el tamaño del botón en relación con otros elementos
-            shape = RectangleShape,
-            colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
-        ) {
-            Text(
-                text = "INICIO DE SESIÓN",
-                fontSize = 25.sp,
-            )
-        }
-
-
-        // Botón 4: REGISTRO
-        Button(
-            onClick = { navController.navigate(AppScreens.pantallaLogin.ruta) },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(100.dp)
-                .padding(vertical = 15.dp)
-                .weight(1f),  // Ajusta el tamaño del botón en relación con otros elementos
-            shape = RectangleShape,
-            colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
-        ) {
-            Text(
-                text = "REGISTRARSE",
-                fontSize = 25.sp,
-            )
-        }
 
 
 
