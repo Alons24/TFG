@@ -16,7 +16,7 @@ import androidx.navigation.NavHostController
 import com.example.tfg.R
 
 @Composable
-fun Login (navController: NavHostController) {
+fun pantallaLogin (navController: NavHostController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
