@@ -39,9 +39,9 @@ fun MenuPrimero(navController: NavHostController) {
             painter = painterResource(R.drawable.logo_cerveceria_montemayor),
             contentDescription = "TÍTULO DE LA EMPRESA",
             modifier = Modifier
-                .padding(22.dp)
-                .height(500.dp)
-                .width(300.dp)
+                .padding(vertical = 22.dp)
+                .height(200.dp)
+                .width(200.dp)
         )
 
         // Botón 1: ACCEDER TRABAJADORES
@@ -61,9 +61,6 @@ fun MenuPrimero(navController: NavHostController) {
             )
         }
 
-
-        /*ESTE BOTÓN TIENE QUE LLEVAR A LOS CLIENTES AL LECTOR DE CÓDIGOS QR*/
-        /*HACER ALGO DE CONTACTLESS*/
         // Botón 2: ACCEDER CLIENTES
         Button(
             onClick = { navController.navigate(AppScreens.MenuClientes.ruta) },
@@ -80,5 +77,43 @@ fun MenuPrimero(navController: NavHostController) {
                 fontSize = 25.sp,
             )
         }
+
+        // Botón 3: INICIO DE SESIÓN
+        Button(
+            onClick = { navController.navigate(AppScreens.InicioSesion.ruta) },
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(100.dp)
+                .padding(vertical = 15.dp)
+                .weight(1f),  // Ajusta el tamaño del botón en relación con otros elementos
+            shape = RectangleShape,
+            colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
+        ) {
+            Text(
+                text = "INICIO DE SESIÓN",
+                fontSize = 25.sp,
+            )
+        }
+
+
+        // Botón 4: REGISTRO
+        Button(
+            onClick = { navController.navigate(AppScreens.Login.ruta) },
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(100.dp)
+                .padding(vertical = 15.dp)
+                .weight(1f),  // Ajusta el tamaño del botón en relación con otros elementos
+            shape = RectangleShape,
+            colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
+        ) {
+            Text(
+                text = "REGISTRARSE",
+                fontSize = 25.sp,
+            )
+        }
+
+
+
     }
 }

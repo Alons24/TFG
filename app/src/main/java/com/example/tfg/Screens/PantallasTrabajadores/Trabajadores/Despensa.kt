@@ -1,4 +1,4 @@
-package com.example.tfg.Screens.PantallasTrabajadores
+package com.example.tfg.Screens.PantallasTrabajadores.Trabajadores
 
 import android.util.Log
 import androidx.compose.foundation.background

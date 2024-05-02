@@ -3,8 +3,10 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.tfg.Screens.Login
 
-import com.example.tfg.Screens.PantallasTrabajadores.Despensa
+
+import com.example.tfg.Screens.PantallasTrabajadores.Trabajadores.Despensa
 import com.example.tfg.Screens.MenuBotones
 
 
@@ -34,15 +36,20 @@ fun AppNavigation() {
         composable(AppScreens.Mesa1.ruta){ Mesa1(navigationController) }
         composable(AppScreens.Mesa2.ruta){ Mesa2(navigationController) }
         composable(AppScreens.Mesa2.ruta){AnadirTrabajador(navigationController)}
-        //composable(AppScreens.InicioSesion.ruta){ InicioSesion(navigationController)}
 
         composable(AppScreens.MenuClientes.ruta){MenuClientes(navigationController)}
+        composable(AppScreens.InicioSesion.ruta){InicioSesion(navigationController)}
+        composable(AppScreens.Login.ruta){ Login(navigationController)}
+
+
 
 
 
         }
 
 }
+
+
 
 
 

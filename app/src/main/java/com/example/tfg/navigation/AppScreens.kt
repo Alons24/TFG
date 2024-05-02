@@ -13,11 +13,14 @@ sealed class AppScreens(val ruta: String) {
     object AnadirTrabajador:AppScreens("AnadirProducto")
     object Mesa1:AppScreens("Mesa1")
     object Mesa2:AppScreens("Mesa2")
-    object InicioSesion:AppScreens("Mesa2")
 
     object MenuClientes:AppScreens("MenuClientes")
 
     object DejarResena:AppScreens("DejarResena")
+
+    object InicioSesion:AppScreens("InicioSesion")
+
+    object Login:AppScreens("Login")
 
 
 
