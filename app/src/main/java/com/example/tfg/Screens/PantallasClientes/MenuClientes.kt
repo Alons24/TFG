@@ -117,6 +117,7 @@ fun MenuClientes(navController: NavHostController) {
                 )
             },
 
+
             bottomBar = {
                 BottomAppBar(
                     containerColor = Color.Blue,

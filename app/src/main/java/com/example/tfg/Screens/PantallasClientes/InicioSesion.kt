@@ -40,12 +40,35 @@ fun InicioSesion(navController: NavHostController) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Inicia sesión con tu cuenta", fontSize = 30.sp, fontWeight = FontWeight.Bold)
+        Text(text = "INICIA SESIÓN", fontSize = 30.sp, fontWeight = FontWeight.Bold)
         Spacer(modifier = Modifier.height(20.dp))
         Text(text ="Bienvenido de nuevo", fontSize = 20.sp, color = Color.Gray)
+
+        var nombre by rememberSaveable { mutableStateOf("") }
+        OutlinedTextField(
+            value = nombre,
+            onValueChange = { nombre = it },
+            singleLine = true,
+            label = {
+                Text("Introduzca su nombre")
+            }
+        )
+
+        var contrasena by rememberSaveable { mutableStateOf("") }
+        OutlinedTextField(
+            value = contrasena,
+            onValueChange = { contrasena = it },
+            singleLine = true,
+            label = {
+                Text("Introduzca su contrasena")
+            }
+        )
+
         RedesSocialesButtons()
         Divider()
         EmailLoginSection()
+
+
         Spacer(modifier = Modifier.height(30.dp))
         var correo by rememberSaveable { mutableStateOf("") }
         var password by rememberSaveable { mutableStateOf("") }
@@ -66,8 +89,11 @@ fun InicioSesion(navController: NavHostController) {
 
         Spacer(modifier = Modifier.size(10.dp))
         ClickableLogin("¿No tienes cuenta?", "Regístrate") {
-            navController.navigate("registro")
+            navController.navigate("pantallaLogin")
         }
+
+
+
     }
 }
 
@@ -81,8 +107,12 @@ private fun RedesSocialesButtons() {
         SocialButton(R.drawable.banner_facebook) {
             // Acción al hacer clic en el botón de Facebook
         }
+
     }
 }
+
+
+
 
 @Composable
 private fun SocialButton(iconResId: Int, onClick: () -> Unit) {
