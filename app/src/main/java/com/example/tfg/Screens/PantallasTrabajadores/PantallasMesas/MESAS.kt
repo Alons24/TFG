@@ -5,10 +5,13 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.ExitToApp
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Settings
@@ -39,100 +42,99 @@ fun Mesa(navController: NavHostController) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
 
 
+    /*Inicio del cajón lateral*/
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
-            // Contenido del cajón de navegación
-            Box(
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .background(Color.Gray) // Puedes cambiar el color o usar otra imagen como fondo
-                    .padding(16.dp)
-                    .width(200.dp) // Ancho del cajón lateral
-                    .offset(x = if (drawerState.isOpen) 0.dp else (-200).dp) // Desplazar hacia la izquierda cuando está cerrado
-            ) {
+            ModalDrawerSheet {
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(Color.Gray) // Puedes cambiar el color o usar otra imagen como fondo
                         .padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                    verticalArrangement = Arrangement.spacedBy(16.dp),
                 ) {
-                    // Opciones de navegación
-
-                    //Icono del perfil
-                    IconButton(onClick = { navController.navigate("MenuBotones") }) {
-                        Icon(
-                            imageVector = Icons.Default.Person,
-                            contentDescription = "Profile",
-                            modifier = Modifier.size(24.dp)
+                    //BOTÓN PARA BOLVER AL MENÚ DE INICIO
+                    // Otros elementos del menú lateral
+                    Button(
+                        onClick = { navController.navigate(AppScreens.Despensa.ruta) },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .width(300.dp)
+                            .height(100.dp),
+                        shape = RectangleShape,
+                        colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
+                    ) {
+                        Text(
+                            text = "DESPENSA",
+                            fontSize = 25.sp,
                         )
-                        Text("Perfil")
                     }
 
-                    //Icono Configuración
-                    IconButton(onClick = { navController.navigate("MenuBotones") }) {
-                        Icon(
-                            imageVector = Icons.Default.Settings,
-                            contentDescription = "Settings",
-                            modifier = Modifier.size(24.dp)
-                        )
-                        Text("Configuración")
-                    }
-
-
-
-                    IconButton(onClick = { "MenuBotones" }) {
-                        // Opción para cerrar sesión u otra acción
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ExitToApp,
-                            contentDescription = "Logout",
-                            modifier = Modifier.size(24.dp)
-                        )
-                        Text("Cerrar sesión")
-                    }
-
-
+                    //FIN DE LOS BOTONES DEL MENÚ LATERAL
                 }
             }
-
         },
     ) {
 
+        //Fin del cajón lateral y enpieza el Scaffold
+
         Scaffold(
             topBar = {
-                TopAppBar(
+                CenterAlignedTopAppBar(
                     colors = TopAppBarDefaults.mediumTopAppBarColors(
-                        containerColor = Color.Green,
-                        titleContentColor = Color.Black,
+                        containerColor = Color.Blue, // Cambia el color de fondo
+                        titleContentColor = Color.White, // Cambia el color del título
                     ),
-                    title = { Text("MESAS") },
+                    title = {
+                        Text("MESAS")
+                    },
                     navigationIcon = {
-                        IconButton(onClick = { navController.navigate("MenuBotones") }) {
+                        IconButton(onClick = { navController.navigate("MenuPrimero") }) {
                             Icon(
                                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                                contentDescription = "Localized description"
+                                contentDescription = "Localized description",
+                                tint=Color.White
                             )
                         }
                     },
                     actions = {
-                        IconButton(onClick = { scope.launch { /*drawerState.open()*/ } }) {
-                            Icon(imageVector = Icons.Filled.Menu, contentDescription = "Menu")
+                        IconButton(onClick = { scope.launch { drawerState.open() } }) {
+                            Icon(
+                                imageVector = Icons.Filled.Menu,
+                                contentDescription = "Menu",
+                                tint=Color.White
+                            )
                         }
                     }
                 )
             },
             bottomBar = {
                 BottomAppBar(
-                    content = {
-                        Text(
-                            modifier = Modifier.fillMaxWidth(),
-                            textAlign = TextAlign.Center,
-                            text = "CONFIANZA, SEGURIDAD, SENCILLEZ",
-                            style = TextStyle(color = Color.White) // Ajustar color según sea necesario
-                        )
-                    }
-                )
+                    containerColor = Color.Blue,
+                    contentColor = MaterialTheme.colorScheme.primary,
+                ) {
+                    // Icono
+                    BottomNavigationItem(
+                        selected = false,
+                        onClick = {/*QUE HAGA ALGOOOOOOOOOOOOOOOO*/},
+                        modifier = Modifier.weight(1f),
+                        icon = {
+                            Icon(imageVector = Icons.Default.DateRange, contentDescription = "Search", tint = Color.White)
+                        },
+                    )
+
+                    // Icono Adicional
+                    BottomNavigationItem(
+                        selected = false,
+                        onClick = {
+                            /* Código para la acción del segundo ícono */
+                        },
+                        modifier = Modifier.weight(1f),
+                        icon = {
+                            Icon(imageVector = Icons.Default.AccountCircle, contentDescription = "YourIcon", tint = Color.White)
+                        },
+                    )
+                }
             },
         ) { innerPadding ->
             Box(
@@ -166,7 +168,7 @@ fun Mesa(navController: NavHostController) {
                         // Añade un botón al final de la Column
 
                         Button(
-                            onClick = { navController.navigate(AppScreens.Despensa.ruta) },
+                            onClick = { navController.navigate(AppScreens.Mesa1.ruta) },
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .width(300.dp)

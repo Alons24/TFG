@@ -16,23 +16,32 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.ExitToApp
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -43,6 +52,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -51,6 +61,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.tfg.R
+import com.example.tfg.navigation.AppScreens
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
@@ -69,84 +80,97 @@ fun Mesa1(navController: NavHostController) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
 
 
+    /*Inicio del cajón lateral*/
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
-            // Contenido del cajón de navegación
-            Box(
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .background(Color.Gray) // Puedes cambiar el color o usar otra imagen como fondo
-                    .padding(16.dp)
-                    .width(200.dp) // Ancho del cajón lateral
-                    .offset(x = if (drawerState.isOpen) 0.dp else (-200).dp) // Desplazar hacia la izquierda cuando está cerrado
-            ) {
+            ModalDrawerSheet {
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(Color.Gray) // Puedes cambiar el color o usar otra imagen como fondo
                         .padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                    verticalArrangement = Arrangement.spacedBy(16.dp),
                 ) {
-                    // Opciones de navegación
-                    Icon(
-                        imageVector = Icons.Default.Person,
-                        contentDescription = "Profile",
-                        modifier = Modifier.size(24.dp)
-                    )
-                    Text("Perfil")
+                    //BOTÓN PARA BOLVER AL MENÚ DE INICIO
+                    // Otros elementos del menú lateral
+                    Button(
+                        onClick = { navController.navigate(AppScreens.Despensa.ruta) },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .width(300.dp)
+                            .height(100.dp),
+                        shape = RectangleShape,
+                        colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
+                    ) {
+                        Text(
+                            text = "DESPENSA",
+                            fontSize = 25.sp,
+                        )
+                    }
 
-                    Icon(
-                        imageVector = Icons.Default.Settings,
-                        contentDescription = "Settings",
-                        modifier = Modifier.size(24.dp)
-                    )
-                    Text("Configuración")
-
-
-                    // Opción para cerrar sesión u otra acción
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ExitToApp,
-                        contentDescription = "Logout",
-                        modifier = Modifier.size(24.dp)
-                    )
-                    Text("Cerrar sesión")
+                    //FIN DE LOS BOTONES DEL MENÚ LATERAL
                 }
             }
-
         },
     ) {
 
         Scaffold(
             topBar = {
-                TopAppBar(
-                    title = { Text("MESA 1") },
+                CenterAlignedTopAppBar(
+                    colors = TopAppBarDefaults.mediumTopAppBarColors(
+                        containerColor = Color.Blue, // Cambia el color de fondo
+                        titleContentColor = Color.White, // Cambia el color del título
+                    ),
+                    title = {
+                        Text("MESA 1")
+                    },
                     navigationIcon = {
-                        IconButton(onClick = { navController.navigate("MenuInicio") }) {
+                        IconButton(onClick = { navController.navigate("MESAS") }) {
                             Icon(
                                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                                contentDescription = "Localized description"
+                                contentDescription = "Localized description",
+                                tint=Color.White
                             )
                         }
                     },
                     actions = {
-                        IconButton(onClick = { scope.launch { /*drawerState.open()*/ } }) {
-                            Icon(imageVector = Icons.Filled.Menu, contentDescription = "Menu")
+                        IconButton(onClick = { scope.launch { drawerState.open() } }) {
+                            Icon(
+                                imageVector = Icons.Filled.Menu,
+                                contentDescription = "Menu",
+                                tint=Color.White
+                            )
                         }
                     }
                 )
             },
             bottomBar = {
                 BottomAppBar(
-                    content = {
-                        Text(
-                            modifier = Modifier.fillMaxWidth(),
-                            textAlign = TextAlign.Center,
-                            text = "CONFIANZA, SEGURIDAD, SENCILLEZ",
-                            style = TextStyle(color = Color.Black) // Ajustar color según sea necesario
-                        )
-                    }
-                )
+                    containerColor = Color.Blue,
+                    contentColor = MaterialTheme.colorScheme.primary,
+                ) {
+                    // Icono
+                    BottomNavigationItem(
+                        selected = false,
+                        onClick = {/*QUE HAGA ALGOOOOOOOOOOOOOOOO*/},
+                        modifier = Modifier.weight(1f),
+                        icon = {
+                            Icon(imageVector = Icons.Default.DateRange, contentDescription = "Search", tint = Color.White)
+                        },
+                    )
+
+                    // Icono Adicional
+                    BottomNavigationItem(
+                        selected = false,
+                        onClick = {
+                            /* Código para la acción del segundo ícono */
+                        },
+                        modifier = Modifier.weight(1f),
+                        icon = {
+                            Icon(imageVector = Icons.Default.AccountCircle, contentDescription = "YourIcon", tint = Color.White)
+                        },
+                    )
+                }
             },
         ) { innerPadding ->
             Box(

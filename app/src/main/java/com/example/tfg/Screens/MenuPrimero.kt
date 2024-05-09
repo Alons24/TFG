@@ -28,6 +28,8 @@ import com.example.tfg.navigation.AppScreens
 
 @Composable
 fun MenuPrimero(navController: NavHostController) {
+
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -56,7 +58,7 @@ fun MenuPrimero(navController: NavHostController) {
             colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
         ) {
             Text(
-                text = "ACCEDER ALONSADORE TRABAJADORES",
+                text = "ACCESO TRABAJADORES",
                 fontSize = 25.sp,
             )
         }
