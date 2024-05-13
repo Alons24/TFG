@@ -75,6 +75,27 @@ fun pantallaLogin (navController: NavHostController) {
             }
         )
 
+        var correo by rememberSaveable { mutableStateOf("") }
+        OutlinedTextField(
+            value = correo,
+            onValueChange = { correo = it },
+            singleLine = true,
+            label = {
+                Text("Introduzca su correo")
+            }
+        )
+
+        var contrasena by rememberSaveable { mutableStateOf("") }
+        OutlinedTextField(
+            value = contrasena,
+            onValueChange = { contrasena = it },
+            singleLine = true,
+            label = {
+                Text("Introduzca su contraseña")
+            }
+        )
+
+
         Button(
             onClick = {
                 // Lógica de inicio de sesión
@@ -86,7 +107,7 @@ fun pantallaLogin (navController: NavHostController) {
             colors = ButtonDefaults.buttonColors(Color(59, 64, 72, 255)),
         ) {
             Text(
-                text = "LOG IN",
+                text = "REGISTRARSE",
                 fontSize = 20.sp,
                 color = Color.White
             )
