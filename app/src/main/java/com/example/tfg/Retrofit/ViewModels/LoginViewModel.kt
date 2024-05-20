@@ -1,4 +1,4 @@
-package com.example.tfg.modelo
+package com.example.tfg.Retrofit.ViewModels
 
 import android.util.Patterns
 import androidx.lifecycle.LiveData
