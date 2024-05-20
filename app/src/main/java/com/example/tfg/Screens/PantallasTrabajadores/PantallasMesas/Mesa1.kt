@@ -17,15 +17,20 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.ExitToApp
+import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -103,7 +108,23 @@ fun Mesa1(navController: NavHostController) {
                         colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
                     ) {
                         Text(
-                            text = "DESPENSA",
+                            text = "EJEMPLO",
+                            fontSize = 25.sp,
+                        )
+                    }
+
+
+                    Button(
+                        onClick = { navController.navigate(AppScreens.Despensa.ruta) },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .width(300.dp)
+                            .height(100.dp),
+                        shape = RectangleShape,
+                        colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
+                    ) {
+                        Text(
+                            text = "EJEMPLO 2",
                             fontSize = 25.sp,
                         )
                     }
@@ -139,6 +160,7 @@ fun Mesa1(navController: NavHostController) {
                                 imageVector = Icons.Filled.Menu,
                                 contentDescription = "Menu",
                                 tint=Color.White
+
                             )
                         }
                     }
@@ -149,27 +171,55 @@ fun Mesa1(navController: NavHostController) {
                     containerColor = Color.Blue,
                     contentColor = MaterialTheme.colorScheme.primary,
                 ) {
+
                     // Icono
                     BottomNavigationItem(
                         selected = false,
-                        onClick = {/*QUE HAGA ALGOOOOOOOOOOOOOOOO*/},
+                        onClick = {/*TIENE QUE ENVIAR LA INFORMACIÓN A LA BASE DE DATOS
+                        TRAS PULDAR*/},
                         modifier = Modifier.weight(1f),
+
                         icon = {
-                            Icon(imageVector = Icons.Default.DateRange, contentDescription = "Search", tint = Color.White)
+                            Icon(imageVector = Icons.Default.MoreVert, contentDescription = "OPCIONES", tint = Color.White)
+                            /*PROVISIONAL*/Text(text = "Opciones", fontSize = 20.sp, fontWeight = FontWeight.Black)
+                            /*Estoy mirando como mejorarlo */
                         },
                     )
 
-                    // Icono Adicional
+
+                    // Icono
                     BottomNavigationItem(
                         selected = false,
-                        onClick = {
-                            /* Código para la acción del segundo ícono */
-                        },
+                        onClick = {/*TIENE QUE ENVIAR LA INFORMACIÓN A LA BASE DE DATOS
+                        TRAS PULDAR*/},
                         modifier = Modifier.weight(1f),
                         icon = {
-                            Icon(imageVector = Icons.Default.AccountCircle, contentDescription = "YourIcon", tint = Color.White)
+                            Icon(imageVector = Icons.Default.AccountBox, contentDescription = "TICKET", tint = Color.White)
                         },
                     )
+
+                    // Icono
+                    BottomNavigationItem(
+                        selected = false,
+                        onClick = {/*TIENE QUE ENVIAR LA INFORMACIÓN A LA BASE DE DATOS
+                        TRAS PULDAR*/},
+                        modifier = Modifier.weight(1f),
+                        icon = {
+                            Icon(imageVector = Icons.Default.ShoppingCart, contentDescription = "COBRAR", tint = Color.White)
+                        },
+                    )
+
+                    // Icono
+                    BottomNavigationItem(
+                        selected = false,
+                        onClick = {/*TIENE QUE ENVIAR LA INFORMACIÓN A LA BASE DE DATOS
+                        TRAS PULDAR*/},
+                        modifier = Modifier.weight(1f),
+                        icon = {
+                            Icon(imageVector = Icons.Default.CheckCircle, contentDescription = "ENVIAR", tint = Color.White)
+                        },
+                    )
+
                 }
             },
         ) { innerPadding ->
@@ -210,7 +260,35 @@ fun Mesa1(navController: NavHostController) {
                         }
                     }
 
-                    /**/
+                    var NumComensales by remember { mutableStateOf("") }
+                    OutlinedTextField(
+                        value = NumComensales,
+                        onValueChange = { NumComensales = it },
+                        singleLine = true,
+                        label = {
+                            Text("¿Cuántos comensales? ")
+                        }
+                    )
+
+
+                    /*AHORA ME DEBERÍA DE LLEVAR A UNA PANTALLA NUEVA CON MENÚ QUE CONTENGA LOS BOTONES DE:
+                    * FUERA DE CARTA
+                    * BACADILLOS
+                    * CERVEZAS
+                    * TOSTADAS
+                    * CAFES
+                    * REFRESCOS*/
+
+
+
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(60.dp)
+                    ) {
+                        Text(text = "LISTA", fontSize = 30.sp, fontWeight = FontWeight.Bold)
+                    }
+
 
                     // Usamos LaunchedEffect para cargar los datos cuando la pantalla se carga por primera vez
                     LaunchedEffect(Unit) {
@@ -227,19 +305,6 @@ fun Mesa1(navController: NavHostController) {
                             }
                     }
 
-                    // Adding the missing curly brace and fixing the misplaced modifier
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(60.dp)
-                    ) {
-                        Text(
-                            text = "LISTA:",
-                            style = TextStyle(fontSize = 30.sp)
-
-
-                        )
-                    }
 
                     if (productosEncargados) {
                         productosMesa1.value.forEachIndexed { index, pedido ->
@@ -255,13 +320,7 @@ fun Mesa1(navController: NavHostController) {
                                         .padding(16.dp),
                                     verticalArrangement = Arrangement.spacedBy(4.dp)
                                 ) {
-                                    /*Text(
-                                        text = "Cliente ${index + 1}",
-                                        style = TextStyle(
-                                            fontSize = 18.sp,
-                                            fontWeight = FontWeight.Bold
-                                        )
-                                    )*/
+
                                     Text(
                                         text = "Cantidad productos: ${pedido["Tomates"]}",
                                         style = TextStyle(
@@ -279,10 +338,7 @@ fun Mesa1(navController: NavHostController) {
                         )
                     }
 
-                    /**/
 
-                    /*IDEA: HACER QUE DESDE EL APARTADO DE MESA 1 (QUE CADA MESA TENGA UNO) SE PUEDAN METER PRODUCTOS.
-                            * Y QUE SE GUARDEN EN UNA BASE DE DATOS (FIREBASE)*/
                 }
             }
         }

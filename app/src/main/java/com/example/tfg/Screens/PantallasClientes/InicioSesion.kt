@@ -91,9 +91,6 @@ fun InicioSesion(navController: NavHostController) {
         ClickableLogin("¿No tienes cuenta?", "Regístrate") {
             navController.navigate("pantallaLogin")
         }
-
-
-
     }
 }
 

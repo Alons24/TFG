@@ -126,7 +126,7 @@ fun MenuClientes(navController: NavHostController) {
                     // Icono
                     BottomNavigationItem(
                         selected = false,
-                        onClick = {/*QUE HAGA ALGOOOOOOOOOOOOOOOO*/},
+                        onClick = {navController.navigate("Perfil")},
                         modifier = Modifier.weight(1f),
                         icon = {
                             Icon(imageVector = Icons.Default.DateRange, contentDescription = "Search", tint = Color.White)
@@ -136,7 +136,7 @@ fun MenuClientes(navController: NavHostController) {
                     // Icono Adicional
                     BottomNavigationItem(
                         selected = false,
-                        onClick = {/* Código para la acción del segundo ícono */},
+                        onClick = {navController.navigate("Perfil")},
                         modifier = Modifier.weight(1f),
                         icon = {
                             Icon(imageVector = Icons.Default.AccountCircle, contentDescription = "YourIcon", tint = Color.White)
@@ -173,7 +173,7 @@ fun MenuClientes(navController: NavHostController) {
                 }
 
                 Button(
-                    onClick = { navController.navigate(AppScreens.Despensa.ruta) },
+                    onClick = { navController.navigate(AppScreens.Carta.ruta) },
                     modifier = Modifier
                         .fillMaxWidth()
                         .width(300.dp)
@@ -183,6 +183,22 @@ fun MenuClientes(navController: NavHostController) {
                 ) {
                     Text(
                         text = "MENÚ PLATOS",
+                        fontSize = 25.sp,
+                    )
+                }
+
+
+                Button(
+                    onClick = { navController.navigate(AppScreens.Perfil.ruta) },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .width(300.dp)
+                        .height(100.dp),
+                    shape = RectangleShape,
+                    colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
+                ) {
+                    Text(
+                        text = "PERFIL",
                         fontSize = 25.sp,
                     )
                 }
@@ -202,7 +218,6 @@ fun MenuClientes(navController: NavHostController) {
                         fontSize = 25.sp,
                     )
                 }
-
 
             }
         }

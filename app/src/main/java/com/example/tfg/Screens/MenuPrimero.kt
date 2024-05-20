@@ -95,25 +95,5 @@ fun MenuPrimero(navController: NavHostController) {
             )
         }
 
-
-        // Botón 4: REGISTRO
-        Button(
-            onClick = { navController.navigate(AppScreens.pantallaLogin.ruta) },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(100.dp)
-                .padding(vertical = 15.dp)
-                .weight(1f),  // Ajusta el tamaño del botón en relación con otros elementos
-            shape = RectangleShape,
-            colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
-        ) {
-            Text(
-                text = "REGISTRARSE",
-                fontSize = 25.sp,
-            )
-        }
-
-
-
     }
 }

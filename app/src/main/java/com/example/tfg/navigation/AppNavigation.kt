@@ -1,5 +1,6 @@
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -11,6 +12,7 @@ import com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas.Mesa
 import com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas.Mesa1
 import com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas.Mesa2
 import com.example.tfg.Screens.PantallasClientes.pantallaLogin
+import com.example.tfg.Screens.Perfil
 import com.example.tfg.navigation.AppScreens
 
 
@@ -33,6 +35,8 @@ fun AppNavigation() {
         composable(AppScreens.MenuClientes.ruta){MenuClientes(navigationController)}
         composable(AppScreens.InicioSesion.ruta){InicioSesion(navigationController)}
         composable(AppScreens.pantallaLogin.ruta){pantallaLogin(navigationController) }
+        composable(AppScreens.Perfil.ruta){ Perfil(navigationController)}
+        //composable(AppScreens.Perfil.ruta){ AppScreens.Carta(navigationController) }
 
     //alonso bujarron
 
@@ -40,7 +44,6 @@ fun AppNavigation() {
         }
 
 }
-
 
 
 
