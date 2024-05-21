@@ -20,7 +20,9 @@ sealed class AppScreens(val ruta: String) {
 
     object Perfil:AppScreens("Perfil")
 
-    object Carta: AppScreens("Carta")
+    object Carta: AppScreens("CartaEntrantes")
+
+    object MenuCategorias:AppScreens("MenuCategorias")
 
 
 

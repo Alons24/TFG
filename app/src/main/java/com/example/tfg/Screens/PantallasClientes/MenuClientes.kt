@@ -173,7 +173,7 @@ fun MenuClientes(navController: NavHostController) {
                 }
 
                 Button(
-                    onClick = { navController.navigate(AppScreens.Carta.ruta) },
+                    onClick = { navController.navigate(AppScreens.MenuCategorias.ruta) },
                     modifier = Modifier
                         .fillMaxWidth()
                         .width(300.dp)

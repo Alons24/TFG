@@ -129,11 +129,12 @@ fun Mesa1(navController: NavHostController) {
                         )
                     }
 
-                    //FIN DE LOS BOTONES DEL MENÚ LATERAL
+
                 }
             }
         },
     ) {
+        //FIN DE LOS BOTONES DEL MENÚ LATERAL
 
         Scaffold(
             topBar = {
@@ -327,7 +328,6 @@ fun Mesa1(navController: NavHostController) {
                                             fontSize = 18.sp,
                                             fontWeight = FontWeight.Bold)
                                     )
-
                                 }
                             }
                         }

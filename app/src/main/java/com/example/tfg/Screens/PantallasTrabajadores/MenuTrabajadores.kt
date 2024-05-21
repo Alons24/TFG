@@ -1,46 +1,37 @@
-package com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas
+package com.example.tfg.Screens.PantallasTrabajadores
 
-import androidx.compose.foundation.Image
+import com.example.tfg.navigation.AppScreens
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.BottomNavigationItem
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.automirrored.filled.ExitToApp
-import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.example.tfg.R
 
-import com.example.tfg.navigation.AppScreens
-import com.google.firebase.firestore.FirebaseFirestore
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Mesa(navController: NavHostController) {
+fun MenuBotones(navController: NavHostController) {
+
     val scaffoldState = rememberScrollState()
     val scope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-
 
     /*Inicio del cajón lateral*/
     ModalNavigationDrawer(
@@ -66,7 +57,7 @@ fun Mesa(navController: NavHostController) {
                     ) {
                         Text(
                             text = "DESPENSA",
-                            fontSize = 50.sp,
+                            fontSize = 25.sp,
                         )
                     }
 
@@ -75,9 +66,8 @@ fun Mesa(navController: NavHostController) {
             }
         },
     ) {
-
+        
         //Fin del cajón lateral y enpieza el Scaffold
-
         Scaffold(
             topBar = {
                 CenterAlignedTopAppBar(
@@ -86,8 +76,7 @@ fun Mesa(navController: NavHostController) {
                         titleContentColor = Color.White, // Cambia el color del título
                     ),
                     title = {
-                        Text("MESAS")
-
+                        Text("MENU TRABAJADORES")
                     },
                     navigationIcon = {
                         IconButton(onClick = { navController.navigate("MenuPrimero") }) {
@@ -127,9 +116,7 @@ fun Mesa(navController: NavHostController) {
                     // Icono Adicional
                     BottomNavigationItem(
                         selected = false,
-                        onClick = {
-                            /* Código para la acción del segundo ícono */
-                        },
+                        onClick = {},
                         modifier = Modifier.weight(1f),
                         icon = {
                             Icon(imageVector = Icons.Default.AccountCircle, contentDescription = "YourIcon", tint = Color.White)
@@ -138,82 +125,71 @@ fun Mesa(navController: NavHostController) {
                 }
             },
         ) { innerPadding ->
-            Box(
+            Column(
                 modifier = Modifier
                     .padding(innerPadding)
-                    .verticalScroll(state = scaffoldState)
+                    .fillMaxSize()
+                    .padding(16.dp)
+                    .background(MaterialTheme.colorScheme.background.copy(alpha = 0.8f))
+                    .padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(30.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                Column(
+
+                Button(
+                    onClick = { navController.navigate(AppScreens.MESAS.ruta) },
                     modifier = Modifier
-                        .fillMaxSize()
-                        .padding(innerPadding),
-                    verticalArrangement = Arrangement.spacedBy(16.dp),
+                        .fillMaxWidth()
+                        .width(300.dp)
+                        .height(100.dp),
+                    shape = RectangleShape,
+                    colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
                 ) {
-
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(16.dp),
-                        verticalArrangement = Arrangement.spacedBy(4.dp)
-                    ) {
-                        /*INICIO*/
-                        Image(
-                            painter = painterResource(R.drawable.mesa),
-                            contentDescription = "MESA 1",
-                            modifier = Modifier
-                                .padding(22.dp)
-                                .height(500.dp)
-                                .width(300.dp)
-                        )
-
-                        // Añade un botón al final de la Column
-
-                        Button(
-                            onClick = { navController.navigate(AppScreens.Mesa1.ruta) },
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .width(300.dp)
-                                .height(100.dp),
-                            shape = RectangleShape,
-                            colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
-                        ) {
-                            Text(
-                                text = "Accede a Mesa 1",
-                                fontSize = 25.sp,
-                            )
-                        }
-                        /*FIN*/
-                        Spacer(modifier = Modifier.height(16.dp))
-                        /*INICIO*/
-                        Image(
-                            painter = painterResource(R.drawable.mesa),
-                            contentDescription = "MESA 2",
-                            modifier = Modifier
-                                .padding(22.dp)
-                                .height(500.dp)
-                                .width(300.dp)
-                        )
-
-
-                        Button(
-                            onClick = { navController.navigate(AppScreens.Mesa2.ruta) },
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .width(300.dp)
-                                .height(100.dp),
-                            shape = RectangleShape,
-                            colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
-                        ) {
-                            Text(
-                                text = "Accede a Mesa 2",
-                                fontSize = 25.sp,
-                            )
-                        }
-
-                        /*FIN*/
-
-                    }
+                    Text(
+                        text = "MESAS",
+                        fontSize = 25.sp,
+                    )
                 }
+
+                Button(
+                    onClick = { navController.navigate(AppScreens.Despensa.ruta) },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .width(300.dp)
+                        .height(100.dp),
+                    shape = RectangleShape,
+                    colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
+                ) {
+                    Text(
+                        text = "DESPENSA",
+                        fontSize = 25.sp,
+                    )
+                }
+                /*
+                no lo dudo jajajajaja
+
+                les debes de tener acojonados a los pobres
+
+
+
+                * */
+
+                Button(
+                    onClick = { navController.navigate(AppScreens.InicioSesion.ruta) },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .width(300.dp)
+                        .height(100.dp),
+                    shape = RectangleShape,
+                    colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
+                ) {
+                    Text(
+                        text = "INICIO DE SESIÓN",
+                        fontSize = 25.sp,
+                    )
+                }
+
+
             }
         }
     }
