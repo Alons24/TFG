@@ -24,6 +24,8 @@ sealed class AppScreens(val ruta: String) {
 
     object MenuCategorias:AppScreens("MenuCategorias")
 
+    object Reservas:AppScreens("Rerservas")
+
 
 
 }

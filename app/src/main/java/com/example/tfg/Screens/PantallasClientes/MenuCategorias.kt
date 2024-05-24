@@ -1,6 +1,6 @@
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -35,14 +35,10 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.example.tfg.R
 import com.example.tfg.navigation.AppScreens
 import kotlinx.coroutines.launch
 
@@ -77,7 +73,7 @@ fun MenuCategorias(navController: NavHostController) {
                     ) {
                         Text(
                             text = "EJEMPLO",
-                            fontSize = 25.sp,
+                            fontSize = 50.sp,
                         )
                     }
                     //FIN DE LOS BOTONES DEL MENÚ LATERAL
@@ -168,7 +164,7 @@ fun MenuCategorias(navController: NavHostController) {
                 ) {
                     Text(
                         text = "ENTRANTES",
-                        fontSize = 25.sp,
+                        fontSize = 45.sp,
                     )
                 }
 
@@ -183,7 +179,7 @@ fun MenuCategorias(navController: NavHostController) {
                 ) {
                     Text(
                         text = "BEBIDAS",
-                        fontSize = 25.sp,
+                        fontSize = 50.sp,
                     )
                 }
 
@@ -198,7 +194,7 @@ fun MenuCategorias(navController: NavHostController) {
                 ) {
                     Text(
                         text = "BOCADILLOS",
-                        fontSize = 25.sp,
+                        fontSize = 45.sp,
                     )
                 }
 
@@ -213,7 +209,7 @@ fun MenuCategorias(navController: NavHostController) {
                 ) {
                     Text(
                         text = "CAFÉS",
-                        fontSize = 25.sp,
+                        fontSize = 50.sp,
                     )
                 }
 
@@ -228,7 +224,7 @@ fun MenuCategorias(navController: NavHostController) {
                 ) {
                     Text(
                         text = "CERVEZAS",
-                        fontSize = 25.sp,
+                        fontSize = 50.sp,
                     )
                 }
             }

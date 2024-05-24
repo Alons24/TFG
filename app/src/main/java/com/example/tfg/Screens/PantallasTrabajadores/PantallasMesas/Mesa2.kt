@@ -14,7 +14,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Card
@@ -48,7 +47,7 @@ fun Mesa2(navController: NavHostController){
             TopAppBar(
                 title = { Text("Mesa 2") },
                 navigationIcon = {
-                    IconButton(onClick = { navController.navigate("MenuInicio") }) {
+                    IconButton(onClick = { navController.navigate("MESAS") }) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = "Localized description"

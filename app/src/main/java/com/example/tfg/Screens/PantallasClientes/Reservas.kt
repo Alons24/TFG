@@ -1,19 +1,23 @@
 package com.example.tfg.Screens.PantallasClientes
 
+import android.app.DatePickerDialog
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.BottomAppBar
@@ -32,26 +36,45 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
+import androidx.navigation.NavController
 import com.example.tfg.navigation.AppScreens
 import kotlinx.coroutines.launch
+import java.util.Calendar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MenuClientes(navController: NavHostController) {
-
-    val scaffoldState = rememberScrollState()
+fun Reservas(navController: NavController) {
+    val scrollState = rememberScrollState()
     val scope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
 
-    /*Inicio del cajón lateral*/
+    var fecha by rememberSaveable { mutableStateOf("") }
+    val mCalendar = Calendar.getInstance()
+    val anio = mCalendar.get(Calendar.YEAR)
+    val mes = mCalendar.get(Calendar.MONTH)
+    val dia = mCalendar.get(Calendar.DAY_OF_MONTH)
+
+    val context = LocalContext.current
+
+    val mDatePickerDialog = DatePickerDialog(
+        context,
+        { _, selectedAnio: Int, selectedMes: Int, selectedDia: Int ->
+            fecha = "$selectedDia/${selectedMes + 1}/$selectedAnio"
+        }, anio, mes, dia
+    )
+
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
@@ -60,10 +83,8 @@ fun MenuClientes(navController: NavHostController) {
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
-                    //BOTÓN PARA VOLVER AL MENÚ DE INICIO
-                    // Otros elementos del menú lateral
                     Button(
                         onClick = { navController.navigate(AppScreens.DejarResena.ruta) },
                         modifier = Modifier
@@ -75,34 +96,29 @@ fun MenuClientes(navController: NavHostController) {
                     ) {
                         Text(
                             text = "EJEMPLO",
-                            fontSize = 25.sp,
+                            fontSize = 50.sp
                         )
                     }
-
-
-                    //FIN DE LOS BOTONES DEL MENÚ LATERAL
                 }
             }
         },
     ) {
-
-        //Fin del cajón lateral y enpieza el Scaffold
         Scaffold(
             topBar = {
                 CenterAlignedTopAppBar(
-                    colors = TopAppBarDefaults.mediumTopAppBarColors(
-                        containerColor = Color.Blue, // Cambia el color de fondo
-                        titleContentColor = Color.White, // Cambia el color del título
+                    colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                        containerColor = Color.Blue,
+                        titleContentColor = Color.White,
                     ),
                     title = {
-                        Text("MENU CLIENTES")
+                        Text("RESERVAS")
                     },
                     navigationIcon = {
-                        IconButton(onClick = { navController.navigate("MenuPrimero") }) {
+                        IconButton(onClick = { navController.navigate("MenuClientes") }) {
                             Icon(
                                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                                 contentDescription = "Localized description",
-                                tint= Color.White
+                                tint = Color.White
                             )
                         }
                     },
@@ -111,130 +127,59 @@ fun MenuClientes(navController: NavHostController) {
                             Icon(
                                 imageVector = Icons.Filled.Menu,
                                 contentDescription = "Menu",
-                                tint= Color.White
+                                tint = Color.White
                             )
                         }
                     }
                 )
             },
-
-
             bottomBar = {
                 BottomAppBar(
                     containerColor = Color.Blue,
                     contentColor = MaterialTheme.colorScheme.primary,
                 ) {
-                    // Icono
                     BottomNavigationItem(
                         selected = false,
-                        onClick = {navController.navigate("Perfil")},
-                        modifier = Modifier.weight(1f),
+                        onClick = { navController.navigate("Perfil") },
                         icon = {
                             Icon(imageVector = Icons.Default.DateRange, contentDescription = "Search", tint = Color.White)
                         },
                     )
 
-                    // Icono Adicional
-                    BottomNavigationItem(
-                        selected = false,
-                        onClick = {navController.navigate("Perfil")},
-                        modifier = Modifier.weight(1f),
-                        icon = {
-                            Icon(imageVector = Icons.Default.AccountCircle, contentDescription = "YourIcon", tint = Color.White)
-                        },
-                    )
                 }
-            },
+            }
         ) { innerPadding ->
             Column(
                 modifier = Modifier
                     .padding(innerPadding)
                     .fillMaxSize()
                     .padding(16.dp)
-                    .verticalScroll(rememberScrollState()) // Habilitar desplazamiento vertical
                     .background(MaterialTheme.colorScheme.background.copy(alpha = 0.8f))
+                    .verticalScroll(scrollState)
                     .padding(16.dp),
                 verticalArrangement = Arrangement.spacedBy(30.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-
-
-                Button(
-                    onClick = { navController.navigate(AppScreens.DejarResena.ruta) },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .width(300.dp)
-                        .height(100.dp),
-                    shape = RectangleShape,
-                    colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
                 ) {
-                    Text(
-                        text = "Escaner QR",
-                        fontSize = 25.sp,
+                    OutlinedTextField(
+                        value = fecha,
+                        onValueChange = { fecha = it },
+                        readOnly = true,
+                        label = { Text(text = "Select Date") }
+                    )
+                    Icon(
+                        imageVector = Icons.Default.DateRange,
+                        contentDescription = null,
+                        modifier = Modifier
+                            .size(60.dp)
+                            .padding(4.dp)
+                            .clickable { mDatePickerDialog.show() }
                     )
                 }
-
-                Button(
-                    onClick = { navController.navigate(AppScreens.MenuCategorias.ruta) },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .width(300.dp)
-                        .height(100.dp),
-                    shape = RectangleShape,
-                    colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
-                ) {
-                    Text(
-                        text = "MENÚ PLATOS",
-                        fontSize = 25.sp,
-                    )
-                }
-
-
-                Button(
-                    onClick = { navController.navigate(AppScreens.Perfil.ruta) },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .width(300.dp)
-                        .height(100.dp),
-                    shape = RectangleShape,
-                    colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
-                ) {
-                    Text(
-                        text = "PERFIL",
-                        fontSize = 25.sp,
-                    )
-                }
-
-                Button(
-                    onClick = { navController.navigate(AppScreens.Reservas.ruta) },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .width(300.dp)
-                        .height(100.dp),
-                    shape = RectangleShape,
-                    colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
-                ) {
-                    Text(
-                        text = "HACER RESERVA",
-                        fontSize = 25.sp,
-                    )
-                }
-
-                Button(
-                    onClick = { /*navController.navigate(AppScreens.Despensa.ruta)*/ },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .width(300.dp)
-                        .height(100.dp),
-                    shape = RectangleShape,
-                    colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
-                ) {
-                    Text(
-                        text = "DEJAR RESEÑA",
-                        fontSize = 25.sp,
-                    )
-                }
-
             }
         }
     }

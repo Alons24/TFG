@@ -1,6 +1,5 @@
 package com.example.tfg.Screens.PantallasClientes
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -8,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
@@ -23,12 +21,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.example.tfg.R
 
 @Composable
 fun pantallaLogin (navController: NavHostController) {
@@ -47,17 +44,18 @@ fun pantallaLogin (navController: NavHostController) {
         var nombre by rememberSaveable { mutableStateOf("") }
         OutlinedTextField(
             value = nombre,
-            onValueChange = { nombre = it },
+            onValueChange = { if (it.length <= 10 && it.all { char -> char.isLetter() }) nombre = it },
             singleLine = true,
             label = {
                 Text("Introduzca su nombre")
             }
         )
 
+
         var apellido by rememberSaveable { mutableStateOf("") }
         OutlinedTextField(
             value = apellido,
-            onValueChange = { apellido = it },
+            onValueChange = {  if (it.length <= 10 && it.all { char -> char.isLetter() }) apellido = it },
             singleLine = true,
             label = {
                 Text("Introduzca su apellido")
@@ -68,31 +66,36 @@ fun pantallaLogin (navController: NavHostController) {
         var telefono by rememberSaveable { mutableStateOf("") }
         OutlinedTextField(
             value = telefono,
-            onValueChange = { telefono = it },
+            onValueChange = { nuevoValor ->
+                if (nuevoValor.all { it.isDigit() } && nuevoValor.length <= 17) {
+                    telefono = nuevoValor
+                }
+            },
             singleLine = true,
-            label = {
-                Text("Introduzca su telefono")
-            }
+            label = { Text("Introduzca su teléfono") }
         )
+
 
         var correo by rememberSaveable { mutableStateOf("") }
         OutlinedTextField(
             value = correo,
-            onValueChange = { correo = it },
+            onValueChange = { nuevoValor ->
+                if (nuevoValor.all { it.isLetterOrDigit() || it == '@' }) {
+                    correo = nuevoValor
+                }
+            },
             singleLine = true,
-            label = {
-                Text("Introduzca su correo")
-            }
+            label = { Text("Introduzca su correo") }
         )
+
 
         var contrasena by rememberSaveable { mutableStateOf("") }
         OutlinedTextField(
             value = contrasena,
-            onValueChange = { contrasena = it },
+            onValueChange = { if (it.length <= 12) contrasena = it },
             singleLine = true,
-            label = {
-                Text("Introduzca su contraseña")
-            }
+            label = { Text("Introduzca su contraseña") },
+            visualTransformation = PasswordVisualTransformation()
         )
 
 
