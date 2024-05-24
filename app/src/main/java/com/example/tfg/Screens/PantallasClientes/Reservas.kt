@@ -18,6 +18,7 @@ import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.BottomAppBar
@@ -142,7 +143,7 @@ fun Reservas(navController: NavController) {
                         selected = false,
                         onClick = { navController.navigate("Perfil") },
                         icon = {
-                            Icon(imageVector = Icons.Default.DateRange, contentDescription = "Search", tint = Color.White)
+                            Icon(imageVector = Icons.Default.AccountCircle, contentDescription = "Search", tint = Color.White)
                         },
                     )
 

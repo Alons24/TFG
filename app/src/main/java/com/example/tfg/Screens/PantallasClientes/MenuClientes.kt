@@ -221,7 +221,7 @@ fun MenuClientes(navController: NavHostController) {
                 }
 
                 Button(
-                    onClick = { /*navController.navigate(AppScreens.Despensa.ruta)*/ },
+                    onClick = { navController.navigate(AppScreens.DejarResena.ruta) },
                     modifier = Modifier
                         .fillMaxWidth()
                         .width(300.dp)

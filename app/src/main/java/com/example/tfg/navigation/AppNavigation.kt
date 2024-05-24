@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.tfg.Screens.MenuPrimero
 import com.example.tfg.Screens.PantallasClientes.CartaEntrantes
+import com.example.tfg.Screens.PantallasClientes.DejarResena
 import com.example.tfg.Screens.PantallasClientes.MenuClientes
 import com.example.tfg.Screens.PantallasClientes.Reservas
 import com.example.tfg.Screens.PantallasClientes.pantallaLogin
@@ -43,6 +44,8 @@ fun AppNavigation() {
         composable(AppScreens.Carta.ruta){ CartaEntrantes(navigationController) }
         composable(AppScreens.MenuCategorias.ruta){ MenuCategorias(navigationController)}
         composable(AppScreens.Reservas.ruta){ Reservas(navigationController)}
+        composable(AppScreens.DejarResena.ruta){ DejarResena(navigationController)}
+
 
 
     //alonso bujarron
@@ -51,6 +54,8 @@ fun AppNavigation() {
         }
 
 }
+
+
 
 
 

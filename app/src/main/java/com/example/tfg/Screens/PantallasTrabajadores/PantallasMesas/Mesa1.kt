@@ -168,7 +168,7 @@ fun Mesa1(navController: NavHostController) {
 
                         icon = {
                             Icon(imageVector = Icons.Default.MoreVert, contentDescription = "OPCIONES", tint = Color.White)
-                            /*PROVISIONAL*/Text(text = "Opciones", fontSize = 20.sp, fontWeight = FontWeight.Black)
+                            ///*PROVISIONAL*/Text(text = "Opciones", fontSize = 20.sp, fontWeight = FontWeight.Black)
                             /*Estoy mirando como mejorarlo */
                         },
                     )
