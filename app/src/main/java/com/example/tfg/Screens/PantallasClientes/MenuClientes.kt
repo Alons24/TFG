@@ -15,7 +15,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -41,7 +40,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.tfg.navigation.AppScreens
-import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -106,7 +104,7 @@ fun MenuClientes(navController: NavHostController) {
                             )
                         }
                     },
-                    actions = {
+                    /*actions = {
                         IconButton(onClick = { scope.launch { drawerState.open() } }) {
                             Icon(
                                 imageVector = Icons.Filled.Menu,
@@ -115,6 +113,8 @@ fun MenuClientes(navController: NavHostController) {
                             )
                         }
                     }
+                            */
+
                 )
             },
 
@@ -160,7 +160,7 @@ fun MenuClientes(navController: NavHostController) {
 
 
                 Button(
-                    onClick = { navController.navigate(AppScreens.DejarResena.ruta) },
+                    onClick = { /*navController.navigate(AppScreens.DejarResena.ruta)*/ },
                     modifier = Modifier
                         .fillMaxWidth()
                         .width(300.dp)

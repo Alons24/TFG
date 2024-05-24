@@ -68,7 +68,7 @@ fun DejarResena(navController: NavHostController) {
                     //BOTÓN PARA BOLVER AL MENÚ DE INICIO
                     // Otros elementos del menú lateral
                     Button(
-                        onClick = { navController.navigate(AppScreens.Despensa.ruta) },
+                        onClick = { /*navController.navigate(AppScreens.Despensa.ruta)*/ },
                         modifier = Modifier
                             .fillMaxWidth()
                             .width(300.dp)
@@ -77,7 +77,23 @@ fun DejarResena(navController: NavHostController) {
                         colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
                     ) {
                         Text(
-                            text = "DESPENSA",
+                            text = "Escaner QR",
+                            fontSize = 50.sp,
+                        )
+                    }
+
+
+                    Button(
+                        onClick = { navController.navigate(AppScreens.MenuCategorias.ruta) },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .width(300.dp)
+                            .height(100.dp),
+                        shape = RectangleShape,
+                        colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
+                    ) {
+                        Text(
+                            text = "MENU PLATOS",
                             fontSize = 50.sp,
                         )
                     }

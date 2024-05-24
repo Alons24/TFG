@@ -99,19 +99,7 @@ fun Perfil(navController: NavHostController) {
                     }
 
 
-                    Button(
-                        onClick = { navController.navigate(AppScreens.DejarResena.ruta) },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(100.dp),
-                        shape = RectangleShape,
-                        colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
-                    ) {
-                        Text(
-                            text = "EJEMPLO",
-                            fontSize = 25.sp,
-                        )
-                    }
+
 
 
 
