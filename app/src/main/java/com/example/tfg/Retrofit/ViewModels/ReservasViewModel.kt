@@ -72,4 +72,34 @@ class ReservasViewModel: ViewModel() {
             }
         }
     }
+
+    fun getReserva(idReserva: String){
+        viewModelScope.launch(Dispatchers.IO){
+            try{
+            val response = RetrofitClient.webService.getReserva(idReserva)
+            withContext(Dispatchers.Main){
+                if(response.body()!!.codigo == "200"){
+                    _listaReservas = response.body()?.data!!
+                }
+            }
+        }catch (e: Exception){
+            Log.e("Error", "Error al obtener la reserva: ${e.message}")
+            }
+        }
+    }
+
+    fun getReservaPorFecha(fecha: String){
+        viewModelScope.launch(Dispatchers.IO){
+            try{
+            val response = RetrofitClient.webService.getReservaPorFecha(fecha)
+            withContext(Dispatchers.Main){
+                if(response.body()!!.codigo == "200"){
+                    _listaReservas = response.body()?.data!!
+                }
+            }
+        }catch (e: Exception){
+            Log.e("Error", "Error al obtener la reserva por fecha: ${e.message}")
+            }
+        }
+    }
 }
