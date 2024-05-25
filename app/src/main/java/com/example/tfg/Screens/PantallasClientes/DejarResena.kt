@@ -78,7 +78,7 @@ fun DejarResena(navController: NavHostController) {
                     ) {
                         Text(
                             text = "Escaner QR",
-                            fontSize = 50.sp,
+                            fontSize = 40.sp,
                         )
                     }
 
@@ -94,7 +94,23 @@ fun DejarResena(navController: NavHostController) {
                     ) {
                         Text(
                             text = "MENU PLATOS",
-                            fontSize = 50.sp,
+                            fontSize = 40.sp,
+                        )
+                    }
+
+
+                    Button(
+                        onClick = { navController.navigate(AppScreens.MenuCategorias.ruta) },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .width(300.dp)
+                            .height(100.dp),
+                        shape = RectangleShape,
+                        colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
+                    ) {
+                        Text(
+                            text = "Hacer reservas",
+                            fontSize = 40.sp,
                         )
                     }
 
@@ -119,7 +135,7 @@ fun DejarResena(navController: NavHostController) {
 
                     },
                     navigationIcon = {
-                        IconButton(onClick = { navController.navigate("MenuBotones") }) {
+                        IconButton(onClick = { navController.navigate("MenuClientes") }) {
 
                             Icon(
                                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,

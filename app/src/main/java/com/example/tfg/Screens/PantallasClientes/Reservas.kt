@@ -76,6 +76,7 @@ fun Reservas(navController: NavController) {
         }, anio, mes, dia
     )
 
+    /*Inicio del cajón lateral*/
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
@@ -84,8 +85,42 @@ fun Reservas(navController: NavController) {
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                    verticalArrangement = Arrangement.spacedBy(16.dp),
                 ) {
+                    //BOTÓN PARA BOLVER AL MENÚ DE INICIO
+                    // Otros elementos del menú lateral
+                    Button(
+                        onClick = { /*navController.navigate(AppScreens.DejarResena.ruta) */},
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .width(300.dp)
+                            .height(100.dp),
+                        shape = RectangleShape,
+                        colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
+                    ) {
+                        Text(
+                            text = "Escaner qr",
+                            fontSize = 40.sp,
+                        )
+                    }
+
+
+                    Button(
+                        onClick = { navController.navigate(AppScreens.Reservas.ruta) },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .width(300.dp)
+                            .height(100.dp),
+                        shape = RectangleShape,
+                        colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
+                    ) {
+                        Text(
+                            text = "Menu platos",
+                            fontSize = 40.sp,
+                        )
+                    }
+
+
                     Button(
                         onClick = { navController.navigate(AppScreens.DejarResena.ruta) },
                         modifier = Modifier
@@ -96,14 +131,19 @@ fun Reservas(navController: NavController) {
                         colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
                     ) {
                         Text(
-                            text = "EJEMPLO",
-                            fontSize = 50.sp
+                            text = "Hacer reserva",
+                            fontSize = 40.sp,
                         )
                     }
+
+
+                    //FIN DE LOS BOTONES DEL MENÚ LATERAL
                 }
             }
         },
     ) {
+
+        //Fin del cajón lateral y enpieza el Scaffold
         Scaffold(
             topBar = {
                 CenterAlignedTopAppBar(

@@ -141,9 +141,7 @@ fun Despensa(navController: NavHostController) {
                     // Icono Adicional
                     BottomNavigationItem(
                         selected = false,
-                        onClick = {
-                            /* Código para la acción del segundo ícono */
-                        },
+                        onClick = {navController.navigate(AppScreens.Perfil.ruta)},
                         modifier = Modifier.weight(1f),
                         icon = {
                             Icon(imageVector = Icons.Default.AccountCircle, contentDescription = "YourIcon", tint = Color.White)

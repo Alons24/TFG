@@ -2,7 +2,12 @@ package com.example.tfg.Screens.PantallasClientes
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -75,12 +80,12 @@ private val listaProductos = listOf(
 )
 
 private val listaImagenes = listOf(
-    R.drawable.mesa,
+    R.drawable.gazpacho_andaluz,
     R.drawable.paella,
-    R.drawable.paella,
-    R.drawable.paella,
-    R.drawable.paella,
-    R.drawable.paella,
+    R.drawable.cocido_madrileno,
+    R.drawable.pulpo_a_la_gallega,
+    R.drawable.receta_croquetas_jamon,
+    R.drawable.tortilla_patatas,
     //.drawable.imagen3, // Sustituye "imagen3" con el nombre de tu recurso de imagen
 
 )

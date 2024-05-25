@@ -12,7 +12,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.BottomAppBar
@@ -63,6 +62,38 @@ fun MenuCategorias(navController: NavHostController) {
                     //BOTÓN PARA BOLVER AL MENÚ DE INICIO
                     // Otros elementos del menú lateral
                     Button(
+                        onClick = { /*navController.navigate(AppScreens.DejarResena.ruta) */},
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .width(300.dp)
+                            .height(100.dp),
+                        shape = RectangleShape,
+                        colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
+                    ) {
+                        Text(
+                            text = "Escaner qr",
+                            fontSize = 40.sp,
+                        )
+                    }
+
+
+                    Button(
+                        onClick = { navController.navigate(AppScreens.Reservas.ruta) },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .width(300.dp)
+                            .height(100.dp),
+                        shape = RectangleShape,
+                        colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
+                    ) {
+                        Text(
+                            text = "Hacer reserva",
+                            fontSize = 40.sp,
+                        )
+                    }
+
+
+                    Button(
                         onClick = { navController.navigate(AppScreens.DejarResena.ruta) },
                         modifier = Modifier
                             .fillMaxWidth()
@@ -72,10 +103,12 @@ fun MenuCategorias(navController: NavHostController) {
                         colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
                     ) {
                         Text(
-                            text = "EJEMPLO",
-                            fontSize = 50.sp,
+                            text = "Dejar reseña",
+                            fontSize = 40.sp,
                         )
                     }
+
+
                     //FIN DE LOS BOTONES DEL MENÚ LATERAL
                 }
             }
@@ -123,22 +156,14 @@ fun MenuCategorias(navController: NavHostController) {
                     // Icono
                     BottomNavigationItem(
                         selected = false,
-                        onClick = {navController.navigate("Perfil")},
+                        onClick = {navController.navigate("Reservas")},
                         modifier = Modifier.weight(1f),
                         icon = {
                             Icon(imageVector = Icons.Default.DateRange, contentDescription = "Search", tint = Color.White)
                         },
                     )
 
-                    // Icono Adicional
-                    BottomNavigationItem(
-                        selected = false,
-                        onClick = {navController.navigate("Perfil")},
-                        modifier = Modifier.weight(1f),
-                        icon = {
-                            Icon(imageVector = Icons.Default.AccountCircle, contentDescription = "YourIcon", tint = Color.White)
-                        },
-                    )
+
                 }
             },
         ) { innerPadding ->

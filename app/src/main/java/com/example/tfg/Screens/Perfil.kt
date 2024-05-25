@@ -185,10 +185,16 @@ fun Perfil(navController: NavHostController) {
                                 }
                             },
                             modifier = Modifier.weight(1f)
+                                .fillMaxWidth()
+                                .width(300.dp)
+                                .height(100.dp),
+                            shape = RectangleShape,
+                            colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
                         ) {
                             Text(
                                 text = if (isRunning) "Pause" else "Start",
-                                color = Color.White
+                                color = Color.White,
+                                fontSize = 25.sp
                             )
                         }
 
@@ -200,11 +206,20 @@ fun Perfil(navController: NavHostController) {
                                 isRunning = false
                             },
                             modifier = Modifier.weight(1f)
+                                .fillMaxWidth()
+                                .width(300.dp)
+                                .height(100.dp),
+                            shape = RectangleShape,
+                            colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
                         ) {
-                            Text(text = "Reset", color = Color.White)
+                            Text(text = "Reset",
+                                color = Color.White,
+                                fontSize = 25.sp,
+                            )
                         }
                     }
                 }
+
 
                 LaunchedEffect(isRunning) {
                     while (isRunning) {

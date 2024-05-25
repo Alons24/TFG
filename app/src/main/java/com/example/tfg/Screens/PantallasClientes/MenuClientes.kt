@@ -13,7 +13,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
@@ -127,22 +126,14 @@ fun MenuClientes(navController: NavHostController) {
                     // Icono
                     BottomNavigationItem(
                         selected = false,
-                        onClick = {navController.navigate("Perfil")},
+                        onClick = {navController.navigate("Reservas")},
                         modifier = Modifier.weight(1f),
                         icon = {
                             Icon(imageVector = Icons.Default.DateRange, contentDescription = "Search", tint = Color.White)
                         },
                     )
 
-                    // Icono Adicional
-                    BottomNavigationItem(
-                        selected = false,
-                        onClick = {navController.navigate("Perfil")},
-                        modifier = Modifier.weight(1f),
-                        icon = {
-                            Icon(imageVector = Icons.Default.AccountCircle, contentDescription = "YourIcon", tint = Color.White)
-                        },
-                    )
+
                 }
             },
         ) { innerPadding ->
@@ -190,20 +181,6 @@ fun MenuClientes(navController: NavHostController) {
                 }
 
 
-                Button(
-                    onClick = { navController.navigate(AppScreens.Perfil.ruta) },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .width(300.dp)
-                        .height(100.dp),
-                    shape = RectangleShape,
-                    colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
-                ) {
-                    Text(
-                        text = "PERFIL",
-                        fontSize = 25.sp,
-                    )
-                }
 
                 Button(
                     onClick = { navController.navigate(AppScreens.Reservas.ruta) },

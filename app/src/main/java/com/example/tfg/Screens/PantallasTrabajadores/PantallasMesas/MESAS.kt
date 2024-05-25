@@ -212,6 +212,63 @@ fun Mesa(navController: NavHostController) {
                             )
                         }
 
+
+                        Spacer(modifier = Modifier.height(16.dp))
+                        /*INICIO*/
+                        Image(
+                            painter = painterResource(R.drawable.mesa),
+                            contentDescription = "MESA 3",
+                            modifier = Modifier
+                                .padding(22.dp)
+                                .height(500.dp)
+                                .width(300.dp)
+                        )
+
+
+                        Button(
+                            onClick = { navController.navigate(AppScreens.Mesa2.ruta) },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .width(300.dp)
+                                .height(100.dp),
+                            shape = RectangleShape,
+                            colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
+                        ) {
+                            Text(
+                                text = "Accede a Mesa 3",
+                                fontSize = 25.sp,
+                            )
+                        }
+
+
+
+                        Spacer(modifier = Modifier.height(16.dp))
+                        /*INICIO*/
+                        Image(
+                            painter = painterResource(R.drawable.mesa),
+                            contentDescription = "MESA 4",
+                            modifier = Modifier
+                                .padding(22.dp)
+                                .height(500.dp)
+                                .width(300.dp)
+                        )
+
+
+                        Button(
+                            onClick = { navController.navigate(AppScreens.Mesa2.ruta) },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .width(300.dp)
+                                .height(100.dp),
+                            shape = RectangleShape,
+                            colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
+                        ) {
+                            Text(
+                                text = "Accede a Mesa 4",
+                                fontSize = 25.sp,
+                            )
+                        }
+
                         /*FIN*/
 
                     }
