@@ -131,7 +131,7 @@ fun Reservas(navController: NavController) {
                         colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
                     ) {
                         Text(
-                            text = "Hacer reserva",
+                            text = "Dejar reseña",
                             fontSize = 40.sp,
                         )
                     }
