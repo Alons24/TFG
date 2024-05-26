@@ -37,12 +37,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.tfg.R
+import com.example.tfg.Retrofit.SessionManager
+import com.example.tfg.Retrofit.ViewModels.UserViewModel
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun InicioSesion(navController: NavHostController) {
+    val userViewModel: UserViewModel = viewModel()
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -90,7 +95,7 @@ fun InicioSesion(navController: NavHostController) {
             rememberMe = it
         }
 
-        LoginButton(correo, password, rememberMe, showDialog, navController)
+        LoginButton(correo, password, rememberMe, showDialog, navController, userViewModel)
 
         if (showDialog.value) {
             ShowErrorDialog {
@@ -169,17 +174,33 @@ private fun RememberMeCheckbox(
     }
 }
 
+
+
 @Composable
 private fun LoginButton(
     correo: String,
     password: String,
     rememberMe: Boolean,
     showDialog: MutableState<Boolean>,
-    navController: NavHostController
+    navController: NavHostController,
+    userViewModel: UserViewModel,
+    sessionManager: SessionManager
 ) {
+    val correosPermitidos = listOf("gblancocastro@gmail.com", "jramosgarcia@gmail.com", "lgallardo@gmail.com")
     Button(
         onClick = {
-            // Lógica de inicio de sesión
+            val loginSuccessful = userViewModel.signIn(correo, password)
+            if (loginSuccessful) {
+                // Si las credenciales son las específicas, navega a la ruta deseada
+                if (correo in correosPermitidos) {
+                    navController.navigate("MenuTrabajadores")
+                } else {
+                    // Si las credenciales no son las específicas, navega a la ruta predeterminada
+                    navController.navigate("MenuClientes")
+                }
+            } else {
+                showDialog.value = true
+            }
         },
         modifier = Modifier
             .fillMaxWidth()
