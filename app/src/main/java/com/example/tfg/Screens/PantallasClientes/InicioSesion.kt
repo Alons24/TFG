@@ -40,7 +40,6 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.tfg.R
-import com.example.tfg.Retrofit.SessionManager
 import com.example.tfg.Retrofit.ViewModels.UserViewModel
 
 
@@ -95,7 +94,7 @@ fun InicioSesion(navController: NavHostController) {
             rememberMe = it
         }
 
-        LoginButton(correo, password, rememberMe, showDialog, navController, userViewModel)
+        LoginButton(correo, password, rememberMe, showDialog, navController)
 
         if (showDialog.value) {
             ShowErrorDialog {
@@ -183,24 +182,12 @@ private fun LoginButton(
     rememberMe: Boolean,
     showDialog: MutableState<Boolean>,
     navController: NavHostController,
-    userViewModel: UserViewModel,
-    sessionManager: SessionManager
+
 ) {
     val correosPermitidos = listOf("gblancocastro@gmail.com", "jramosgarcia@gmail.com", "lgallardo@gmail.com")
     Button(
         onClick = {
-            val loginSuccessful = userViewModel.signIn(correo, password)
-            if (loginSuccessful) {
-                // Si las credenciales son las específicas, navega a la ruta deseada
-                if (correo in correosPermitidos) {
-                    navController.navigate("MenuTrabajadores")
-                } else {
-                    // Si las credenciales no son las específicas, navega a la ruta predeterminada
-                    navController.navigate("MenuClientes")
-                }
-            } else {
-                showDialog.value = true
-            }
+
         },
         modifier = Modifier
             .fillMaxWidth()

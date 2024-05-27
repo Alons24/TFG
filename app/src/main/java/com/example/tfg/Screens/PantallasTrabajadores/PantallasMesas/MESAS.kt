@@ -4,12 +4,12 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.BottomNavigationItem
@@ -47,13 +47,11 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Mesa(navController: NavHostController) {
+fun Mesas(navController: NavHostController) {
     val scaffoldState = rememberScrollState()
     val scope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
 
-
-    /*Inicio del cajón lateral*/
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
@@ -64,13 +62,10 @@ fun Mesa(navController: NavHostController) {
                         .padding(16.dp),
                     verticalArrangement = Arrangement.spacedBy(16.dp),
                 ) {
-                    //BOTÓN PARA BOLVER AL MENÚ DE INICIO
-                    // Otros elementos del menú lateral
                     Button(
                         onClick = { navController.navigate(AppScreens.Despensa.ruta) },
                         modifier = Modifier
                             .fillMaxWidth()
-                            .width(300.dp)
                             .height(100.dp),
                         shape = RectangleShape,
                         colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
@@ -80,33 +75,24 @@ fun Mesa(navController: NavHostController) {
                             fontSize = 50.sp,
                         )
                     }
-
-                    //FIN DE LOS BOTONES DEL MENÚ LATERAL
                 }
             }
         },
     ) {
-
-        //Fin del cajón lateral y enpieza el Scaffold
-
         Scaffold(
             topBar = {
                 CenterAlignedTopAppBar(
                     colors = TopAppBarDefaults.mediumTopAppBarColors(
-                        containerColor = Color.Blue, // Cambia el color de fondo
-                        titleContentColor = Color.White, // Cambia el color del título
+                        containerColor = Color.Blue,
+                        titleContentColor = Color.White,
                     ),
-                    title = {
-                        Text("MESAS")
-
-                    },
+                    title = { Text("MESAS") },
                     navigationIcon = {
                         IconButton(onClick = { navController.navigate("MenuBotones") }) {
-
                             Icon(
                                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                                contentDescription = "Localized description",
-                                tint=Color.White
+                                contentDescription = "Back",
+                                tint = Color.White
                             )
                         }
                     },
@@ -115,7 +101,7 @@ fun Mesa(navController: NavHostController) {
                             Icon(
                                 imageVector = Icons.Filled.Menu,
                                 contentDescription = "Menu",
-                                tint=Color.White
+                                tint = Color.White
                             )
                         }
                     }
@@ -126,15 +112,12 @@ fun Mesa(navController: NavHostController) {
                     containerColor = Color.Blue,
                     contentColor = MaterialTheme.colorScheme.primary,
                 ) {
-
-
-                    // Icono Adicional
                     BottomNavigationItem(
                         selected = false,
-                        onClick = {navController.navigate(AppScreens.Perfil.ruta)},
+                        onClick = { navController.navigate(AppScreens.Perfil.ruta) },
                         modifier = Modifier.weight(1f),
                         icon = {
-                            Icon(imageVector = Icons.Default.AccountCircle, contentDescription = "YourIcon", tint = Color.White)
+                            Icon(imageVector = Icons.Default.AccountCircle, contentDescription = "Profile", tint = Color.White)
                         },
                     )
                 }
@@ -148,129 +131,56 @@ fun Mesa(navController: NavHostController) {
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(innerPadding),
+                        .padding(16.dp),
                     verticalArrangement = Arrangement.spacedBy(16.dp),
                 ) {
+                    val mesas = listOf(
+                        "Mesa 1" to AppScreens.Mesa1.ruta,
+                        "Mesa 2" to AppScreens.Mesa2.ruta,
+                        "Mesa 3" to AppScreens.Mesa3.ruta,
+                        "Mesa 4" to AppScreens.Mesa4.ruta,
+                        "Mesa 5" to AppScreens.Mesa5.ruta,
+                        "Mesa 6" to AppScreens.Mesa6.ruta,
+                        "Mesa 7" to AppScreens.Mesa7.ruta,
+                        "Mesa 8" to AppScreens.Mesa8.ruta,
+                        "Mesa 9" to AppScreens.Mesa9.ruta
 
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(16.dp),
-                        verticalArrangement = Arrangement.spacedBy(4.dp)
-                    ) {
-                        /*INICIO*/
-                        Image(
-                            painter = painterResource(R.drawable.mesa),
-                            contentDescription = "MESA 1",
-                            modifier = Modifier
-                                .padding(22.dp)
-                                .height(500.dp)
-                                .width(300.dp)
-                        )
+                    )
 
-                        // Añade un botón al final de la Column
-
-                        Button(
-                            onClick = { navController.navigate(AppScreens.Mesa1.ruta) },
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .width(300.dp)
-                                .height(100.dp),
-                            shape = RectangleShape,
-                            colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
+                    mesas.chunked(3).forEach { rowItems ->
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(16.dp)
                         ) {
-                            Text(
-                                text = "Accede a Mesa 1",
-                                fontSize = 25.sp,
-                            )
+                            rowItems.forEach { (mesaName, route) ->
+                                Column(
+                                    modifier = Modifier.weight(1f)
+                                ) {
+                                    Image(
+                                        painter = painterResource(R.drawable.mesa),
+                                        contentDescription = mesaName,
+                                        modifier = Modifier
+                                            .padding(8.dp)
+                                            .height(150.dp)
+                                            .fillMaxWidth()
+                                    )
+                                    Button(
+                                        onClick = { navController.navigate(route) },
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .height(75.dp),
+                                        shape = RectangleShape,
+                                        colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
+                                    ) {
+                                        Text(
+                                            text = "Accede a $mesaName",
+                                            fontSize = 16.sp,
+                                        )
+                                    }
+                                }
+                            }
                         }
-                        /*FIN*/
                         Spacer(modifier = Modifier.height(16.dp))
-                        /*INICIO*/
-                        Image(
-                            painter = painterResource(R.drawable.mesa),
-                            contentDescription = "MESA 2",
-                            modifier = Modifier
-                                .padding(22.dp)
-                                .height(500.dp)
-                                .width(300.dp)
-                        )
-
-
-                        Button(
-                            onClick = { navController.navigate(AppScreens.Mesa2.ruta) },
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .width(300.dp)
-                                .height(100.dp),
-                            shape = RectangleShape,
-                            colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
-                        ) {
-                            Text(
-                                text = "Accede a Mesa 2",
-                                fontSize = 25.sp,
-                            )
-                        }
-
-
-                        Spacer(modifier = Modifier.height(16.dp))
-                        /*INICIO*/
-                        Image(
-                            painter = painterResource(R.drawable.mesa),
-                            contentDescription = "MESA 3",
-                            modifier = Modifier
-                                .padding(22.dp)
-                                .height(500.dp)
-                                .width(300.dp)
-                        )
-
-
-                        Button(
-                            onClick = { navController.navigate(AppScreens.Mesa2.ruta) },
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .width(300.dp)
-                                .height(100.dp),
-                            shape = RectangleShape,
-                            colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
-                        ) {
-                            Text(
-                                text = "Accede a Mesa 3",
-                                fontSize = 25.sp,
-                            )
-                        }
-
-
-
-                        Spacer(modifier = Modifier.height(16.dp))
-                        /*INICIO*/
-                        Image(
-                            painter = painterResource(R.drawable.mesa),
-                            contentDescription = "MESA 4",
-                            modifier = Modifier
-                                .padding(22.dp)
-                                .height(500.dp)
-                                .width(300.dp)
-                        )
-
-
-                        Button(
-                            onClick = { navController.navigate(AppScreens.Mesa2.ruta) },
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .width(300.dp)
-                                .height(100.dp),
-                            shape = RectangleShape,
-                            colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
-                        ) {
-                            Text(
-                                text = "Accede a Mesa 4",
-                                fontSize = 25.sp,
-                            )
-                        }
-
-                        /*FIN*/
-
                     }
                 }
             }
