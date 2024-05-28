@@ -3,6 +3,7 @@
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -39,7 +40,7 @@ fun AppNavigation() {
         composable(AppScreens.Mesa2.ruta){AnadirTrabajador(navigationController)}
         composable(AppScreens.MenuClientes.ruta){MenuClientes(navigationController)}
         composable(AppScreens.InicioSesion.ruta){InicioSesion(navigationController)}
-        composable(AppScreens.pantallaLogin.ruta){pantallaLogin(navigationController) }
+        composable(AppScreens.pantallaLogin.ruta){pantallaLogin(navigationController, viewModel()) }
         composable(AppScreens.Perfil.ruta){ Perfil(navigationController)}
         composable(AppScreens.Carta.ruta){ CartaEntrantes(navigationController) }
         composable(AppScreens.MenuCategorias.ruta){ MenuCategorias(navigationController)}

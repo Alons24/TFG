@@ -16,6 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -26,9 +27,13 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.example.tfg.Retrofit.DataClases.User
+import com.example.tfg.Retrofit.ViewModels.UserViewModel
+import kotlin.random.Random
 
 @Composable
-fun pantallaLogin (navController: NavHostController) {
+fun pantallaLogin (navController: NavHostController, viewModel: UserViewModel) {
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -52,10 +57,10 @@ fun pantallaLogin (navController: NavHostController) {
         )
 
 
-        var apellido by rememberSaveable { mutableStateOf("") }
+        var apellidos by rememberSaveable { mutableStateOf("") }
         OutlinedTextField(
-            value = apellido,
-            onValueChange = {  if (it.length <= 10 && it.all { char -> char.isLetter() }) apellido = it },
+            value = apellidos,
+            onValueChange = {  if (it.length <= 10 && it.all { char -> char.isLetter() }) apellidos = it },
             singleLine = true,
             label = {
                 Text("Introduzca su apellido")
@@ -76,12 +81,12 @@ fun pantallaLogin (navController: NavHostController) {
         )
 
 
-        var correo by rememberSaveable { mutableStateOf("") }
+        var email by rememberSaveable { mutableStateOf("") }
         OutlinedTextField(
-            value = correo,
+            value = email,
             onValueChange = { nuevoValor ->
                 if (nuevoValor.all { it.isLetterOrDigit() || it == '@' }) {
-                    correo = nuevoValor
+                    email = nuevoValor
                 }
             },
             singleLine = true,
@@ -89,20 +94,33 @@ fun pantallaLogin (navController: NavHostController) {
         )
 
 
-        var contrasena by rememberSaveable { mutableStateOf("") }
+        var password by rememberSaveable { mutableStateOf("") }
         OutlinedTextField(
-            value = contrasena,
-            onValueChange = { if (it.length <= 12) contrasena = it },
+            value = password,
+            onValueChange = { if (it.length <= 12) password = it },
             singleLine = true,
             label = { Text("Introduzca su contraseña") },
             visualTransformation = PasswordVisualTransformation()
         )
 
 
+        var rol by remember { mutableStateOf("2") } //Siempre sera 2 para el cliente
+        var idUsuario by remember { mutableStateOf(Random.nextInt(1, 1000000000)) }
 
-
+        var showDialog by remember { mutableStateOf(false) }
+        var mensajeConfirmacion by remember { mutableStateOf("") }
         Button(
             onClick = {
+                if (nombre.isNotEmpty() && apellidos.isNotEmpty() && password.isNotEmpty() &&
+                    telefono.isNotEmpty() && email.isNotEmpty() && email.contains('@')
+                ) {
+                    val user = User(idUsuario, nombre, apellidos, email, password, telefono, rol)
+                    viewModel.signUp(user.email, user.password)
+                    showDialog = true
+                } else {
+                    mensajeConfirmacion =
+                        "Por favor, completa todos los campos" // Mensaje de error si falta algún campo
+                }
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -118,3 +136,5 @@ fun pantallaLogin (navController: NavHostController) {
         }
     }
 }
+
+

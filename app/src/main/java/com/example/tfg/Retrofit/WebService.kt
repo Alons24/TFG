@@ -1,6 +1,8 @@
 package com.example.tfg.Retrofit
 
+import com.example.tfg.Retrofit.DataClases.Critica
 import com.example.tfg.Retrofit.DataClases.Reserva
+import com.example.tfg.Retrofit.Response.CriticaResponse
 import com.example.tfg.Retrofit.Response.ReservaResponse
 import com.example.tfg.Retrofit.Response.UserResponse
 import retrofit2.Response
@@ -46,4 +48,23 @@ interface WebService {
 
     @POST("/signin")
     suspend fun signIn(@Body request: Request): Response<UserResponse>
+
+    @GET("/criticas")
+    suspend fun obtenerCriticas(): Response<CriticaResponse>
+
+    @GET("/criticas/{idCritica}")
+    suspend fun obtenerCritica(@Path("idCritica") idCritica: Int): Response<CriticaResponse>
+
+    @POST("/hacerCriticas")
+    suspend fun crearCritica(@Body critica: Critica): Response<CriticaResponse>
+
+    @PUT("/actualizarCritica/{idCritica}")
+    suspend fun actualizarCritica(@Path("idCritica") idCritica: String, @Body critica: Critica): Response<CriticaResponse>
+
+    @DELETE("/eliminarCritica/{idCritica}")
+    suspend fun eliminarCritica(@Path("idCritica") idCritica: String): Response<CriticaResponse>
+
+    @GET("/criticas/usuario/{idUsuario}")
+    suspend fun obtenerCriticasUsuario(@Path("idUsuario") idUsuario: Int): Response<CriticaResponse>
+
 }
