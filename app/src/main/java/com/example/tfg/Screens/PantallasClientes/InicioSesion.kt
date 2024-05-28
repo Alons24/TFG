@@ -95,7 +95,7 @@ fun InicioSesion(navController: NavHostController) {
             rememberMe = it
         }
 
-        LoginButton(correo, password, rememberMe, showDialog, navController, userViewModel)
+        LoginButton(correo, password, rememberMe, showDialog, navController, userViewModel, SessionManager)
 
         if (showDialog.value) {
             ShowErrorDialog {

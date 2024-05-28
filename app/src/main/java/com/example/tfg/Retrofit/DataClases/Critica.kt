@@ -1,7 +1,7 @@
 package com.example.tfg.Retrofit.DataClases
 
 data class Critica(
-    var idCritica: Int,
+    var idCritica: String,
     var mensaje: String,
-    var valoracion: Int,
+    var valoracion: Float,
 )

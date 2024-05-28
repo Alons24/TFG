@@ -1,5 +1,6 @@
 package com.example.tfg.Retrofit.ViewModels
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -29,14 +30,19 @@ class CriticaViewModel : ViewModel(){
     fun crearCritica(critica: Critica){
         viewModelScope.launch(Dispatchers.IO){
             try{
+                Log.d("crearCritica", "Iniciando la creación de la crítica")
                 val response = RetrofitClient.webService.crearCritica(critica)
                 withContext(Dispatchers.Main){
-                    if(response.body()!!.codigo == "200"){
+                    if(response.isSuccessful && response.body()!!.codigo == "200"){
+                        Log.d("crearCritica", "Crítica creada exitosamente")
                         obtenerCriticas()
+                    } else {
+                        Log.d("crearCritica", "La respuesta no fue exitosa. Código: ${response.code()}, Mensaje: ${response.message()}")
                     }
                 }
             }catch (e: Exception){
-                // Manejar el error aquí
+                // Imprimir el mensaje de error en la consola
+                Log.e("crearCritica", "Error al crear la crítica", e)
             }
         }
     }

@@ -58,7 +58,7 @@ fun AppNavigation() {
         composable(AppScreens.Carta.ruta){ CartaEntrantes(navigationController) }
         composable(AppScreens.MenuCategorias.ruta){ MenuCategorias(navigationController)}
         composable(AppScreens.Reservas.ruta){ Reservas(navigationController)}
-        composable(AppScreens.DejarResena.ruta){ DejarResena(navigationController)}
+        composable(AppScreens.DejarResena.ruta){ DejarResena(navigationController, viewModel())}
 
 
 
