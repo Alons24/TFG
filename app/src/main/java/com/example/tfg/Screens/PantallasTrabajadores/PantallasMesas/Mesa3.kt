@@ -60,7 +60,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Mesa1(navController: NavHostController) {
+fun Mesa3(navController: NavHostController) {
     var productosEncargados by remember { mutableStateOf(false) }
     val db = FirebaseFirestore.getInstance()
     val coleccion="Mesas"
@@ -130,14 +130,14 @@ fun Mesa1(navController: NavHostController) {
                         titleContentColor = Color.White, // Cambia el color del título
                     ),
                     title = {
-                        Text("MESA 1")
+                        Text("MESA 3")
                     },
                     navigationIcon = {
                         IconButton(onClick = { navController.navigate("MESAS") }) {
                             Icon(
                                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                                 contentDescription = "Localized description",
-                                tint=Color.White
+                                tint= Color.White
                             )
                         }
                     },
@@ -146,7 +146,7 @@ fun Mesa1(navController: NavHostController) {
                             Icon(
                                 imageVector = Icons.Filled.Menu,
                                 contentDescription = "Menu",
-                                tint=Color.White
+                                tint= Color.White
 
                             )
                         }

@@ -32,22 +32,22 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.tfg.R
 import com.example.tfg.Retrofit.SessionManager
-import com.google.firebase.firestore.FirebaseFirestore
-
+import com.example.tfg.Retrofit.ViewModels.UserViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun InicioSesion(navController: NavHostController) {
+    val userViewModel: UserViewModel = viewModel()
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -59,21 +59,21 @@ fun InicioSesion(navController: NavHostController) {
         Spacer(modifier = Modifier.height(20.dp))
         Text(text ="Bienvenido de nuevo", fontSize = 20.sp, color = Color.Gray)
 
-        var email by rememberSaveable { mutableStateOf("") }
+        var nombre by rememberSaveable { mutableStateOf("") }
 
         OutlinedTextField(
-            value = email,
-            onValueChange = {  email = it },
+            value = nombre,
+            onValueChange = { if (it.length <= 10) nombre = it },
             singleLine = true,
             label = {
-                Text("Introduzca su email")
+                Text("Introduzca su nombre")
             }
         )
 
-        var password by rememberSaveable { mutableStateOf("") }
+        var contrasena by rememberSaveable { mutableStateOf("") }
         OutlinedTextField(
-            value = password,
-            onValueChange = {  password = it },
+            value = contrasena,
+            onValueChange = { if (it.length <= 12) contrasena = it },
             singleLine = true,
             label = { Text("Introduzca su contraseña") },
             visualTransformation = PasswordVisualTransformation()
@@ -86,7 +86,8 @@ fun InicioSesion(navController: NavHostController) {
 
 
         Spacer(modifier = Modifier.height(30.dp))
-
+        var correo by rememberSaveable { mutableStateOf("") }
+        var password by rememberSaveable { mutableStateOf("") }
         var rememberMe by remember { mutableStateOf(false) }
         val showDialog = remember { mutableStateOf(false) }
 
@@ -94,7 +95,7 @@ fun InicioSesion(navController: NavHostController) {
             rememberMe = it
         }
 
-        LoginButton(email, password, rememberMe, showDialog, navController)
+        LoginButton(correo, password, rememberMe, showDialog, navController, userViewModel)
 
         if (showDialog.value) {
             ShowErrorDialog {
@@ -177,56 +178,29 @@ private fun RememberMeCheckbox(
 
 @Composable
 private fun LoginButton(
-    email: String,
+    correo: String,
     password: String,
     rememberMe: Boolean,
     showDialog: MutableState<Boolean>,
-    navController: NavHostController
+    navController: NavHostController,
+    userViewModel: UserViewModel,
+    sessionManager: SessionManager
 ) {
-    val db = FirebaseFirestore.getInstance()
-    val coleccion = db.collection("User")
     val correosPermitidos = listOf("gblancocastro@gmail.com", "jramosgarcia@gmail.com", "lgallardo@gmail.com")
-    var mensajeConfirmacion by remember { mutableStateOf("") }
-    val context = LocalContext.current
     Button(
         onClick = {
-            if (email.isNotBlank() && password.isNotBlank()) {
+            val loginSuccessful = userViewModel.signIn(correo, password)
+            if (loginSuccessful) {
+                // Si las credenciales son las específicas, navega a la ruta deseada
+                if (correo in correosPermitidos) {
+                    navController.navigate("MenuTrabajadores")
+                } else {
+                    // Si las credenciales no son las específicas, navega a la ruta predeterminada
+                    navController.navigate("MenuClientes")
+                }
             } else {
+                showDialog.value = true
             }
-            db.collection(coleccion.toString())
-                .whereEqualTo("email", email.toString())
-                .get()
-                .addOnSuccessListener { querySnapshot ->
-                    if (!querySnapshot.isEmpty) {
-                        var credentialsMatched = false
-                        for (documentSnapshot in querySnapshot) {
-                            val storedUser = documentSnapshot.getString("email")
-                            val storedContraseña = documentSnapshot.getString("password")
-                            val storedRol = documentSnapshot.getString("rol")
-                            if (email == storedUser && password == storedContraseña) {
-                                credentialsMatched = true
-                                SessionManager.setLoggedIn(context, true)
-                                SessionManager.setUsername(context, email)
-                                val isLoggedIn = SessionManager.isLoggedIn(context)
-                                if (isLoggedIn) {
-                                    when (storedRol){
-                                        "1" -> navController.navigate("MenuTrabajadores")
-                                        "2" -> navController.navigate("MenuClientes")
-                                    }
-
-                                }
-                                if (!credentialsMatched) {
-                                    mensajeConfirmacion = "Usuario o contraseña incorrectos"
-                                }
-                            } else {
-                            }
-                        }
-                    }
-
-                }
-                .addOnFailureListener {
-                    mensajeConfirmacion = "Error al verificar los datos"
-                }
         },
         modifier = Modifier
             .fillMaxWidth()
