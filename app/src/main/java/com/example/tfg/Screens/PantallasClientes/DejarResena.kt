@@ -1,5 +1,6 @@
 package com.example.tfg.Screens.PantallasClientes
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -10,8 +11,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.material.AlertDialog
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.Slider
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.DateRange
@@ -32,6 +35,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -40,20 +44,25 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.tfg.R
+import com.example.tfg.Retrofit.DataClases.Critica
+import com.example.tfg.Retrofit.ViewModels.CriticaViewModel
 import com.example.tfg.navigation.AppScreens
 import kotlinx.coroutines.launch
+import com.google.firebase.firestore.FirebaseFirestore
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DejarResena(navController: NavHostController) {
+fun DejarResena(navController: NavHostController, viewModel: CriticaViewModel) {
     val scrollState = rememberScrollState() // Inicializar scrollState
     val scope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+    var showDialog by remember { mutableStateOf(false) }
 
     /*Inicio del cajón lateral*/
     ModalNavigationDrawer(
@@ -185,10 +194,10 @@ fun DejarResena(navController: NavHostController) {
                     verticalArrangement = Arrangement.spacedBy(16.dp),
                     horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally // Centrar horizontalmente
                 ) {
-                    var resena by remember { mutableStateOf("") }
+                    var mensaje by remember { mutableStateOf("") }
                     OutlinedTextField(
-                        value = resena,
-                        onValueChange = { resena = it },
+                        value = mensaje,
+                        onValueChange = { mensaje = it },
                         singleLine = true,
                         label = {
                             Text("Introduzca la reseña que desee")
@@ -196,18 +205,67 @@ fun DejarResena(navController: NavHostController) {
                         modifier = Modifier.fillMaxWidth(0.8f) // Ajustar el ancho del TextField
                     )
 
+                    var valoracion by remember { mutableStateOf(1f) }
+                    Slider(
+                        value = valoracion,
+                        onValueChange = { valoracion = it },
+                        valueRange = 1f..5f,
+                        steps = 4,
+                        modifier = Modifier.fillMaxWidth(0.8f)
+                    )
+
+                    val db = FirebaseFirestore.getInstance()
+                    val coleccion = db.collection("Critica")
+                    var showDialog by remember { mutableStateOf(false) }
+                    var mensajeConfirmacion by remember { mutableStateOf("") }
+                    var showToast by remember { mutableStateOf(false) }
+                    val idCritica = coleccion.document().id
+
                     Button(
-                        onClick = { navController.navigate(AppScreens.DejarResena.ruta) },
-                        modifier = Modifier
-                            .fillMaxWidth(0.8f)
-                            .height(50.dp), // Ajustar la altura del botón
-                        shape = RectangleShape,
-                        colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
+                        onClick = {
+                            if(mensaje.isNotEmpty() && valoracion != 0f){
+                                val critica = Critica(idCritica, mensaje, valoracion)
+                                viewModel.crearCritica(critica)
+                                showDialog = true
+                            }else{
+                                mensajeConfirmacion = "Por favor, rellene todos los campos"
+                            }
+                        },
+                        // ...
                     ) {
                         Text(
                             text = "ENVIAR RESEÑA",
                             fontSize = 25.sp,
                         )
+                    }
+
+                    if (showDialog) {
+                        AlertDialog(
+                            onDismissRequest = { showDialog = false },
+                            title = { Text("Confirmación") },
+                            text = { Text("¿Estás seguro de que quieres enviar la reseña?") },
+                            confirmButton = {
+                                Button(onClick = {
+                                    showDialog = false
+                                    navController.navigate("MenuClientes")
+                                }) {
+                                    Text("Confirmar")
+                                }
+                            },
+                            dismissButton = {
+                                Button(onClick = { showDialog = false }) {
+                                    Text("Cancelar")
+                                }
+                            }
+                        )
+                    }
+
+                    if (showToast) {
+                        val context = LocalContext.current
+                        LaunchedEffect(key1 = showToast) {
+                            Toast.makeText(context, "ID de su reseña: $idCritica", Toast.LENGTH_LONG).show()
+                            showToast = false
+                        }
                     }
 
                     // Espaciado para que la imagen se mueva hacia abajo

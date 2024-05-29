@@ -26,7 +26,7 @@ object SessionManager {
         }
     }
 
-    fun getUsername(context: Context): String {
+    fun getEmail(context: Context): String {
         val sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         //return sharedPreferences.getString(KEY_USERNAME, "") ?: ""
         return sharedPreferences.getString(KEY_USERNAME, "") ?: ""

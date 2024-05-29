@@ -12,5 +12,4 @@ data class Reserva(
     val telefonoCliente: String,
     val emailCliente: String,
     val observaciones: String?,
-    val mesa: String // Aquí asumo que la mesa se representa con su ID en formato String
 ) : Serializable
