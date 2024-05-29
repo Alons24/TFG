@@ -3,15 +3,17 @@
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.tfg.INICIOSESIONYREGISTRO.pantallaLogin
 import com.example.tfg.Screens.MenuPrimero
+import com.example.tfg.Screens.PantallasClientes.AnadirReserva
 import com.example.tfg.Screens.PantallasClientes.CartaEntrantes
 import com.example.tfg.Screens.PantallasClientes.DejarResena
 import com.example.tfg.Screens.PantallasClientes.MenuClientes
-import com.example.tfg.Screens.PantallasClientes.Reservas
-import com.example.tfg.Screens.PantallasClientes.pantallaLogin
+import com.example.tfg.Screens.PantallasClientes.Reservas.Reservas
 import com.example.tfg.Screens.PantallasTrabajadores.MenuBotones
 import com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas.Mesa1
 import com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas.Mesa2
@@ -52,12 +54,13 @@ fun AppNavigation() {
         composable(AppScreens.Mesa9.ruta){ Mesa9(navigationController) }
         composable(AppScreens.MenuClientes.ruta){MenuClientes(navigationController)}
         composable(AppScreens.InicioSesion.ruta){InicioSesion(navigationController)}
-        composable(AppScreens.pantallaLogin.ruta){pantallaLogin(navigationController) }
+        composable(AppScreens.pantallaLogin.ruta){pantallaLogin(navigationController, viewModel()) }
         composable(AppScreens.Perfil.ruta){ Perfil(navigationController)}
         composable(AppScreens.Carta.ruta){ CartaEntrantes(navigationController) }
         composable(AppScreens.MenuCategorias.ruta){ MenuCategorias(navigationController)}
         composable(AppScreens.Reservas.ruta){ Reservas(navigationController)}
-        composable(AppScreens.DejarResena.ruta){ DejarResena(navigationController)}
+        composable(AppScreens.DejarResena.ruta){ DejarResena(navigationController, viewModel())}
+        composable(AppScreens.AnadirReserva.ruta){ AnadirReserva(navigationController) }
 
 
 

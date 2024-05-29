@@ -35,6 +35,7 @@ sealed class AppScreens(val ruta: String) {
 
     object Reservas:AppScreens("Rerservas")
     object Reservar:AppScreens("Reservar")
+    object AnadirReserva:AppScreens("AnadirReserva")
 
 
 
