@@ -1,4 +1,5 @@
 
+import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -42,14 +43,14 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.tfg.R
 import com.example.tfg.Retrofit.SessionManager
-import com.example.tfg.Retrofit.ViewModels.UserViewModel
+
+import com.example.tfg.Retrofit.WebService
 import com.google.firebase.firestore.FirebaseFirestore
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun InicioSesion(navController: NavHostController) {
-    val userViewModel: UserViewModel = viewModel()
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -103,8 +104,6 @@ fun InicioSesion(navController: NavHostController) {
             rememberMe = rememberMe,
             showDialog = showDialog,
             navController = navController,
-            userViewModel = userViewModel,
-            sessionManager = SessionManager
         )
 
         if (showDialog.value) {
@@ -195,11 +194,13 @@ private fun LoginButton(
     rememberMe: Boolean,
     showDialog: MutableState<Boolean>,
     navController: NavHostController,
-    userViewModel: UserViewModel,
-    sessionManager: SessionManager
 ) {
     var mensajeConfirmacion by remember { mutableStateOf("") }
-    val context = LocalContext.current
+    val context: Context = LocalContext.current
+
+
+    // Usa UserViewModelFactory para obtener una instancia de UserViewModel
+
     val emailPermitidos = listOf("gblancocastro@gmail.com", "jramosgarcia@gmail.com", "lgallardo@gmail.com")
 Button(
     onClick = {

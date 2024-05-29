@@ -15,8 +15,10 @@ import retrofit2.http.Path
 
 interface WebService {
     data class Request(val correo: String, val password: String)
+
     @GET("/reservas")
     suspend fun getReservas(): Response<ReservaResponse>
+
     @POST("/hacerReservas")
     suspend fun createReserva(
         @Body reserva: Reserva
@@ -59,12 +61,15 @@ interface WebService {
     suspend fun crearCritica(@Body critica: Critica): Response<CriticaResponse>
 
     @PUT("/actualizarCritica/{idCritica}")
-    suspend fun actualizarCritica(@Path("idCritica") idCritica: String, @Body critica: Critica): Response<CriticaResponse>
+    suspend fun actualizarCritica(
+        @Path("idCritica") idCritica: String,
+        @Body critica: Critica
+    ): Response<CriticaResponse>
 
     @DELETE("/eliminarCritica/{idCritica}")
     suspend fun eliminarCritica(@Path("idCritica") idCritica: String): Response<CriticaResponse>
 
     @GET("/criticas/usuario/{idUsuario}")
     suspend fun obtenerCriticasUsuario(@Path("idUsuario") idUsuario: Int): Response<CriticaResponse>
-
 }
+
