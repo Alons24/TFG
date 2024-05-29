@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.BottomNavigationItem
@@ -34,6 +35,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
@@ -170,13 +172,16 @@ fun Mesas(navController: NavHostController) {
                                             .fillMaxWidth()
                                             .height(75.dp),
                                         shape = RectangleShape,
-                                        colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
+                                        colors = ButtonDefaults.buttonColors(Color(255, 215, 0, 255))//Color dorado
                                     ) {
                                         Text(
-                                            text = "Accede a $mesaName",
-                                            fontSize = 16.sp,
+                                            text = "$mesaName",
+                                            fontSize = 25.sp,
+                                            modifier = Modifier.wrapContentWidth(Alignment.CenterHorizontally) // Centrar texto
                                         )
                                     }
+
+
                                 }
                             }
                         }

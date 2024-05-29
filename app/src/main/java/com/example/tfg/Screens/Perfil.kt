@@ -71,7 +71,7 @@ fun Perfil(navController: NavHostController) {
                 ) {
                     // BOTÓN PARA VOLVER AL MENÚ DE INICIO
                     Button(
-                        onClick = { navController.navigate(AppScreens.DejarResena.ruta) },
+                        onClick = { navController.navigate(AppScreens.MESAS.ruta) },
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(100.dp),
@@ -85,7 +85,7 @@ fun Perfil(navController: NavHostController) {
                     }
 
                     Button(
-                        onClick = { navController.navigate(AppScreens.DejarResena.ruta) },
+                        onClick = { navController.navigate(AppScreens.Despensa.ruta) },
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(100.dp),
@@ -231,6 +231,8 @@ fun Perfil(navController: NavHostController) {
         }
     }
 }
+
+
 
 @Composable
 fun formatTime(timeMi: Long): String {

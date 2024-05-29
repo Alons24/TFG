@@ -1,4 +1,4 @@
-package com.example.tfg.Screens.PantallasClientes
+package com.example.tfg.INICIOSESIONYREGISTRO
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

@@ -115,6 +115,7 @@ fun DejarResena(navController: NavHostController) {
                         )
                     }
 
+//Hacer reserva, eliminarla,  obtenerla y otro para actualizar  básicamente un crud
 
                     //FIN DE LOS BOTONES DEL MENÚ LATERAL
                 }
