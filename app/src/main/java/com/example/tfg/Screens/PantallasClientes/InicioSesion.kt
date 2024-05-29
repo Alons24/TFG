@@ -32,6 +32,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -42,6 +43,7 @@ import androidx.navigation.NavHostController
 import com.example.tfg.R
 import com.example.tfg.Retrofit.SessionManager
 import com.example.tfg.Retrofit.ViewModels.UserViewModel
+import com.google.firebase.firestore.FirebaseFirestore
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -86,7 +88,7 @@ fun InicioSesion(navController: NavHostController) {
 
 
         Spacer(modifier = Modifier.height(30.dp))
-        var correo by rememberSaveable { mutableStateOf("") }
+        var email by rememberSaveable { mutableStateOf("") }
         var password by rememberSaveable { mutableStateOf("") }
         var rememberMe by remember { mutableStateOf(false) }
         val showDialog = remember { mutableStateOf(false) }
@@ -95,7 +97,15 @@ fun InicioSesion(navController: NavHostController) {
             rememberMe = it
         }
 
-        LoginButton(correo, password, rememberMe, showDialog, navController, userViewModel, SessionManager)
+        LoginButton(
+            email = email,
+            password = password,
+            rememberMe = rememberMe,
+            showDialog = showDialog,
+            navController = navController,
+            userViewModel = userViewModel,
+            sessionManager = SessionManager
+        )
 
         if (showDialog.value) {
             ShowErrorDialog {
@@ -178,7 +188,9 @@ private fun RememberMeCheckbox(
 
 @Composable
 private fun LoginButton(
-    correo: String,
+    db: FirebaseFirestore = FirebaseFirestore.getInstance(),
+    coleccion: String = "User",
+    email: String,
     password: String,
     rememberMe: Boolean,
     showDialog: MutableState<Boolean>,
@@ -186,35 +198,59 @@ private fun LoginButton(
     userViewModel: UserViewModel,
     sessionManager: SessionManager
 ) {
-    val correosPermitidos = listOf("gblancocastro@gmail.com", "jramosgarcia@gmail.com", "lgallardo@gmail.com")
-    Button(
-        onClick = {
-            val loginSuccessful = userViewModel.signIn(correo, password)
-            if (loginSuccessful) {
-                // Si las credenciales son las específicas, navega a la ruta deseada
-                if (correo in correosPermitidos) {
-                    navController.navigate("MenuTrabajadores")
-                } else {
-                    // Si las credenciales no son las específicas, navega a la ruta predeterminada
-                    navController.navigate("MenuClientes")
+    var mensajeConfirmacion by remember { mutableStateOf("") }
+    val context = LocalContext.current
+    val emailPermitidos = listOf("gblancocastro@gmail.com", "jramosgarcia@gmail.com", "lgallardo@gmail.com")
+Button(
+    onClick = {
+        if (email.isNotBlank() && password.isNotBlank()) {
+            db.collection(coleccion)
+                .whereEqualTo("email", email.toString())
+                .get()
+                .addOnSuccessListener { querySnapshot ->
+                    if (!querySnapshot.isEmpty) {
+                        var credentialsMatched = false
+                        for (documentSnapshot in querySnapshot) {
+                            val storedUser = documentSnapshot.getString("email")
+                            val storedContraseña = documentSnapshot.getString("password")
+                            val userRole = documentSnapshot.getString("rol") // Obtén el rol del usuario
+                            if (email == storedUser && password == storedContraseña) {
+                                credentialsMatched = true
+                                SessionManager.setLoggedIn(context, true)
+                                SessionManager.setUsername(context, email)
+                                val isLoggedIn = SessionManager.isLoggedIn(context)
+                                if (isLoggedIn) {
+                                    // Navega a la página de inicio en función del rol del usuario
+                                    if (userRole == "1") {
+                                        navController.navigate("MenuTrabajadores")
+                                    } else if (userRole == "2") {
+                                        navController.navigate("MenuClientes")
+                                    }
+                                }
+                                if (!credentialsMatched) {
+                                    mensajeConfirmacion = "Usuario o contraseña incorrectos"
+                                }
+                            }
+                        }
+                    }
                 }
-            } else {
-                showDialog.value = true
-            }
-        },
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(66.dp, 10.dp, 66.dp, 0.dp),
-        shape = MaterialTheme.shapes.medium,
-        colors = ButtonDefaults.buttonColors(Color(59, 64, 72, 255)),
-    ) {
-        Text(
-            text = "LOG IN",
-            fontSize = 20.sp,
-            color = Color.White
-        )
-    }
-}
+                .addOnFailureListener {
+                    mensajeConfirmacion = "Error al verificar los datos"
+                }
+        }
+    },
+    modifier = Modifier
+        .fillMaxWidth()
+        .padding(66.dp, 10.dp, 66.dp, 0.dp),
+    shape = MaterialTheme.shapes.medium,
+    colors = ButtonDefaults.buttonColors(Color(59, 64, 72, 255)),
+) {
+    Text(
+        text = "LOG IN",
+        fontSize = 20.sp,
+        color = Color.White
+    )
+}}
 
 @Composable
 private fun ShowErrorDialog(onDismiss: () -> Unit) {

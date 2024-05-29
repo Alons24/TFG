@@ -6,5 +6,7 @@ data class UserResponse(
     var codigo: String,
     var mensaje: String,
     var data: ArrayList<User>,
-    val toke: String
-)
+    val token: String
+) {
+
+}
