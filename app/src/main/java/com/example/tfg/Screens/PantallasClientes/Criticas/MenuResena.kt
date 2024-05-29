@@ -1,4 +1,4 @@
-package com.example.tfg.Screens.PantallasClientes
+package com.example.tfg.Screens.PantallasClientes.Criticas
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -78,7 +78,7 @@ fun DejarResena(navController: NavHostController, viewModel: CriticaViewModel) {
                 ) {
                     // BOTONES DEL MENÚ LATERAL
                     Button(
-                        onClick = { /*navController.navigate(AppScreens.DejarResena.ruta) */},
+                        onClick = { /*navController.navigate(AppScreens.DejarResena.ruta) */ },
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(100.dp),
@@ -201,7 +201,7 @@ fun DejarResena(navController: NavHostController, viewModel: CriticaViewModel) {
                                 .width(150.dp)
                         ) {
                             IconButton(
-                                onClick = { navController.navigate("Facturas") },
+                                onClick = { navController.navigate("CrearCritica") },
                                 modifier = Modifier.fillMaxSize()
                             ) {
                                 Icon(
@@ -220,7 +220,7 @@ fun DejarResena(navController: NavHostController, viewModel: CriticaViewModel) {
                                 .width(150.dp)
                         ) {
                             IconButton(
-                                onClick = { navController.navigate("Reservar") },
+                                onClick = { navController.navigate("CrearCritica") },
                                 modifier = Modifier.fillMaxSize()
                             ) {
                                 Icon(
@@ -241,7 +241,7 @@ fun DejarResena(navController: NavHostController, viewModel: CriticaViewModel) {
                         horizontalArrangement = Arrangement.Center
                     ) {
                         Button(
-                            onClick = { navController.navigate("AnadirReserva") },
+                            onClick = { navController.navigate("") },
                             modifier = Modifier
                                 .height(40.dp)
                                 .width(150.dp)
@@ -258,7 +258,7 @@ fun DejarResena(navController: NavHostController, viewModel: CriticaViewModel) {
                         }
                         Spacer(modifier = Modifier.size(36.dp))
                         Button(
-                            onClick = { navController.navigate("Facturas") },
+                            onClick = { navController.navigate("") },
                             modifier = Modifier
                                 .height(40.dp)
                                 .width(150.dp)
@@ -306,7 +306,7 @@ fun DejarResena(navController: NavHostController, viewModel: CriticaViewModel) {
                                 .width(150.dp)
                         ) {
                             IconButton(
-                                onClick = { navController.navigate("Tareas") },
+                                onClick = { navController.navigate("") },
                                 modifier = Modifier.fillMaxSize()
                             ) {
                                 Icon(
@@ -327,7 +327,7 @@ fun DejarResena(navController: NavHostController, viewModel: CriticaViewModel) {
                         horizontalArrangement = Arrangement.Center
                     ) {
                         Button(
-                            onClick = { navController.navigate("Facturas") },
+                            onClick = { navController.navigate("") },
                             modifier = Modifier
                                 .height(40.dp)
                                 .width(150.dp)
@@ -345,7 +345,7 @@ fun DejarResena(navController: NavHostController, viewModel: CriticaViewModel) {
 
                         Spacer(modifier = Modifier.size(36.dp))
                         Button(
-                            onClick = { navController.navigate("Facturas") },
+                            onClick = { navController.navigate("") },
                             modifier = Modifier
                                 .height(40.dp)
                                 .width(160.dp)
