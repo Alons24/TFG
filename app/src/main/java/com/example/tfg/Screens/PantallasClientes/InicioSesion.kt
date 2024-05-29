@@ -62,21 +62,21 @@ fun InicioSesion(navController: NavHostController) {
         Spacer(modifier = Modifier.height(20.dp))
         Text(text ="Bienvenido de nuevo", fontSize = 20.sp, color = Color.Gray)
 
-        var nombre by rememberSaveable { mutableStateOf("") }
+        var email by rememberSaveable { mutableStateOf("") }
 
         OutlinedTextField(
-            value = nombre,
-            onValueChange = { if (it.length <= 10) nombre = it },
+            value = email,
+            onValueChange = { if (it.length <= 50) email = it },
             singleLine = true,
             label = {
-                Text("Introduzca su nombre")
+                Text("Introduzca su email")
             }
         )
 
-        var contrasena by rememberSaveable { mutableStateOf("") }
+        var password by rememberSaveable { mutableStateOf("") }
         OutlinedTextField(
-            value = contrasena,
-            onValueChange = { if (it.length <= 12) contrasena = it },
+            value = password,
+            onValueChange = { if (it.length <= 42) password = it },
             singleLine = true,
             label = { Text("Introduzca su contraseña") },
             visualTransformation = PasswordVisualTransformation()
@@ -89,8 +89,6 @@ fun InicioSesion(navController: NavHostController) {
 
 
         Spacer(modifier = Modifier.height(30.dp))
-        var email by rememberSaveable { mutableStateOf("") }
-        var password by rememberSaveable { mutableStateOf("") }
         var rememberMe by remember { mutableStateOf(false) }
         val showDialog = remember { mutableStateOf(false) }
 
@@ -198,60 +196,72 @@ private fun LoginButton(
     var mensajeConfirmacion by remember { mutableStateOf("") }
     val context: Context = LocalContext.current
 
-
-    // Usa UserViewModelFactory para obtener una instancia de UserViewModel
-
-    val emailPermitidos = listOf("gblancocastro@gmail.com", "jramosgarcia@gmail.com", "lgallardo@gmail.com")
-Button(
-    onClick = {
-        if (email.isNotBlank() && password.isNotBlank()) {
-            db.collection(coleccion)
-                .whereEqualTo("email", email.toString())
-                .get()
-                .addOnSuccessListener { querySnapshot ->
-                    if (!querySnapshot.isEmpty) {
-                        var credentialsMatched = false
-                        for (documentSnapshot in querySnapshot) {
-                            val storedUser = documentSnapshot.getString("email")
-                            val storedContraseña = documentSnapshot.getString("password")
-                            val userRole = documentSnapshot.getString("rol") // Obtén el rol del usuario
-                            if (email == storedUser && password == storedContraseña) {
-                                credentialsMatched = true
-                                SessionManager.setLoggedIn(context, true)
-                                SessionManager.setUsername(context, email)
-                                val isLoggedIn = SessionManager.isLoggedIn(context)
-                                if (isLoggedIn) {
-                                    // Navega a la página de inicio en función del rol del usuario
-                                    if (userRole == "1") {
-                                        navController.navigate("MenuTrabajadores")
-                                    } else if (userRole == "2") {
-                                        navController.navigate("MenuClientes")
+    Button(
+        onClick = {
+            if (email.isBlank()) {
+                mensajeConfirmacion = "Debe introducir un correo electrónico"
+            } else if (password.isBlank()) {
+                mensajeConfirmacion = "Debe introducir una contraseña"
+            } else {
+                db.collection(coleccion)
+                    .whereEqualTo("email", email)
+                    .whereEqualTo("password", password)
+                    .get()
+                    .addOnSuccessListener { querySnapshot ->
+                        if (querySnapshot.isEmpty) {
+                            mensajeConfirmacion = "Los datos introducidos son erróneos"
+                        } else {
+                            var credentialsMatched = false
+                            for (documentSnapshot in querySnapshot) {
+                                val storedUser = documentSnapshot.getString("email")
+                                val storedContraseña = documentSnapshot.getString("password")
+                                val userRole = documentSnapshot.getLong("rol") // Obtén el rol del usuario
+                                if (email == storedUser && password == storedContraseña) {
+                                    credentialsMatched = true
+                                    SessionManager.setLoggedIn(context, true)
+                                    SessionManager.setUsername(context, email)
+                                    val isLoggedIn = SessionManager.isLoggedIn(context)
+                                    if (isLoggedIn) {
+                                        // Navega a la página de inicio en función del rol del usuario
+                                        if (userRole?.toInt() == 1) {
+                                            navController.navigate("MenuBotones")
+                                        } else if (userRole?.toInt() == 2) {
+                                            navController.navigate("MenuClientes")
+                                        }
                                     }
                                 }
-                                if (!credentialsMatched) {
-                                    mensajeConfirmacion = "Usuario o contraseña incorrectos"
-                                }
+                            }
+                            if (!credentialsMatched) {
+                                mensajeConfirmacion = "Usuario o contraseña incorrectos"
                             }
                         }
                     }
-                }
-                .addOnFailureListener {
-                    mensajeConfirmacion = "Error al verificar los datos"
-                }
-        }
-    },
-    modifier = Modifier
-        .fillMaxWidth()
-        .padding(66.dp, 10.dp, 66.dp, 0.dp),
-    shape = MaterialTheme.shapes.medium,
-    colors = ButtonDefaults.buttonColors(Color(59, 64, 72, 255)),
-) {
-    Text(
-        text = "LOG IN",
-        fontSize = 20.sp,
-        color = Color.White
-    )
-}}
+                    .addOnFailureListener {
+                        mensajeConfirmacion = "Error al verificar los datos"
+                    }
+            }
+        },
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(66.dp, 10.dp, 66.dp, 0.dp),
+        shape = MaterialTheme.shapes.medium,
+        colors = ButtonDefaults.buttonColors(Color(59, 64, 72, 255)),
+    ) {
+        Text(
+            text = "LOG IN",
+            fontSize = 20.sp,
+            color = Color.White
+        )
+    }
+
+    if (mensajeConfirmacion.isNotEmpty()) {
+        Text(
+            text = mensajeConfirmacion,
+            color = Color.Red,
+            modifier = Modifier.padding(top = 8.dp)
+        )
+    }
+}
 
 @Composable
 private fun ShowErrorDialog(onDismiss: () -> Unit) {
