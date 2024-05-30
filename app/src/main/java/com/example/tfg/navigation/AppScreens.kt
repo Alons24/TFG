@@ -25,6 +25,7 @@ sealed class AppScreens(val ruta: String) {
     object InicioSesion:AppScreens("InicioSesion")
     object pantallaLogin:AppScreens("pantallaLogin")
     object MenuPrimero : AppScreens("MenuPrimero")
+    object LoginScreen:AppScreens("LoginScreen")
 
 
     object Perfil:AppScreens("Perfil")

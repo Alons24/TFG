@@ -7,6 +7,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.tfg.INICIOSESIONYREGISTRO.LoginScreen
 import com.example.tfg.INICIOSESIONYREGISTRO.pantallaLogin
 import com.example.tfg.Screens.MenuPrimero
 import com.example.tfg.Screens.PantallasClientes.CartaEntrantes
@@ -61,6 +62,7 @@ fun AppNavigation() {
         composable(AppScreens.Reservas.ruta){ Reservas(navigationController)}
         composable(AppScreens.MenuCritica.ruta){ MenuCritica(navigationController) }
         composable(AppScreens.CrearCritica.ruta){ CrearCritica(navigationController, viewModel()) }
+        composable(AppScreens.LoginScreen.ruta){ LoginScreen(navigationController) }
 
 
 

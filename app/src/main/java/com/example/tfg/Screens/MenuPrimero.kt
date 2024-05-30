@@ -80,7 +80,7 @@ fun MenuPrimero(navController: NavHostController) {
 
         // Botón 3: INICIO DE SESIÓN
         Button(
-            onClick = { navController.navigate(AppScreens.InicioSesion.ruta) },
+            onClick = { navController.navigate(AppScreens.LoginScreen.ruta) },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(100.dp)

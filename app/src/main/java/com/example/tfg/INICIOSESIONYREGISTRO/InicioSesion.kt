@@ -110,9 +110,7 @@ fun InicioSesion(navController: NavHostController) {
         }
 
         Spacer(modifier = Modifier.size(10.dp))
-        ClickableLogin("¿No tienes cuenta?", "Regístrate") {
-            navController.navigate("pantallaLogin")
-        }
+        ClickableLogin("¿No tienes cuenta?", "Regístrate", navController)
     }
 }
 
@@ -293,7 +291,7 @@ private fun ShowErrorDialog(onDismiss: () -> Unit) {
 }
 
 @Composable
-private fun ClickableLogin(text1: String, text2: String, onClick: () -> Unit) {
+private fun ClickableLogin(text1: String, text2: String, navController: NavHostController) {
     Row{
         Text(
             text = text1,
@@ -307,7 +305,7 @@ private fun ClickableLogin(text1: String, text2: String, onClick: () -> Unit) {
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
             color = Color(4, 104, 249, 255),
-            modifier = Modifier.clickable { onClick.invoke() }
+            modifier = Modifier.clickable { navController.navigate("pantallaLogin") }
         )
     }
 }
