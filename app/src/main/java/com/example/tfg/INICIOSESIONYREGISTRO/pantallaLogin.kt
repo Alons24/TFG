@@ -22,17 +22,24 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.tfg.Retrofit.DataClases.User
+import com.example.tfg.Retrofit.RetrofitClient
 import com.example.tfg.Retrofit.ViewModels.UserViewModel
 import kotlin.random.Random
 
 @Composable
-fun pantallaLogin (navController: NavHostController, viewModel: UserViewModel) {
+fun pantallaLogin (navController: NavHostController) {
+    val context = LocalContext.current
+    val api = RetrofitClient.webService
+    val factory = UserViewModel.UserViewModelFactory(api, context)
+    val viewModel: UserViewModel = viewModel(factory = factory)
 
     Column(
         modifier = Modifier

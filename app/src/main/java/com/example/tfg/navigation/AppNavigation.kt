@@ -54,7 +54,7 @@ fun AppNavigation() {
         composable(AppScreens.Mesa9.ruta){ Mesa9(navigationController) }
         composable(AppScreens.MenuClientes.ruta){MenuClientes(navigationController)}
         composable(AppScreens.InicioSesion.ruta){InicioSesion(navigationController)}
-        composable(AppScreens.pantallaLogin.ruta){pantallaLogin(navigationController, viewModel()) }
+        composable(AppScreens.pantallaLogin.ruta){pantallaLogin(navigationController) }
         composable(AppScreens.Perfil.ruta){ Perfil(navigationController)}
         composable(AppScreens.Carta.ruta){ CartaEntrantes(navigationController) }
         composable(AppScreens.MenuCategorias.ruta){ MenuCategorias(navigationController)}

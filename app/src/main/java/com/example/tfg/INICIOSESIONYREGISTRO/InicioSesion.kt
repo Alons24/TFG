@@ -1,4 +1,3 @@
-
 import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -39,13 +38,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.tfg.R
 import com.example.tfg.Retrofit.SessionManager
-
-import com.example.tfg.Retrofit.WebService
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -119,9 +118,17 @@ fun InicioSesion(navController: NavHostController) {
 
 @Composable
 private fun RedesSocialesButtons() {
+
+    lateinit var googleSignInClient: GoogleSignInClient
+    val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        .requestEmail()
+        .build()
+    googleSignInClient = GoogleSignIn.getClient(LocalContext.current, gso)
+
     Row {
         SocialButton(R.drawable.google_banner) {
             // Acción al hacer clic en el botón de Google
+
         }
         Spacer(modifier = Modifier.width(20.dp))
         SocialButton(R.drawable.banner_facebook) {
