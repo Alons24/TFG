@@ -104,7 +104,7 @@ fun Reservas(navController: NavHostController) {
 
 
                     Button(
-                        onClick = { navController.navigate(AppScreens.DejarResena.ruta) },
+                        onClick = { navController.navigate(AppScreens.MenuCritica.ruta) },
                         modifier = Modifier
                             .fillMaxWidth()
                             .width(300.dp)

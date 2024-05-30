@@ -62,7 +62,7 @@ fun MenuClientes(navController: NavHostController) {
                     //BOTÓN PARA VOLVER AL MENÚ DE INICIO
                     // Otros elementos del menú lateral
                     Button(
-                        onClick = { navController.navigate(AppScreens.DejarResena.ruta) },
+                        onClick = { navController.navigate(AppScreens.CrearCritica.ruta) },
                         modifier = Modifier
                             .fillMaxWidth()
                             .width(300.dp)
@@ -198,7 +198,7 @@ fun MenuClientes(navController: NavHostController) {
                 }
 
                 Button(
-                    onClick = { navController.navigate(AppScreens.DejarResena.ruta) },
+                    onClick = { navController.navigate(AppScreens.MenuCritica.ruta) },
                     modifier = Modifier
                         .fillMaxWidth()
                         .width(300.dp)
@@ -207,7 +207,7 @@ fun MenuClientes(navController: NavHostController) {
                     colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
                 ) {
                     Text(
-                        text = "DEJAR RESEÑA",
+                        text = "Menu Criticas",
                         fontSize = 25.sp,
                     )
                 }

@@ -9,15 +9,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.AlertDialog
-import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Slider
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
@@ -41,6 +39,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
@@ -59,12 +58,11 @@ import com.google.firebase.firestore.FirebaseFirestore
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CrearCritica(navController: NavHostController, viewModel: CriticaViewModel) {
-    val scrollState = rememberScrollState() // Inicializar scrollState
+    val scrollState = rememberScrollState()
     val scope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     var showDialog by remember { mutableStateOf(false) }
 
-    /*Inicio del cajón lateral*/
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
@@ -75,58 +73,47 @@ fun CrearCritica(navController: NavHostController, viewModel: CriticaViewModel) 
                         .padding(16.dp),
                     verticalArrangement = Arrangement.spacedBy(16.dp),
                 ) {
-                    //BOTÓN PARA BOLVER AL MENÚ DE INICIO
-                    // Otros elementos del menú lateral
                     Button(
-                        onClick = { /*navController.navigate(AppScreens.DejarResena.ruta) */},
+                        onClick = { navController.navigate(AppScreens.CrearCritica.ruta) },
                         modifier = Modifier
                             .fillMaxWidth()
-                            .width(300.dp)
-                            .height(100.dp),
+                            .height(50.dp),
                         shape = RectangleShape,
                         colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
                     ) {
                         Text(
-                            text = "Escaner qr",
-                            fontSize = 40.sp,
+                            text = "Escaner QR",
+                            fontSize = 20.sp,
                         )
                     }
-
 
                     Button(
                         onClick = { navController.navigate(AppScreens.Reservas.ruta) },
                         modifier = Modifier
                             .fillMaxWidth()
-                            .width(300.dp)
-                            .height(100.dp),
+                            .height(50.dp),
                         shape = RectangleShape,
                         colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
                     ) {
                         Text(
-                            text = "Menu platos",
-                            fontSize = 40.sp,
+                            text = "Menú Platos",
+                            fontSize = 20.sp,
                         )
                     }
-
 
                     Button(
-                        onClick = { navController.navigate(AppScreens.DejarResena.ruta) },
+                        onClick = { navController.navigate(AppScreens.CrearCritica.ruta) },
                         modifier = Modifier
                             .fillMaxWidth()
-                            .width(300.dp)
-                            .height(100.dp),
+                            .height(50.dp),
                         shape = RectangleShape,
                         colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
                     ) {
                         Text(
-                            text = "Hacer reserva",
-                            fontSize = 40.sp,
+                            text = "Hacer Reserva",
+                            fontSize = 20.sp,
                         )
                     }
-
-//Hacer reserva, eliminarla,  obtenerla y otro para actualizar  básicamente un crud
-
-                    //FIN DE LOS BOTONES DEL MENÚ LATERAL
                 }
             }
         },
@@ -135,17 +122,17 @@ fun CrearCritica(navController: NavHostController, viewModel: CriticaViewModel) 
             topBar = {
                 CenterAlignedTopAppBar(
                     colors = TopAppBarDefaults.mediumTopAppBarColors(
-                        containerColor = Color.Blue, // Cambia el color de fondo
-                        titleContentColor = Color.White, // Cambia el color del título
+                        containerColor = Color.Blue,
+                        titleContentColor = Color.White,
                     ),
                     title = {
-                        Text("DEJAR RESEÑA")
+                        Text("Dejar Reseña")
                     },
                     navigationIcon = {
                         IconButton(onClick = { navController.navigate("MenuClientes") }) {
                             Icon(
                                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                                contentDescription = "Localized description",
+                                contentDescription = "Back",
                                 tint = Color.White
                             )
                         }
@@ -166,18 +153,7 @@ fun CrearCritica(navController: NavHostController, viewModel: CriticaViewModel) 
                     containerColor = Color.Blue,
                     contentColor = MaterialTheme.colorScheme.primary,
                 ) {
-                    BottomNavigationItem(
-                        selected = false,
-                        onClick = { /* Código para la acción del segundo ícono */ },
-                        modifier = Modifier.weight(1f),
-                        icon = {
-                            Icon(
-                                imageVector = Icons.Default.DateRange,
-                                contentDescription = "YourIcon",
-                                tint = Color.White
-                            )
-                        },
-                    )
+                    // Aquí puedes agregar íconos o elementos de navegación adicionales si es necesario
                 }
             },
         ) { innerPadding ->
@@ -185,14 +161,15 @@ fun CrearCritica(navController: NavHostController, viewModel: CriticaViewModel) 
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(innerPadding),
-                contentAlignment = androidx.compose.ui.Alignment.TopCenter // Cambiar a la parte superior
+                contentAlignment = Alignment.TopCenter
             ) {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(16.dp),
+                        .padding(16.dp)
+                        .verticalScroll(scrollState),
                     verticalArrangement = Arrangement.spacedBy(16.dp),
-                    horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally // Centrar horizontalmente
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     var mensaje by remember { mutableStateOf("") }
                     OutlinedTextField(
@@ -202,7 +179,7 @@ fun CrearCritica(navController: NavHostController, viewModel: CriticaViewModel) 
                         label = {
                             Text("Introduzca la reseña que desee")
                         },
-                        modifier = Modifier.fillMaxWidth(0.8f) // Ajustar el ancho del TextField
+                        modifier = Modifier.fillMaxWidth(0.8f)
                     )
 
                     var valoracion by remember { mutableStateOf(1f) }
@@ -216,26 +193,28 @@ fun CrearCritica(navController: NavHostController, viewModel: CriticaViewModel) 
 
                     val db = FirebaseFirestore.getInstance()
                     val coleccion = db.collection("Critica")
-                    var showDialog by remember { mutableStateOf(false) }
                     var mensajeConfirmacion by remember { mutableStateOf("") }
                     var showToast by remember { mutableStateOf(false) }
                     val idCritica = coleccion.document().id
 
                     Button(
                         onClick = {
-                            if(mensaje.isNotEmpty() && valoracion != 0f){
+                            if (mensaje.isNotEmpty() && valoracion != 0f) {
                                 val critica = Critica(idCritica, mensaje, valoracion)
                                 viewModel.crearCritica(critica)
                                 showDialog = true
-                            }else{
+                            } else {
                                 mensajeConfirmacion = "Por favor, rellene todos los campos"
+                                showToast = true
                             }
                         },
-                        // ...
+                        modifier = Modifier.fillMaxWidth(0.8f),
+                        shape = RectangleShape,
+                        colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
                     ) {
                         Text(
-                            text = "ENVIAR RESEÑA",
-                            fontSize = 25.sp,
+                            text = "Enviar Reseña",
+                            fontSize = 20.sp,
                         )
                     }
 
@@ -263,17 +242,16 @@ fun CrearCritica(navController: NavHostController, viewModel: CriticaViewModel) 
                     if (showToast) {
                         val context = LocalContext.current
                         LaunchedEffect(key1 = showToast) {
-                            Toast.makeText(context, "ID de su reseña: $idCritica", Toast.LENGTH_LONG).show()
+                            Toast.makeText(context, mensajeConfirmacion, Toast.LENGTH_LONG).show()
                             showToast = false
                         }
                     }
 
-                    // Espaciado para que la imagen se mueva hacia abajo
                     Box(modifier = Modifier.weight(1f))
 
                     Image(
                         painter = painterResource(R.drawable.cervecer_a_montemayorjpg),
-                        contentDescription = "TÍTULO DE LA EMPRESA",
+                        contentDescription = "Título de la empresa",
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(200.dp)

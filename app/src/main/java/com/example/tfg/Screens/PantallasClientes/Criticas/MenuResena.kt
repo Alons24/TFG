@@ -59,7 +59,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DejarResena(navController: NavHostController, viewModel: CriticaViewModel) {
+fun MenuCritica(navController: NavHostController) {
     val scrollState = rememberScrollState()
     val scope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
@@ -106,7 +106,7 @@ fun DejarResena(navController: NavHostController, viewModel: CriticaViewModel) {
                     }
 
                     Button(
-                        onClick = { navController.navigate(AppScreens.DejarResena.ruta) },
+                        onClick = { navController.navigate(AppScreens.CrearCritica.ruta) },
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(100.dp),
@@ -241,7 +241,7 @@ fun DejarResena(navController: NavHostController, viewModel: CriticaViewModel) {
                         horizontalArrangement = Arrangement.Center
                     ) {
                         Button(
-                            onClick = { navController.navigate("") },
+                            onClick = { navController.navigate("CrearCritica") },
                             modifier = Modifier
                                 .height(40.dp)
                                 .width(150.dp)
@@ -256,9 +256,11 @@ fun DejarResena(navController: NavHostController, viewModel: CriticaViewModel) {
                                 )
                             )
                         }
+
                         Spacer(modifier = Modifier.size(36.dp))
+
                         Button(
-                            onClick = { navController.navigate("") },
+                            onClick = { navController.navigate("EliminarCritica") },
                             modifier = Modifier
                                 .height(40.dp)
                                 .width(150.dp)
@@ -275,6 +277,7 @@ fun DejarResena(navController: NavHostController, viewModel: CriticaViewModel) {
                         }
                     }
                     Spacer(modifier = Modifier.size(30.dp))
+
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -287,7 +290,7 @@ fun DejarResena(navController: NavHostController, viewModel: CriticaViewModel) {
                                 .width(150.dp)
                         ) {
                             IconButton(
-                                onClick = { navController.navigate("") },
+                                onClick = { navController.navigate("EliminarCritica") },
                                 modifier = Modifier.fillMaxSize()
                             ) {
                                 Icon(
@@ -306,7 +309,7 @@ fun DejarResena(navController: NavHostController, viewModel: CriticaViewModel) {
                                 .width(150.dp)
                         ) {
                             IconButton(
-                                onClick = { navController.navigate("") },
+                                onClick = { navController.navigate("ObtenerCritica") },
                                 modifier = Modifier.fillMaxSize()
                             ) {
                                 Icon(
@@ -327,7 +330,7 @@ fun DejarResena(navController: NavHostController, viewModel: CriticaViewModel) {
                         horizontalArrangement = Arrangement.Center
                     ) {
                         Button(
-                            onClick = { navController.navigate("") },
+                            onClick = { navController.navigate("ObtenerCritica") },
                             modifier = Modifier
                                 .height(40.dp)
                                 .width(150.dp)
@@ -345,7 +348,7 @@ fun DejarResena(navController: NavHostController, viewModel: CriticaViewModel) {
 
                         Spacer(modifier = Modifier.size(36.dp))
                         Button(
-                            onClick = { navController.navigate("") },
+                            onClick = { navController.navigate("ActualizarCritica") },
                             modifier = Modifier
                                 .height(40.dp)
                                 .width(160.dp)

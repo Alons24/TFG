@@ -94,7 +94,7 @@ fun MenuCategorias(navController: NavHostController) {
 
 
                     Button(
-                        onClick = { navController.navigate(AppScreens.DejarResena.ruta) },
+                        onClick = { navController.navigate(AppScreens.CrearCritica.ruta) },
                         modifier = Modifier
                             .fillMaxWidth()
                             .width(300.dp)
