@@ -44,9 +44,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.tfg.R
+import com.example.tfg.Retrofit.RetrofitClient
 import com.example.tfg.Retrofit.SessionManager
+import com.example.tfg.Retrofit.ViewModels.UserViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 import com.loc.composeloginscreen.ui.theme.Black
 import com.loc.composeloginscreen.ui.theme.BlueGray
@@ -61,9 +64,11 @@ fun LoginScreen(navController: NavHostController) {
     var password by remember { mutableStateOf("") }
     var rememberMe by remember { mutableStateOf(false) }
     var showDialog by remember { mutableStateOf(false) }
+
+
     Surface {
         Column(modifier = Modifier.fillMaxSize()) {
-            TopSection()
+            TopSectionLogin()
             Spacer(modifier = Modifier.height(36.dp))
 
             Column(
@@ -125,7 +130,7 @@ fun LoginScreen(navController: NavHostController) {
 }
 
 @Composable
-private fun SocialMediaSection() {
+fun SocialMediaSection() {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
             text = "O inicia sesión con:",
@@ -156,7 +161,7 @@ private fun SocialMediaSection() {
 }
 
 @Composable
-private fun LoginSection(
+fun LoginSection(
     db: FirebaseFirestore = FirebaseFirestore.getInstance(),
     coleccion: String = "User",
     email: String,
@@ -290,7 +295,7 @@ private fun LoginSection(
 }
 
 @Composable
-private fun TopSection() {
+fun TopSectionLogin() {
     val uiColor = if (isSystemInDarkTheme()) Color.White else Black
 
     Box(

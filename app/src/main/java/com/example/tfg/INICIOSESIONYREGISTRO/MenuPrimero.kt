@@ -1,4 +1,4 @@
-package com.example.tfg.Screens
+package com.example.tfg.INICIOSESIONYREGISTRO
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -63,7 +63,7 @@ fun MenuPrimero(navController: NavHostController) {
 
         // Botón 2: ACCEDER CLIENTES
         Button(
-            onClick = { navController.navigate(AppScreens.MenuClientes.ruta) },
+            onClick = { navController.navigate(AppScreens.pantallaRegistro.ruta) },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(100.dp)

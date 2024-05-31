@@ -1,13 +1,9 @@
 package com.example.tfg.Retrofit.ViewModels
 
 import android.content.Context
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.tfg.Retrofit.DataClases.User
 import com.example.tfg.Retrofit.WebService
 import kotlinx.coroutines.launch
 
@@ -16,7 +12,7 @@ class UserViewModel (private val api: WebService, private val context: Context) 
 
 
 
-    fun signUp(email: String, password: String) {
+    fun signUp(email: String, password: String, nombre: String, apellidos: String, telefono: String, rol: String, idUsuario: String) {
         viewModelScope.launch {
             try {
                 val response = api.signUp(WebService.Request(email, password))

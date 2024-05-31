@@ -22,10 +22,11 @@ sealed class AppScreens(val ruta: String) {
     object MenuClientes:AppScreens("MenuClientes")
 
     //RUTAS INICIO SESION Y MENU PRINCIPAL
-    object InicioSesion:AppScreens("InicioSesion")
+
     object pantallaLogin:AppScreens("pantallaLogin")
     object MenuPrimero : AppScreens("MenuPrimero")
     object LoginScreen:AppScreens("LoginScreen")
+    object pantallaRegistro:AppScreens("pantallaRegistro")
 
 
     object Perfil:AppScreens("Perfil")
