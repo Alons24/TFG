@@ -33,7 +33,7 @@ import com.example.tfg.Retrofit.DataClases.User
 import com.example.tfg.Retrofit.RetrofitClient
 import com.example.tfg.Retrofit.ViewModels.UserViewModel
 import kotlin.random.Random
-
+/*
 @Composable
 fun pantallaLogin (navController: NavHostController) {
     val context = LocalContext.current
@@ -144,4 +144,4 @@ fun pantallaLogin (navController: NavHostController) {
     }
 }
 
-
+*/

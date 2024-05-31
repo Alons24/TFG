@@ -25,7 +25,6 @@ import com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas.Mesa7
 import com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas.Mesa8
 import com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas.Mesa9
 import com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas.Mesas
-import com.example.tfg.Screens.PantallasTrabajadores.Trabajadores.CartaTrabajadores.CartaTostasTrabajadores
 import com.example.tfg.Screens.PantallasTrabajadores.Trabajadores.Despensa
 import com.example.tfg.Screens.Perfil
 import com.example.tfg.navigation.AppScreens
@@ -57,13 +56,11 @@ fun AppNavigation() {
         composable(AppScreens.InicioSesion.ruta){InicioSesion(navigationController)}
         composable(AppScreens.pantallaLogin.ruta){pantallaLogin(navigationController) }
         composable(AppScreens.Perfil.ruta){ Perfil(navigationController)}
-        composable(AppScreens.CartaEntrantes.ruta){ CartaEntrantes(navigationController) }
+        composable(AppScreens.Carta.ruta){ CartaEntrantes(navigationController) }
         composable(AppScreens.MenuCategorias.ruta){ MenuCategorias(navigationController)}
         composable(AppScreens.Reservas.ruta){ Reservas(navigationController)}
         composable(AppScreens.MenuCritica.ruta){ MenuCritica(navigationController) }
         composable(AppScreens.CrearCritica.ruta){ CrearCritica(navigationController, viewModel()) }
-        composable(AppScreens.CartaTostasTrabajadores.ruta){ CartaTostasTrabajadores(navigationController)}
-
 
 
 
@@ -71,9 +68,6 @@ fun AppNavigation() {
         }
 
 }
-
-
-
 
 
 
