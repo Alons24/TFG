@@ -12,10 +12,12 @@ class UserViewModel (private val api: WebService, private val context: Context) 
 
 
 
-    fun signUp(email: String, password: String, nombre: String, apellidos: String, telefono: String, rol: String, idUsuario: String) {
+    fun signUp(email: String, password: String, nombre: String, apellidos: String, telefono: String, rol: String, idUsuario: Int) {
         viewModelScope.launch {
             try {
-                val response = api.signUp(WebService.Request(email, password))
+                val response = api.signUp(WebService.Request(email, password, nombre, apellidos, telefono, rol,
+                    idUsuario.toString()
+                ))
                 if (response.isSuccessful && response.body() != null) {
                     val sharedPref = context.getSharedPreferences("MyPref", Context.MODE_PRIVATE)
                     with (sharedPref.edit()) {
@@ -31,10 +33,12 @@ class UserViewModel (private val api: WebService, private val context: Context) 
         }
     }
 
-    fun signIn(email: String, password: String) {
+    fun signIn(email: String, password: String, nombre: String, apellidos: String, telefono: String, rol: String, idUsuario: Int) {
         viewModelScope.launch {
             try {
-                val response = api.signIn(WebService.Request(email, password))
+                val response = api.signIn(WebService.Request(email, password, nombre, apellidos, telefono, rol,
+                    idUsuario.toString()
+                ))
                 if (response.isSuccessful && response.body() != null) {
                     val sharedPref = context.getSharedPreferences("MyPref", Context.MODE_PRIVATE)
                     with (sharedPref.edit()) {

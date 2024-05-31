@@ -14,7 +14,15 @@ import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface WebService {
-    data class Request(val correo: String, val password: String)
+    data class Request(
+        val email: String,
+        val password: String,
+        val nombre: String,
+        val apellidos: String,
+        val telefono: String,
+        val rol: String,
+        val idUsuario: String
+    )
 
     @GET("/reservas")
     suspend fun getReservas(): Response<ReservaResponse>
