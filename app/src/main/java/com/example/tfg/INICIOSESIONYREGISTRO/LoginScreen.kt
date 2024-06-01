@@ -250,12 +250,16 @@ fun LoginSection(
                             var credentialsMatched = false
                             for (documentSnapshot in querySnapshot) {
                                 val storedUser = documentSnapshot.getString("email")
+                                val storedNameUser = documentSnapshot.getString("nombre")
                                 val storedContraseña = documentSnapshot.getString("password")
                                 val userRole = documentSnapshot.getLong("rol") // Obtén el rol del usuario
                                 if (email == storedUser && password == storedContraseña) {
                                     credentialsMatched = true
                                     SessionManager.setLoggedIn(context, true)
-                                    SessionManager.setUsername(context, email)
+                                    SessionManager.setEmail(context, email)
+                                    if (storedNameUser != null) {
+                                        SessionManager.setUserName(context, storedNameUser)
+                                    }
                                     val isLoggedIn = SessionManager.isLoggedIn(context)
                                     if (isLoggedIn) {
                                         // Navega a la página de inicio en función del rol del usuario

@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.AlertDialog
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -30,23 +31,58 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.example.tfg.Retrofit.SessionManager
 import com.example.tfg.navigation.AppScreens
+import com.google.firebase.firestore.FirebaseFirestore
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MenuClientes(navController: NavHostController) {
 
+    val context = LocalContext.current
+
+    val db = FirebaseFirestore.getInstance()
+    val coleccion = "User"
+    val emailUsuario = SessionManager.getEmail(context)
+    val nombreUsuario = SessionManager.getUserName(context)
     val scaffoldState = rememberScrollState()
     val scope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+    val showDialog = remember { mutableStateOf(false) }
+
+    if (showDialog.value) {
+        AlertDialog(
+            onDismissRequest = { showDialog.value = false },
+            title = { Text("Cerrar sesión") },
+            text = { Text("¿Estás seguro de que quieres cerrar la sesión?") },
+            confirmButton = {
+                Button(onClick = {
+                    showDialog.value = false
+                    SessionManager.clear(context)
+                    navController.navigate(AppScreens.LoginScreen.ruta)
+                }) {
+                    Text("Sí")
+                }
+            },
+            dismissButton = {
+                Button(onClick = { showDialog.value = false }) {
+                    Text("No")
+                }
+            }
+        )
+    }
 
     /*Inicio del cajón lateral*/
     ModalNavigationDrawer(
@@ -92,10 +128,10 @@ fun MenuClientes(navController: NavHostController) {
                         titleContentColor = Color.White, // Cambia el color del título
                     ),
                     title = {
-                        Text("MENU CLIENTES")
+                        Text("Bienvenido/a $nombreUsuario", color = Color.White)
                     },
                     navigationIcon = {
-                        IconButton(onClick = { navController.navigate("MenuPrimero") }) {
+                        IconButton(onClick = {  showDialog.value = true }) {
                             Icon(
                                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                                 contentDescription = "Localized description",
@@ -148,6 +184,7 @@ fun MenuClientes(navController: NavHostController) {
                 verticalArrangement = Arrangement.spacedBy(30.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
+
 
 
                 Button(
