@@ -23,7 +23,6 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -44,19 +43,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.tfg.R
-import com.example.tfg.Retrofit.RetrofitClient
 import com.example.tfg.Retrofit.SessionManager
-import com.example.tfg.Retrofit.ViewModels.UserViewModel
 import com.google.firebase.firestore.FirebaseFirestore
-import com.loc.composeloginscreen.ui.theme.Black
-import com.loc.composeloginscreen.ui.theme.BlueGray
-import com.loc.composeloginscreen.ui.theme.Roboto
-import com.loc.composeloginscreen.ui.theme.focusedTextFieldText
-import com.loc.composeloginscreen.ui.theme.textFieldContainer
-import com.loc.composeloginscreen.ui.theme.unfocusedTextFieldText
+import com.example.tfg.ui.theme.Black
+import com.example.tfg.ui.theme.BlueGray
+import com.example.tfg.ui.theme.Roboto
+import com.example.tfg.ui.theme.focusedTextFieldText
+import com.example.tfg.ui.theme.textFieldContainer
+import com.example.tfg.ui.theme.unfocusedTextFieldText
 
 @Composable
 fun LoginScreen(navController: NavHostController) {
@@ -254,12 +250,16 @@ fun LoginSection(
                             var credentialsMatched = false
                             for (documentSnapshot in querySnapshot) {
                                 val storedUser = documentSnapshot.getString("email")
+                                val storedNameUser = documentSnapshot.getString("nombre")
                                 val storedContraseña = documentSnapshot.getString("password")
                                 val userRole = documentSnapshot.getLong("rol") // Obtén el rol del usuario
                                 if (email == storedUser && password == storedContraseña) {
                                     credentialsMatched = true
                                     SessionManager.setLoggedIn(context, true)
-                                    SessionManager.setUsername(context, email)
+                                    SessionManager.setEmail(context, email)
+                                    if (storedNameUser != null) {
+                                        SessionManager.setUserName(context, storedNameUser)
+                                    }
                                     val isLoggedIn = SessionManager.isLoggedIn(context)
                                     if (isLoggedIn) {
                                         // Navega a la página de inicio en función del rol del usuario

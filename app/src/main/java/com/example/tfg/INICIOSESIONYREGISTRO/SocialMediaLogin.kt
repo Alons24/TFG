@@ -21,12 +21,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.loc.composeloginscreen.ui.theme.BlueGray
-import com.loc.composeloginscreen.ui.theme.LightBlueWhite
+import com.example.tfg.ui.theme.BlueGray
+import com.example.tfg.ui.theme.LightBlueWhite
 
 @Composable
 fun SocialMediaLogIn(

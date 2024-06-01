@@ -1,4 +1,4 @@
-package com.loc.composeloginscreen.ui.theme
+package com.example.tfg.ui.theme
 
 import android.app.Activity
 import android.os.Build

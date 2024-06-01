@@ -1,7 +1,7 @@
 package com.example.tfg.Retrofit.DataClases
 
 data class User(
-    val idUsuario: String,
+    val idUsuario: Int,
     val nombre: String,
     val apellidos: String,
     val email: String,

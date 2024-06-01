@@ -1,4 +1,4 @@
-package com.loc.composeloginscreen.ui.theme
+package com.example.tfg.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.ColorScheme
