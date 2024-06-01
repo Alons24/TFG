@@ -7,8 +7,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.tfg.INICIOSESIONYREGISTRO.pantallaLogin
-import com.example.tfg.Screens.MenuPrimero
+import com.example.tfg.INICIOSESIONYREGISTRO.MenuPrimero
 import com.example.tfg.Screens.PantallasClientes.CartaEntrantes
 import com.example.tfg.Screens.PantallasClientes.CrearCritica
 import com.example.tfg.Screens.PantallasClientes.Criticas.MenuCritica
@@ -53,14 +52,15 @@ fun AppNavigation() {
         composable(AppScreens.Mesa8.ruta){ Mesa8(navigationController) }
         composable(AppScreens.Mesa9.ruta){ Mesa9(navigationController) }
         composable(AppScreens.MenuClientes.ruta){MenuClientes(navigationController)}
-        composable(AppScreens.InicioSesion.ruta){InicioSesion(navigationController)}
-        composable(AppScreens.pantallaLogin.ruta){pantallaLogin(navigationController) }
+
+
         composable(AppScreens.Perfil.ruta){ Perfil(navigationController)}
-        composable(AppScreens.Carta.ruta){ CartaEntrantes(navigationController) }
+        composable(AppScreens.CartaEntrantes.ruta){ CartaEntrantes(navigationController) }
         composable(AppScreens.MenuCategorias.ruta){ MenuCategorias(navigationController)}
         composable(AppScreens.Reservas.ruta){ Reservas(navigationController)}
         composable(AppScreens.MenuCritica.ruta){ MenuCritica(navigationController) }
         composable(AppScreens.CrearCritica.ruta){ CrearCritica(navigationController, viewModel()) }
+
 
 
 
