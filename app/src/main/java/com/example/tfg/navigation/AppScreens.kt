@@ -39,7 +39,7 @@ sealed class AppScreens(val ruta: String) {
     //RUTAS RESERVAS
     object Reservas:AppScreens("Rerservas")
     object Reservar:AppScreens("Reservar")
-    object AnadirReserva:AppScreens("AnadirReserva")
+    object ConsultarReserva:AppScreens("ConsultarReserva")
 
 
     //RUTAS CRITICAS
