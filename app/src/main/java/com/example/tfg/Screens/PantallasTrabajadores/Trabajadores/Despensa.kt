@@ -8,17 +8,16 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DrawerValue
@@ -41,13 +40,11 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.example.tfg.navigation.AppScreens
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
@@ -55,13 +52,14 @@ import kotlinx.coroutines.tasks.await
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Despensa(navController: NavHostController) {
-
     var productosEncontrados by remember { mutableStateOf(false) }
+    val db = FirebaseFirestore.getInstance()
+    val coleccion = "Despensa"
     var datos by remember { mutableStateOf("") }
+
     val scaffoldState = rememberScrollState()
     val scope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-
     /*Inicio del cajón lateral*/
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -76,17 +74,21 @@ fun Despensa(navController: NavHostController) {
                     //BOTÓN PARA BOLVER AL MENÚ DE INICIO
                     // Otros elementos del menú lateral
                     Button(
-                        onClick = { navController.navigate(AppScreens.MESAS.ruta) },
+                        onClick = {
+                            // Navegar a la pantalla de inicio
+                            navController.navigate("MenuInicio")
+                            // Cerrar el cajón de navegación modal después de la navegación
+                            scope.launch {
+                                drawerState.close()
+                            }
+                        },
                         modifier = Modifier
                             .fillMaxWidth()
-                            .width(300.dp)
-                            .height(100.dp),
-                        shape = RectangleShape,
-                        colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
+                            .height(60.dp),
                     ) {
                         Text(
-                            text = "MESAS",
-                            fontSize = 50.sp,
+                            text = "ejemplo",
+                            style = TextStyle(fontSize = 30.sp)
                         )
                     }
 
@@ -95,8 +97,6 @@ fun Despensa(navController: NavHostController) {
             }
         },
     ) {
-
-        //Fin del cajón lateral y enpieza el Scaffold
 
         //COMIENZO DEL SCAFFOLD
         Scaffold(
@@ -108,24 +108,20 @@ fun Despensa(navController: NavHostController) {
                     ),
                     title = {
                         Text("DESPENSA")
-
                     },
                     navigationIcon = {
-                        IconButton(onClick = { navController.navigate("MenuBotones") }) {
-
+                        IconButton(onClick = { navController.navigate("MenuPrimero") }) {
                             Icon(
                                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                                contentDescription = "Localized description",
-                                tint=Color.White
+                                contentDescription = "Localized description"
                             )
                         }
                     },
                     actions = {
-                        IconButton(onClick = { scope.launch { drawerState.open() } }) {
+                        IconButton(onClick = { (run { scope.launch { drawerState.open() } }) }) {
                             Icon(
                                 imageVector = Icons.Filled.Menu,
-                                contentDescription = "Menu",
-                                tint=Color.White
+                                contentDescription = "Localized description"
                             )
                         }
                     }
@@ -136,20 +132,40 @@ fun Despensa(navController: NavHostController) {
                     containerColor = Color.Blue,
                     contentColor = MaterialTheme.colorScheme.primary,
                 ) {
-
+                    // Icono
+                    BottomNavigationItem(
+                        selected = false,
+                        onClick = {/*QUE HAGA ALGOOOOOOOOOOOOOOOO*/ },
+                        modifier = Modifier.weight(1f),
+                        icon = {
+                            Icon(
+                                imageVector = Icons.Default.DateRange,
+                                contentDescription = "Search",
+                                tint = Color.White
+                            )
+                        },
+                    )
 
                     // Icono Adicional
                     BottomNavigationItem(
                         selected = false,
-                        onClick = {navController.navigate(AppScreens.Perfil.ruta)},
+                        onClick = {
+                            /* Código para la acción del segundo ícono */
+                        },
                         modifier = Modifier.weight(1f),
                         icon = {
-                            Icon(imageVector = Icons.Default.AccountCircle, contentDescription = "YourIcon", tint = Color.White)
+                            Icon(
+                                imageVector = Icons.Default.AccountCircle,
+                                contentDescription = "YourIcon",
+                                tint = Color.White
+                            )
                         },
                     )
+
                 }
             },
-        ) { innerPadding ->
+
+            ) { innerPadding ->
             Box(
                 modifier = Modifier
                     .padding(innerPadding)
@@ -161,18 +177,23 @@ fun Despensa(navController: NavHostController) {
                         .padding(innerPadding),
                     verticalArrangement = Arrangement.spacedBy(16.dp),
                 ) {
+
+
                     val productos = remember { mutableStateOf(emptyList<Map<String, Any>>()) }
 
                     // Usamos LaunchedEffect para cargar los datos cuando la pantalla se carga por primera vez
                     LaunchedEffect(Unit) {
                         val db = FirebaseFirestore.getInstance()
-                        val ref = db.collection("/despensa")
+                        val ref = db.collection("Despensa")
 
                         try {
                             val querySnapshot = ref.get().await()
 
                             for (document in querySnapshot) {
-                                Log.d("samuLino", "Datos del documento: ${document.data.toString()}")
+                                Log.d(
+                                    "samuLino",
+                                    "Datos del documento: ${document.data.toString()}"
+                                )
                             }
 
                             productos.value = querySnapshot.documents.map { it.data ?: emptyMap() }
@@ -184,15 +205,13 @@ fun Despensa(navController: NavHostController) {
                         }
                     }
 
-
-
                     if (productosEncontrados) {
-                        productos.value.forEachIndexed { index, producto ->
+                        productos.value.forEachIndexed { index, productos ->
                             Card(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .padding(16.dp)
-                                    .height(390.dp),
+                                    .height(570.dp),
                             ) {
                                 Column(
                                     modifier = Modifier
@@ -201,27 +220,15 @@ fun Despensa(navController: NavHostController) {
                                     verticalArrangement = Arrangement.spacedBy(4.dp)
                                 ) {
                                     Text(
-                                        text = "Cantidad de productos: ",
+                                        text = "Productos: ",
                                         style = TextStyle(
                                             fontSize = 30.sp,
                                             fontWeight = FontWeight.Bold
                                         )
                                     )
-                                    /*DEBERÍAMOS PONER SOLO COSAS SLOTEBALES*/
-                                    //Como por ejemplo Cervezas o botellas de Cocacolas
 
                                     Text(
-                                        text = "Cantidad Patata: ${producto["CantidadPatatas"]}",
-                                        style = TextStyle(fontSize = 25.sp)
-                                    )
-
-                                    Text(
-                                        text = "Cantidad Pimientos: ${producto["CantidadPimientos"]}",
-                                        style = TextStyle(fontSize = 25.sp)
-                                    )
-
-                                    Text(
-                                        text = "Cantidad Tomates: ${producto["CantidadTomates"]}",
+                                        text = "Alhambra: ${productos["alhambra"]}",
                                         style = TextStyle(fontSize = 25.sp)
                                     )
                                 }
@@ -238,3 +245,6 @@ fun Despensa(navController: NavHostController) {
         }
     }
 }
+
+
+

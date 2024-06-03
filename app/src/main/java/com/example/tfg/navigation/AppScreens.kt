@@ -32,7 +32,7 @@ sealed class AppScreens(val ruta: String) {
     object Perfil:AppScreens("Perfil")
 
     //RUTAS CARTA Y MENU CATEGORIAS
-    object Carta: AppScreens("CartaEntrantes")
+    object CartaEntrantes: AppScreens("CartaEntrantes")
     object MenuCategorias:AppScreens("MenuCategorias")
     object Despensa: AppScreens("Despensa")
 
@@ -50,5 +50,7 @@ sealed class AppScreens(val ruta: String) {
     object ActualizarCritica:AppScreens("ActualizarCritica")
     object EliminarCritica:AppScreens("EliminarCritica")
     object VisualizarCritica:AppScreens("VisualizarCritica")
+
+    object CartaTostasTrabajadores:AppScreens("CartaTostasTrabajadores")
 
 }

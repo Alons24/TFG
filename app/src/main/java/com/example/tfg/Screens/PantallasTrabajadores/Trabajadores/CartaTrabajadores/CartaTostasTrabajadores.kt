@@ -1,4 +1,4 @@
-package com.example.tfg.Screens.PantallasClientes
+package com.example.tfg.Screens.PantallasTrabajadores.Trabajadores.CartaTrabajadores
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -13,6 +13,8 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -29,8 +31,10 @@ import androidx.navigation.NavHostController
 import com.example.tfg.R
 import com.example.tfg.Retrofit.DataClases.Producto
 
+
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CartaEntrantes(navController: NavHostController) {
+fun CartaTostasTrabajadores(navController: NavHostController) {
 
     LazyColumn(
         contentPadding = PaddingValues(16.dp),
@@ -68,15 +72,15 @@ fun CartaEntrantes(navController: NavHostController) {
 data class Publicidad(val titulo: String)
 
 private val listaProductos = listOf(
-    Producto(nombre = "Manzana", precio = 18.99, categoria = "", descripcion = "", idProducto = 1, imagen = "" ),
-    Producto(nombre = "Manzana", precio = 18.99, categoria = "", descripcion = "", idProducto = 1, imagen = "" ),
-    Producto(nombre = "Manzana", precio = 18.99, categoria = "", descripcion = "", idProducto = 1, imagen = "" ),
-    Producto(nombre = "Manzana", precio = 18.99, categoria = "", descripcion = "", idProducto = 1, imagen = "" ),
-    Producto(nombre = "Manzana", precio = 18.99, categoria = "", descripcion = "", idProducto = 1, imagen = "" ),
-    Producto(nombre = "Manzana", precio = 18.99, categoria = "", descripcion = "", idProducto = 1, imagen = "" ),
-    Producto(nombre = "Manzana", precio = 18.99, categoria = "", descripcion = "", idProducto = 1, imagen = "" ),
-    Producto(nombre = "Manzana", precio = 18.99, categoria = "", descripcion = "", idProducto = 1, imagen = "" ),
-    Producto(nombre = "Manzana", precio = 18.99, categoria = "", descripcion = "", idProducto = 1, imagen = "" ),
+    Producto(nombre = "Manzana", precio = 18.99, categoria = "", descripcion = "", idProducto = 1, imagen = ""),
+    Producto(nombre = "Manzana", precio = 18.99, categoria = "", descripcion = "", idProducto = 1, imagen = ""),
+    Producto(nombre = "Manzana", precio = 18.99, categoria = "", descripcion = "", idProducto = 1, imagen = ""),
+    Producto(nombre = "Manzana", precio = 18.99, categoria = "", descripcion = "", idProducto = 1, imagen = ""),
+    Producto(nombre = "Manzana", precio = 18.99, categoria = "", descripcion = "", idProducto = 1, imagen = ""),
+    Producto(nombre = "Manzana", precio = 18.99, categoria = "", descripcion = "", idProducto = 1, imagen = ""),
+    Producto(nombre = "Manzana", precio = 18.99, categoria = "", descripcion = "", idProducto = 1, imagen = ""),
+    Producto(nombre = "Manzana", precio = 18.99, categoria = "", descripcion = "", idProducto = 1, imagen = ""),
+    Producto(nombre = "Manzana", precio = 18.99, categoria = "", descripcion = "", idProducto = 1, imagen = ""),
 )
 
 private val listaImagenes = listOf(
@@ -86,15 +90,14 @@ private val listaImagenes = listOf(
     R.drawable.pulpo_a_la_gallega,
     R.drawable.receta_croquetas_jamon,
     R.drawable.tortilla_patatas,
-    //.drawable.imagen3, // Sustituye "imagen3" con el nombre de tu recurso de imagen
-
 )
 
 @Composable
 fun ProductoDiseño(producto: Producto) {
     Row(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
             text = producto.nombre,
@@ -104,8 +107,12 @@ fun ProductoDiseño(producto: Producto) {
             )
         )
 
+        Button(onClick = { /* Aquí va la acción del botón */ }) {
+            Text(text = "Añadir")
+        }
+
         Text(
-            text = "${producto.precio}.00 €",
+            text = "${producto.precio} €",
             style = TextStyle(
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Light,
@@ -119,7 +126,6 @@ fun ProductoDiseño(producto: Producto) {
 fun PublicidadDiseño(publicidad: Int) {
     Box(
         modifier = Modifier
-
             .size(140.dp)
             .clip(RoundedCornerShape(12))
             .background(color = Color.White),
@@ -129,8 +135,7 @@ fun PublicidadDiseño(publicidad: Int) {
             painter = painterResource(id = publicidad),
             contentDescription = null,
             modifier = Modifier
-                .size(140.dp) // Tamaño ajustado para dejar espacio para el padding
-
+                .size(140.dp)
         )
     }
 }

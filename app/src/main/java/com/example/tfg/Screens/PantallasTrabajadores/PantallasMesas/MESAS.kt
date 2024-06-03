@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -117,9 +116,12 @@ fun Mesas(navController: NavHostController) {
                     BottomNavigationItem(
                         selected = false,
                         onClick = { navController.navigate(AppScreens.Perfil.ruta) },
-                        modifier = Modifier.weight(1f),
                         icon = {
-                            Icon(imageVector = Icons.Default.AccountCircle, contentDescription = "Profile", tint = Color.White)
+                            Icon(
+                                imageVector = Icons.Default.AccountCircle,
+                                contentDescription = "Profile",
+                                tint = Color.White
+                            )
                         },
                     )
                 }
@@ -137,16 +139,15 @@ fun Mesas(navController: NavHostController) {
                     verticalArrangement = Arrangement.spacedBy(16.dp),
                 ) {
                     val mesas = listOf(
-                        "Mesa 1" to AppScreens.Mesa1.ruta,
-                        "Mesa 2" to AppScreens.Mesa2.ruta,
-                        "Mesa 3" to AppScreens.Mesa3.ruta,
-                        "Mesa 4" to AppScreens.Mesa4.ruta,
-                        "Mesa 5" to AppScreens.Mesa5.ruta,
-                        "Mesa 6" to AppScreens.Mesa6.ruta,
-                        "Mesa 7" to AppScreens.Mesa7.ruta,
-                        "Mesa 8" to AppScreens.Mesa8.ruta,
-                        "Mesa 9" to AppScreens.Mesa9.ruta
-
+                        Triple("1", AppScreens.Mesa1.ruta, R.drawable.mesa3tuneada1),
+                        Triple("2", AppScreens.Mesa2.ruta, R.drawable.mesa3tuneada2),
+                        Triple("3", AppScreens.Mesa3.ruta, R.drawable.mesa3tuneada3),
+                        Triple("4", AppScreens.Mesa4.ruta, R.drawable.mesa3tuneada4),
+                        Triple("5", AppScreens.Mesa5.ruta, R.drawable.mesa3tuneada5),
+                        Triple("6", AppScreens.Mesa6.ruta, R.drawable.mesa3tuneada6),
+                        Triple("7", AppScreens.Mesa7.ruta, R.drawable.mesa3tuneada7),
+                        Triple("8", AppScreens.Mesa8.ruta, R.drawable.mesa3tuneada8),
+                        Triple("9", AppScreens.Mesa9.ruta, R.drawable.mesa3tuneada9)
                     )
 
                     mesas.chunked(3).forEach { rowItems ->
@@ -154,12 +155,12 @@ fun Mesas(navController: NavHostController) {
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.spacedBy(16.dp)
                         ) {
-                            rowItems.forEach { (mesaName, route) ->
+                            rowItems.forEach { (mesaName, route, imageRes) ->
                                 Column(
                                     modifier = Modifier.weight(1f)
                                 ) {
                                     Image(
-                                        painter = painterResource(R.drawable.mesa),
+                                        painter = painterResource(imageRes),
                                         contentDescription = mesaName,
                                         modifier = Modifier
                                             .padding(8.dp)
@@ -172,20 +173,17 @@ fun Mesas(navController: NavHostController) {
                                             .fillMaxWidth()
                                             .height(75.dp),
                                         shape = RectangleShape,
-                                        colors = ButtonDefaults.buttonColors(Color(255, 215, 0, 255))//Color dorado
+                                        colors = ButtonDefaults.buttonColors(Color(255, 215, 0, 255)) // Color dorado
                                     ) {
                                         Text(
-                                            text = "$mesaName",
-                                            fontSize = 25.sp,
+                                            text = mesaName,
+                                            fontSize = 40.sp,
                                             modifier = Modifier.wrapContentWidth(Alignment.CenterHorizontally) // Centrar texto
                                         )
                                     }
-
-
                                 }
                             }
                         }
-                        Spacer(modifier = Modifier.height(16.dp))
                     }
                 }
             }

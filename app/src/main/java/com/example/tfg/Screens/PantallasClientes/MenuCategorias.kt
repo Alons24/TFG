@@ -59,7 +59,7 @@ fun MenuCategorias(navController: NavHostController) {
                         .padding(16.dp),
                     verticalArrangement = Arrangement.spacedBy(16.dp),
                 ) {
-                    //BOTÓN PARA BOLVER AL MENÚ DE INICIO
+                    //BOTÓN PARA VOLVER AL MENÚ DE INICIO
                     // Otros elementos del menú lateral
                     Button(
                         onClick = { /*navController.navigate(AppScreens.DejarResena.ruta) */},
@@ -179,7 +179,7 @@ fun MenuCategorias(navController: NavHostController) {
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Button(
-                    onClick = { navController.navigate(AppScreens.Carta.ruta) },
+                    onClick = { navController.navigate(AppScreens.CartaEntrantes.ruta) },
                     modifier = Modifier
                         .fillMaxWidth()
                         .width(300.dp)
