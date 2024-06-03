@@ -21,7 +21,7 @@ class ReservasViewModel: ViewModel() {
             val response = RetrofitClient.webService.getReservas()
             withContext(Dispatchers.Main){
                 if(response.body()!!.codigo == "200"){
-                    _listaReservas = response.body()?.data!!
+                    _listaReservas = (response.body()?.data as ArrayList<Reserva>?)!!
                 }
             }
         }
@@ -64,7 +64,7 @@ class ReservasViewModel: ViewModel() {
             val response = RetrofitClient.webService.deleteReserva(idReserva)
             withContext(Dispatchers.Main){
                 if(response.body()!!.codigo == "200"){
-                    getReservas()
+
                 }
             }
         }catch (e: Exception){
@@ -79,7 +79,7 @@ class ReservasViewModel: ViewModel() {
             val response = RetrofitClient.webService.getReserva(idReserva)
             withContext(Dispatchers.Main){
                 if(response.body()!!.codigo == "200"){
-                    _listaReservas = response.body()?.data!!
+                    _listaReservas = (response.body()?.data as ArrayList<Reserva>?)!!
                 }
             }
         }catch (e: Exception){
@@ -94,7 +94,7 @@ class ReservasViewModel: ViewModel() {
             val response = RetrofitClient.webService.getReservaPorFecha(fecha)
             withContext(Dispatchers.Main){
                 if(response.body()!!.codigo == "200"){
-                    _listaReservas = response.body()?.data!!
+                    _listaReservas = (response.body()?.data as ArrayList<Reserva>?)!!
                 }
             }
         }catch (e: Exception){

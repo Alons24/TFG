@@ -40,6 +40,8 @@ sealed class AppScreens(val ruta: String) {
     object Reservas:AppScreens("Rerservas")
     object Reservar:AppScreens("Reservar")
     object ConsultarReserva:AppScreens("ConsultarReserva")
+    object CancelarReserva:AppScreens("CancelarReserva")
+    object ModificarReserva:AppScreens("ModificarReserva")
 
 
     //RUTAS CRITICAS

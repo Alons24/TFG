@@ -38,7 +38,7 @@ interface WebService {
         @Body reserva: Reserva
     ): Response<ReservaResponse>
 
-    @DELETE("/cancelarReserva/{idReserva}")
+    @DELETE("/cancelaReserva/{idReserva}")
     suspend fun deleteReserva(
         @Path("idReserva") idReserva: String
     ): Response<ReservaResponse>

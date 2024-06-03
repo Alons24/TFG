@@ -266,13 +266,13 @@ fun Reservas(navController: NavHostController) {
                         Spacer(modifier = Modifier.size(36.dp))
 
                         Button(
-                            onClick = { navController.navigate("Facturas") },
+                            onClick = { navController.navigate("CancelarReserva") },
                             modifier = Modifier
                                 .height(40.dp)
                                 .width(150.dp)
                         ) {
                             Text(
-                                text = "ELIMINAR",
+                                text = "CANCELAR",
                                 color = Color.White,
                                 fontWeight = FontWeight.Bold,
                                 style = androidx.compose.ui.text.TextStyle(
