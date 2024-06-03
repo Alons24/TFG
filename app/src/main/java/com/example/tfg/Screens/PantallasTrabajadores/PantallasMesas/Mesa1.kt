@@ -232,12 +232,12 @@ fun Mesa1(navController: NavHostController) {
 
                         // Aquí organizamos los botones en filas de dos
                         val botones = listOf(
-                            Triple("Entrantes", AppScreens.CartaTostasTrabajadores.ruta, Color(4, 104, 249, 255)),
+                            Triple("Tostas", AppScreens.CartaTostasTrabajadores.ruta, Color(4, 104, 249, 255)),
                             Triple("Bebidas", AppScreens.CartaEntrantes.ruta, Color(128, 0, 128, 255)),
                             Triple("Bocadillos", AppScreens.CartaEntrantes.ruta, Color(24, 119, 37, 255)),
                             Triple("Cafés", AppScreens.CartaEntrantes.ruta, Color(255, 128, 0, 255)),
                             Triple("Cervezas", AppScreens.CartaEntrantes.ruta, Color(20, 183, 25, 255)),
-                            Triple("Tostas", AppScreens.CartaEntrantes.ruta, Color(202, 179, 3, 255)),
+                            Triple("Entrantes", AppScreens.CartaEntrantes.ruta, Color(202, 179, 3, 255)),
                             Triple("Raciones", AppScreens.CartaEntrantes.ruta, Color(255, 0, 0, 255)),
                             Triple("Pinchos", AppScreens.CartaEntrantes.ruta, Color(24, 119, 37, 255))
                         )

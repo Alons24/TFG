@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -74,15 +73,8 @@ fun pantallaRegistro(navController: NavHostController){
     Surface {
         Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
 
-            Spacer(modifier = Modifier.height(36.dp))
-
             TopSectionRegistro()
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(horizontal = 30.dp)
-                    .offset(y = (-80).dp)
-            ) {
+
 
                 OutlinedTextField(
                     value = nombre,
@@ -141,6 +133,8 @@ fun pantallaRegistro(navController: NavHostController){
                         }
                     }
                 )
+
+                Spacer(modifier = Modifier.height(10.dp))
 
                 OutlinedTextField(
 
@@ -233,15 +227,13 @@ fun pantallaRegistro(navController: NavHostController){
                     }
                 )
 
-
+                Spacer(modifier = Modifier.height(15.dp))
 
                 Box(modifier = Modifier.fillMaxSize()) {
-                    // Aquí van todos los otros elementos de la interfaz de usuario
-
                     Button(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(80.dp),
+                            .height(60.dp), // Ajustar la altura aquí
                         onClick = {
                             if (nombre.isNotEmpty() && apellidos.isNotEmpty() && password.isNotEmpty() &&
                                 telefono.isNotEmpty() && email.isNotEmpty() && email.contains('@')
@@ -267,47 +259,33 @@ fun pantallaRegistro(navController: NavHostController){
                     }
                 }
 
-
-
-
-
-
-            }
         }
-
     }
 }
-
-
-
-
-
-
 
 @Composable
 fun TopSectionRegistro() {
     val uiColor = if (isSystemInDarkTheme()) Color.White else Black
 
     Box(
+        modifier = Modifier.padding(top = 0.dp), // Asegurarse de que no haya padding superior
         contentAlignment = Alignment.TopCenter
     ) {
         Image(
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(fraction = 0.5f)
-                .padding(bottom = 10.dp),
+                .fillMaxHeight(fraction = 0.4f) // Ajustar la altura aquí
+                .padding(bottom = 5.dp), // Reducir el espaciado aquí
 
             painter = painterResource(id = R.drawable.shape),
             contentDescription = null,
             contentScale = ContentScale.FillBounds
         )
 
-
         Row(
             modifier = Modifier.padding(top = 10.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-
             Icon(
                 modifier = Modifier.size(42.dp),
                 painter = painterResource(id = R.drawable.logo_cerveceria_montemayor),
@@ -331,7 +309,7 @@ fun TopSectionRegistro() {
 
         Text(
             modifier = Modifier
-                .padding(bottom = 140.dp)
+                .padding(bottom = 120.dp) // Reducir el espaciado aquí
                 .align(alignment = Alignment.BottomCenter),
             text = stringResource(id = R.string.registro),
             style = MaterialTheme.typography.headlineLarge,
