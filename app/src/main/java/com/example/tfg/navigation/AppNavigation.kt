@@ -1,5 +1,6 @@
 
 
+
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -7,13 +8,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.tfg.INICIOSESIONYREGISTRO.LoginScreen
-import com.example.tfg.INICIOSESIONYREGISTRO.MenuPrimero
+
 import com.example.tfg.INICIOSESIONYREGISTRO.pantallaRegistro
+import com.example.tfg.INICIOSESIONYREGISTRO.MenuPrimero
 import com.example.tfg.Screens.PantallasClientes.CartaEntrantes
 import com.example.tfg.Screens.PantallasClientes.CrearCritica
 import com.example.tfg.Screens.PantallasClientes.Criticas.MenuCritica
 import com.example.tfg.Screens.PantallasClientes.MenuClientes
-import com.example.tfg.Screens.PantallasClientes.Reservas.Reservar
 import com.example.tfg.Screens.PantallasClientes.Reservas.Reservas
 import com.example.tfg.Screens.PantallasTrabajadores.MenuBotones
 import com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas.Mesa1
@@ -41,9 +42,8 @@ fun AppNavigation() {
     NavHost(navController = navigationController, startDestination = AppScreens.MenuPrimero.ruta)
     {
         composable(AppScreens.MenuPrimero.ruta) { MenuPrimero(navigationController) }
-        /*Este es el menÃº de trabajadores*/composable(AppScreens.MenuBotones.ruta){ MenuBotones(navigationController) }
+        /*Este es el menú de trabajadores*/composable(AppScreens.MenuBotones.ruta){ MenuBotones(navigationController) }
         composable(AppScreens.Despensa.ruta){ Despensa(navigationController) }
-
         composable(AppScreens.MESAS.ruta){ Mesas(navigationController) }
         composable(AppScreens.Mesa1.ruta){ Mesa1(navigationController) }
         composable(AppScreens.Mesa2.ruta){ Mesa2(navigationController) }
@@ -55,12 +55,11 @@ fun AppNavigation() {
         composable(AppScreens.Mesa8.ruta){ Mesa8(navigationController) }
         composable(AppScreens.Mesa9.ruta){ Mesa9(navigationController) }
         composable(AppScreens.MenuClientes.ruta){MenuClientes(navigationController)}
-        /* composable(AppScreens.pantallaLogin.ruta){pantallaLogin(navigationController) }*/
+       /* composable(AppScreens.pantallaLogin.ruta){pantallaLogin(navigationController) }*/
         composable(AppScreens.Perfil.ruta){ Perfil(navigationController)}
-        composable(AppScreens.CartaEntrantes.ruta){ CartaEntrantes(navigationController) }
+        composable(AppScreens.Carta.ruta){ CartaEntrantes(navigationController) }
         composable(AppScreens.MenuCategorias.ruta){ MenuCategorias(navigationController)}
         composable(AppScreens.Reservas.ruta){ Reservas(navigationController)}
-        composable(AppScreens.Reservar.ruta){ Reservar(navigationController) }
         composable(AppScreens.MenuCritica.ruta){ MenuCritica(navigationController) }
         composable(AppScreens.CrearCritica.ruta){ CrearCritica(navigationController, viewModel()) }
         composable(AppScreens.LoginScreen.ruta){ LoginScreen(navigationController) }
@@ -70,13 +69,9 @@ fun AppNavigation() {
 
 
 
-    }
+        }
 
 }
-
-
-
-
 
 
 

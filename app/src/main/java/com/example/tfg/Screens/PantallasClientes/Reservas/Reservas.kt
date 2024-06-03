@@ -202,7 +202,7 @@ fun Reservas(navController: NavHostController) {
                                 .width(150.dp)
                         ) {
                             IconButton(
-                                onClick = { navController.navigate("Facturas") },
+                                onClick = { navController.navigate("Fact") },
                                 modifier = Modifier.fillMaxSize()
                             ) {
                                 Icon(
@@ -214,7 +214,10 @@ fun Reservas(navController: NavHostController) {
                                 )
                             }
                         }
+
                         Spacer(modifier = Modifier.size(36.dp))
+
+
                         Card(
                             modifier = Modifier
                                 .height(150.dp)
@@ -235,6 +238,7 @@ fun Reservas(navController: NavHostController) {
                         }
                     }
                     Spacer(modifier = Modifier.size(10.dp))
+
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -242,7 +246,7 @@ fun Reservas(navController: NavHostController) {
                         horizontalArrangement = Arrangement.Center
                     ) {
                         Button(
-                            onClick = { navController.navigate("Reservar") },
+                            onClick = { navController.navigate(AppScreens.Reservar.ruta) },
                             modifier = Modifier
                                 .height(40.dp)
                                 .width(150.dp)
@@ -260,6 +264,7 @@ fun Reservas(navController: NavHostController) {
                             )
                         }
                         Spacer(modifier = Modifier.size(36.dp))
+
                         Button(
                             onClick = { navController.navigate("Facturas") },
                             modifier = Modifier
@@ -330,7 +335,7 @@ fun Reservas(navController: NavHostController) {
                         horizontalArrangement = Arrangement.Center
                     ) {
                         Button(
-                            onClick = { navController.navigate("Facturas") },
+                            onClick = { navController.navigate("ConsultarReserva") },
                             modifier = Modifier
                                 .height(40.dp)
                                 .width(150.dp)
