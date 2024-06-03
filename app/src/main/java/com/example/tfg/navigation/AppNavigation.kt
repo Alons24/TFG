@@ -8,15 +8,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.tfg.INICIOSESIONYREGISTRO.LoginScreen
-
-import com.example.tfg.INICIOSESIONYREGISTRO.pantallaRegistro
 import com.example.tfg.INICIOSESIONYREGISTRO.MenuPrimero
+import com.example.tfg.INICIOSESIONYREGISTRO.pantallaRegistro
 import com.example.tfg.Screens.PantallasClientes.CartaEntrantes
 import com.example.tfg.Screens.PantallasClientes.CrearCritica
 import com.example.tfg.Screens.PantallasClientes.Criticas.MenuCritica
 import com.example.tfg.Screens.PantallasClientes.MenuClientes
-import com.example.tfg.Screens.PantallasClientes.Reservas.ConsultarReserva
-import com.example.tfg.Screens.PantallasClientes.Reservas.Reservar
 import com.example.tfg.Screens.PantallasClientes.Reservas.Reservas
 import com.example.tfg.Screens.PantallasTrabajadores.MenuBotones
 import com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas.Mesa1
@@ -59,16 +56,15 @@ fun AppNavigation() {
         composable(AppScreens.MenuClientes.ruta){MenuClientes(navigationController)}
        /* composable(AppScreens.pantallaLogin.ruta){pantallaLogin(navigationController) }*/
         composable(AppScreens.Perfil.ruta){ Perfil(navigationController)}
-        composable(AppScreens.Carta.ruta){ CartaEntrantes(navigationController) }
+        composable(AppScreens.CartaEntrantes.ruta){ CartaEntrantes(navigationController) }
         composable(AppScreens.MenuCategorias.ruta){ MenuCategorias(navigationController)}
         composable(AppScreens.Reservas.ruta){ Reservas(navigationController)}
-        composable(AppScreens.Reservar.ruta){ Reservar(navigationController, viewModel()) }
         composable(AppScreens.MenuCritica.ruta){ MenuCritica(navigationController) }
         composable(AppScreens.CrearCritica.ruta){ CrearCritica(navigationController, viewModel()) }
         composable(AppScreens.LoginScreen.ruta){ LoginScreen(navigationController) }
         composable(AppScreens.pantallaRegistro.ruta){
             pantallaRegistro(navigationController) }
-        composable(AppScreens.ConsultarReserva.ruta){ ConsultarReserva(navigationController) }
+
 
 
 

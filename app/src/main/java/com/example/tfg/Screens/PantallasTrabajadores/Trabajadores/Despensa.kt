@@ -18,6 +18,7 @@ import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DrawerValue
@@ -40,6 +41,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -85,6 +87,8 @@ fun Despensa(navController: NavHostController) {
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(60.dp),
+                        shape = RectangleShape,
+                        colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
                     ) {
                         Text(
                             text = "ejemplo",
@@ -178,7 +182,6 @@ fun Despensa(navController: NavHostController) {
                     verticalArrangement = Arrangement.spacedBy(16.dp),
                 ) {
 
-
                     val productos = remember { mutableStateOf(emptyList<Map<String, Any>>()) }
 
                     // Usamos LaunchedEffect para cargar los datos cuando la pantalla se carga por primera vez
@@ -212,6 +215,13 @@ fun Despensa(navController: NavHostController) {
                                     .fillMaxWidth()
                                     .padding(16.dp)
                                     .height(570.dp),
+                                shape = androidx.compose.foundation.shape.RoundedCornerShape(8.dp),
+                                colors = androidx.compose.material3.CardDefaults.cardColors(
+                                    containerColor = Color.White
+                                ),
+                                elevation = androidx.compose.material3.CardDefaults.cardElevation(
+                                    defaultElevation = 4.dp
+                                )
                             ) {
                                 Column(
                                     modifier = Modifier
@@ -227,10 +237,33 @@ fun Despensa(navController: NavHostController) {
                                         )
                                     )
 
+
                                     Text(
-                                        text = "Alhambra: ${productos["alhambra"]}",
+                                        text = "licores y destilados: ${productos["Brandy"]}",
                                         style = TextStyle(fontSize = 25.sp)
                                     )
+
+                                    Text(
+                                        text = "Refrescos: ${productos["Refrescos"]}",
+                                        style = TextStyle(fontSize = 25.sp)
+                                    )
+
+                                    Text(
+                                        text = "No alcholicos: ${productos["Refrescos"]}",
+                                        style = TextStyle(fontSize = 25.sp)
+                                    )
+
+                                    Text(
+                                        text = "Mahou: ${productos["Refrescos"]}",
+                                        style = TextStyle(fontSize = 25.sp)
+                                    )
+
+
+
+
+
+
+
                                 }
                             }
                         }
@@ -245,6 +278,3 @@ fun Despensa(navController: NavHostController) {
         }
     }
 }
-
-
-
