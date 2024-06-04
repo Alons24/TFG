@@ -353,7 +353,7 @@ fun Reservas(navController: NavHostController) {
 
                         Spacer(modifier = Modifier.size(36.dp))
                         Button(
-                            onClick = { navController.navigate("Facturas") },
+                            onClick = { navController.navigate("ModificarReserva") },
                             modifier = Modifier
                                 .height(40.dp)
                                 .width(160.dp)

@@ -16,9 +16,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
@@ -37,6 +39,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
@@ -50,6 +54,11 @@ import com.example.tfg.ui.theme.focusedTextFieldText
 import com.example.tfg.ui.theme.textFieldContainer
 import com.example.tfg.ui.theme.unfocusedTextFieldText
 import kotlin.random.Random
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
+import androidx.compose.material3.AlertDialog
+import androidx.compose.runtime.LaunchedEffect
+import kotlinx.coroutines.delay
 
 @Composable
 fun pantallaRegistro(navController: NavHostController){
@@ -69,11 +78,13 @@ fun pantallaRegistro(navController: NavHostController){
     var showDialog by remember { mutableStateOf(false) }
     val uiColor = if (isSystemInDarkTheme()) Color.White else Black
     var mensajeConfirmacion by remember { mutableStateOf("") }
+    var showRegistrationCompletedDialog by remember { mutableStateOf(false) }
+
 
     Surface {
         Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
 
-            TopSectionRegistro()
+            TopSectionRegistro(mensajeConfirmacion)
 
 
                 OutlinedTextField(
@@ -198,18 +209,23 @@ fun pantallaRegistro(navController: NavHostController){
 
                 Spacer(modifier = Modifier.height(10.dp))
 
+                var passwordVisibility by remember { mutableStateOf(false) }
+
                 OutlinedTextField(
 
                     value = password,
                     onValueChange = { password = it },
                     singleLine = true,
+                    visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
                     label = {
                         Text(
                             text = "Contraseña",
                             style = MaterialTheme.typography.labelMedium,
-                            color = uiColor
+                            color = uiColor,
+
                         )
                     },
+
                     colors = TextFieldDefaults.colors(
                         unfocusedPlaceholderColor = MaterialTheme.colorScheme.unfocusedTextFieldText,
                         focusedPlaceholderColor = MaterialTheme.colorScheme.focusedTextFieldText,
@@ -217,11 +233,10 @@ fun pantallaRegistro(navController: NavHostController){
                         focusedContainerColor = MaterialTheme.colorScheme.textFieldContainer,
                     ),
                     trailingIcon = {
-                        androidx.compose.material3.TextButton(onClick = { /*TODO*/ }) {
-                            Text(
-                                text = "",
-                                style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Medium),
-                                color = uiColor
+                        IconButton(onClick = { passwordVisibility = !passwordVisibility }) {
+                            Icon(
+                                imageVector = if (passwordVisibility) Icons.Filled.VisibilityOff else Icons.Filled.Visibility,
+                                contentDescription = if (passwordVisibility) "Ocultar contraseña" else "Mostrar contraseña"
                             )
                         }
                     }
@@ -236,15 +251,28 @@ fun pantallaRegistro(navController: NavHostController){
                             .height(60.dp), // Ajustar la altura aquí
                         onClick = {
                             if (nombre.isNotEmpty() && apellidos.isNotEmpty() && password.isNotEmpty() &&
-                                telefono.isNotEmpty() && email.isNotEmpty() && email.contains('@')
-                            ) {
-                                val user = User(idUsuario, nombre, apellidos, email, password, telefono, rol)
-                                viewModel.signUp(user.email, user.password, user.nombre, user.apellidos, user.telefono, user.rol, user.idUsuario)
-                                showDialog = true
-                            } else {
-                                mensajeConfirmacion =
-                                    "Por favor, completa todos los campos" // Mensaje de error si falta algún campo
-                            }
+                        telefono.isNotEmpty() && email.isNotEmpty() && email.contains('@')
+                    ) {
+                        if (telefono.length != 9) {
+                            mensajeConfirmacion = "El teléfono debe tener exactamente 9 números"
+                        } else if (!email.contains('@')) {
+                            mensajeConfirmacion = "El correo no es váido"
+                        } else if (!password.matches(Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$"))) {
+                            mensajeConfirmacion = "La contraseña debe contener al menos una letra mayúscula, una letra minúscula y un número"
+                        } else if (nombre.length > 20) {
+                            mensajeConfirmacion = "El nombre debe tener menos de 20 caracteres"
+                        } else if (apellidos.length > 20) {
+                            mensajeConfirmacion = "Los apellidos deben tener menos de 20 caracteres"
+                        } else {
+                            val user = User(idUsuario, nombre, apellidos, email, password, telefono, rol)
+                            viewModel.signUp(user.email, user.password, user.nombre, user.apellidos, user.telefono, user.rol, user.idUsuario)
+                            showDialog = true
+                            showRegistrationCompletedDialog = true
+                        }
+                    } else {
+                        mensajeConfirmacion = "Por favor, completa todos los campos" // Mensaje de error si falta algún campo
+                    }
+
                         },
                         colors = ButtonDefaults.buttonColors(
                             containerColor = if (isSystemInDarkTheme()) BlueGray else Black,
@@ -258,13 +286,27 @@ fun pantallaRegistro(navController: NavHostController){
                         )
                     }
                 }
+            if (showRegistrationCompletedDialog) {
+                AlertDialog(
+                    onDismissRequest = { showRegistrationCompletedDialog = false },
+                    title = { Text(text = "¡REGISTRO COMPLETADO!") },
+                    confirmButton = { },
+                    dismissButton = { }
+                )
+            }
 
+            LaunchedEffect(showRegistrationCompletedDialog) {
+                if (showRegistrationCompletedDialog) {
+                    delay(3000L) // Espera 3 segundos
+                    navController.navigate("menuClientes") // Navega a menuClientes
+                }
+            }
         }
     }
 }
 
 @Composable
-fun TopSectionRegistro() {
+fun TopSectionRegistro(mensajeConfirmacion: String) {
     val uiColor = if (isSystemInDarkTheme()) Color.White else Black
 
     Box(
@@ -309,11 +351,21 @@ fun TopSectionRegistro() {
 
         Text(
             modifier = Modifier
-                .padding(bottom = 120.dp) // Reducir el espaciado aquí
+                .padding(bottom = 50.dp) // Reducir el espaciado aquí
                 .align(alignment = Alignment.BottomCenter),
             text = stringResource(id = R.string.registro),
             style = MaterialTheme.typography.headlineLarge,
             color = uiColor
+        )
+
+        // Agregar este componente Text para mostrar mensajeConfirmacion
+        Text(
+            modifier = Modifier
+                .padding(bottom = 20.dp) // Reducir el espaciado aquí
+                .align(alignment = Alignment.BottomCenter),
+            text = mensajeConfirmacion,
+            style = MaterialTheme.typography.bodyMedium,
+            color = Color.Red // Puedes cambiar el color según tus necesidades
         )
     }
 }

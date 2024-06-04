@@ -14,6 +14,9 @@ import com.example.tfg.Screens.PantallasClientes.CartaEntrantes
 import com.example.tfg.Screens.PantallasClientes.CrearCritica
 import com.example.tfg.Screens.PantallasClientes.Criticas.MenuCritica
 import com.example.tfg.Screens.PantallasClientes.MenuClientes
+import com.example.tfg.Screens.PantallasClientes.Reservas.CancelarReserva
+import com.example.tfg.Screens.PantallasClientes.Reservas.ModificarReserva
+import com.example.tfg.Screens.PantallasClientes.Reservas.Reservar
 import com.example.tfg.Screens.PantallasClientes.Reservas.Reservas
 import com.example.tfg.Screens.PantallasTrabajadores.MenuBotones
 import com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas.Mesa1
@@ -64,6 +67,10 @@ fun AppNavigation() {
         composable(AppScreens.LoginScreen.ruta){ LoginScreen(navigationController) }
         composable(AppScreens.pantallaRegistro.ruta){
             pantallaRegistro(navigationController) }
+        composable(AppScreens.CancelarReserva.ruta){ CancelarReserva(navigationController, viewModel()) }
+        composable(AppScreens.ModificarReserva.ruta){ ModificarReserva(navigationController, viewModel(
+        )) }
+        composable(AppScreens.Reservar.ruta){ Reservar(navigationController,viewModel()) }
 
 
 

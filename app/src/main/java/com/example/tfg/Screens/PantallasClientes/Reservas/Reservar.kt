@@ -179,7 +179,7 @@ fun Reservar(navController: NavHostController, viewModel: ReservasViewModel) {
                                     it1.toString(), horaReserva, nombreCliente, telefonoCliente, emailCliente, observaciones)
                             }
                             if (reserva != null) {
-                                viewModel.createReserva(reserva)
+
                             }
                             val reservaMap = hashMapOf(
                                 "idReserva" to idReserva,
