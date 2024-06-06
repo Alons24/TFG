@@ -1,8 +1,11 @@
 
 
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -34,16 +37,20 @@ import com.example.tfg.Screens.Perfil
 import com.example.tfg.navigation.AppScreens
 
 
+
+@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 
 @Composable
 fun AppNavigation() {
     val navigationController = rememberNavController()
+    val context = LocalContext.current
     //val viewModel= NavHostController()
     //Declaramos en startDestination la pantalla en la que va a empezar.
     NavHost(navController = navigationController, startDestination = AppScreens.MenuPrimero.ruta)
     {
         composable(AppScreens.MenuPrimero.ruta) { MenuPrimero(navigationController) }
+        composable(AppScreens.Perfil.ruta){ Perfil(navigationController, context)}
         /*Este es el menú de trabajadores*/composable(AppScreens.MenuBotones.ruta){ MenuBotones(navigationController) }
         composable(AppScreens.Despensa.ruta){ Despensa(navigationController) }
         composable(AppScreens.MESAS.ruta){ Mesas(navigationController) }
@@ -58,7 +65,7 @@ fun AppNavigation() {
         composable(AppScreens.Mesa9.ruta){ Mesa9(navigationController) }
         composable(AppScreens.MenuClientes.ruta){MenuClientes(navigationController)}
        /* composable(AppScreens.pantallaLogin.ruta){pantallaLogin(navigationController) }*/
-        composable(AppScreens.Perfil.ruta){ Perfil(navigationController)}
+
         composable(AppScreens.CartaEntrantes.ruta){ CartaEntrantes(navigationController) }
         composable(AppScreens.MenuCategorias.ruta){ MenuCategorias(navigationController)}
         composable(AppScreens.Reservas.ruta){ Reservas(navigationController)}
