@@ -42,14 +42,13 @@ class ReservasViewModel: ViewModel() {
         }
     }
 
-    fun updateReseerva(reserva: Reserva, idReserva: Int){
-        val idReservaString = idReserva.toString()
+    fun updateReserva(reserva: Reserva, idReserva: String){
+
         viewModelScope.launch(Dispatchers.IO){
             try{
             val response = RetrofitClient.webService.updateReserva(idReserva, reserva)
             withContext(Dispatchers.Main){
                 if(response.body()!!.codigo == "200"){
-                    getReservas()
                 }
             }
         }catch (e: Exception){

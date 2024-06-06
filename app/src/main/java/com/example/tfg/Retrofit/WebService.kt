@@ -32,9 +32,9 @@ interface WebService {
         @Body reserva: Reserva
     ): Response<ReservaResponse>
 
-    @PUT("/actualizarReserva/{idReserva}")
+    @PUT("/modificarReserva/{idReserva}")
     suspend fun updateReserva(
-        @Path("idReserva") idReserva: Int,
+        @Path("idReserva") idReserva: String,
         @Body reserva: Reserva
     ): Response<ReservaResponse>
 
