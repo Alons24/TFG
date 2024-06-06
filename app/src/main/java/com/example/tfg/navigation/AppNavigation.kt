@@ -10,10 +10,12 @@ import androidx.navigation.compose.rememberNavController
 import com.example.tfg.INICIOSESIONYREGISTRO.LoginScreen
 import com.example.tfg.INICIOSESIONYREGISTRO.MenuPrimero
 import com.example.tfg.INICIOSESIONYREGISTRO.pantallaRegistro
-import com.example.tfg.Screens.PantallasClientes.CartaEntrantes
+import com.example.tfg.Screens.PantallasClientes.CartaTostasCliente
 import com.example.tfg.Screens.PantallasClientes.CrearCritica
 import com.example.tfg.Screens.PantallasClientes.Criticas.MenuCritica
 import com.example.tfg.Screens.PantallasClientes.MenuClientes
+import com.example.tfg.Screens.PantallasClientes.MenuDelDia
+import com.example.tfg.Screens.PantallasClientes.Reservas.ConsultarReserva
 import com.example.tfg.Screens.PantallasClientes.Reservas.Reservas
 import com.example.tfg.Screens.PantallasTrabajadores.MenuBotones
 import com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas.Mesa1
@@ -26,6 +28,8 @@ import com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas.Mesa7
 import com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas.Mesa8
 import com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas.Mesa9
 import com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas.Mesas
+import com.example.tfg.Screens.PantallasTrabajadores.Trabajadores.CartaTrabajadores.CartaBebidasTrabajadores
+import com.example.tfg.Screens.PantallasTrabajadores.Trabajadores.CartaTrabajadores.CartaTostasTrabajadores
 import com.example.tfg.Screens.PantallasTrabajadores.Trabajadores.Despensa
 import com.example.tfg.Screens.Perfil
 import com.example.tfg.navigation.AppScreens
@@ -56,7 +60,7 @@ fun AppNavigation() {
         composable(AppScreens.MenuClientes.ruta){MenuClientes(navigationController)}
        /* composable(AppScreens.pantallaLogin.ruta){pantallaLogin(navigationController) }*/
         composable(AppScreens.Perfil.ruta){ Perfil(navigationController)}
-        composable(AppScreens.CartaEntrantes.ruta){ CartaEntrantes(navigationController) }
+        composable(AppScreens.CartaTostasCliente.ruta){ CartaTostasCliente(navigationController) }
         composable(AppScreens.MenuCategorias.ruta){ MenuCategorias(navigationController)}
         composable(AppScreens.Reservas.ruta){ Reservas(navigationController)}
         composable(AppScreens.MenuCritica.ruta){ MenuCritica(navigationController) }
@@ -64,6 +68,14 @@ fun AppNavigation() {
         composable(AppScreens.LoginScreen.ruta){ LoginScreen(navigationController) }
         composable(AppScreens.pantallaRegistro.ruta){
             pantallaRegistro(navigationController) }
+
+        composable(AppScreens.ConsultarReserva.ruta){ConsultarReserva(navigationController)}
+
+        composable(AppScreens.CartaTostasTrabajadores.ruta){ CartaTostasTrabajadores(navigationController) }
+        composable(AppScreens.CartaBebidasTrabajadores.ruta){ CartaBebidasTrabajadores(navigationController) }
+
+        composable(AppScreens.MenuDelDia.ruta){ MenuDelDia(navigationController) }
+
 
 
 

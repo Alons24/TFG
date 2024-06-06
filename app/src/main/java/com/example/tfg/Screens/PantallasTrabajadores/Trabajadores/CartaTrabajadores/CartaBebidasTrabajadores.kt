@@ -55,7 +55,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CartaTostasTrabajadores(navController: NavHostController) {
+fun CartaBebidasTrabajadores(navController: NavHostController) {
 
 
     val scaffoldState = rememberScrollState()
@@ -99,7 +99,7 @@ fun CartaTostasTrabajadores(navController: NavHostController) {
                         containerColor = Color.Blue,
                         titleContentColor = Color.White,
                     ),
-                    title = { Text("CARTA TOSTAS") },
+                    title = { Text("CARTA BEBIDAS") },
 
                     /*EN REALIDAD NO DEBERÍA HABER UN BOTÓN QUE TE LLEVE ATRÁS
                     * SINO QUE DEBERÍAMOS DESLIZAR PARA QUE NOS LLEVE A LA ÚLTIMA MESA
@@ -167,17 +167,17 @@ fun CartaTostasTrabajadores(navController: NavHostController) {
                     ProductoDiseño(producto = it)
                 }
 
-                }
             }
         }
     }
+}
 
 
-data class Publicidad(val titulo: String)
+
 
 private val listaProductos = listOf(
     Producto(
-        nombre = "Tosta nóridica",
+        nombre = "Manzana",
         precio = 18.99,
         categoria = "",
         descripcion = "",
@@ -253,7 +253,7 @@ private val listaProductos = listOf(
 
 
 @Composable
-fun ProductoDiseño(producto: Producto) {
+fun ProductoDiseñoBebidas(producto: Producto) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -283,7 +283,7 @@ fun ProductoDiseño(producto: Producto) {
 }
 
 @Composable
-fun PublicidadDiseño(publicidad: Int) {
+fun PublicidadDiseñoBebidas(publicidad: Int) {
     Box(
         modifier = Modifier
             .size(140.dp)

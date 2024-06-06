@@ -179,7 +179,7 @@ fun MenuCategorias(navController: NavHostController) {
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Button(
-                    onClick = { navController.navigate(AppScreens.CartaEntrantes.ruta) },
+                    onClick = { navController.navigate(AppScreens.CartaTostasCliente.ruta) },
                     modifier = Modifier
                         .fillMaxWidth()
                         .width(300.dp)
@@ -188,7 +188,7 @@ fun MenuCategorias(navController: NavHostController) {
                     colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
                 ) {
                     Text(
-                        text = "ENTRANTES",
+                        text = "TOSTAS",
                         fontSize = 45.sp,
                     )
                 }

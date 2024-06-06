@@ -19,7 +19,6 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
@@ -150,14 +149,7 @@ fun Mesa1(navController: NavHostController) {
                     contentColor = MaterialTheme.colorScheme.primary,
                 ) {
                     // Iconos de navegación
-                    BottomNavigationItem(
-                        selected = false,
-                        onClick = { /*TIENE QUE ENVIAR LA INFORMACIÓN A LA BASE DE DATOS TRAS PULDAR*/ },
-                        modifier = Modifier.weight(1f),
-                        icon = {
-                            Icon(imageVector = Icons.Default.MoreVert, contentDescription = "OPCIONES", tint = Color.White)
-                        },
-                    )
+
 
                     BottomNavigationItem(
                         selected = false,
@@ -233,7 +225,7 @@ fun Mesa1(navController: NavHostController) {
                         // Aquí organizamos los botones en filas de dos
                         val botones = listOf(
                             Triple("Tostas", AppScreens.CartaTostasTrabajadores.ruta, Color(4, 104, 249, 255)),
-                            Triple("Bebidas", AppScreens.CartaEntrantes.ruta, Color(128, 0, 128, 255)),
+                            Triple("Bebidas", AppScreens.CartaBebidasTrabajadores.ruta, Color(128, 0, 128, 255)),
                             Triple("Bocadillos", AppScreens.CartaEntrantes.ruta, Color(24, 119, 37, 255)),
                             Triple("Cafés", AppScreens.CartaEntrantes.ruta, Color(255, 128, 0, 255)),
                             Triple("Cervezas", AppScreens.CartaEntrantes.ruta, Color(20, 183, 25, 255)),

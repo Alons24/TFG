@@ -1,4 +1,4 @@
-package com.example.tfg.Screens.PantallasTrabajadores.Trabajadores.CartaTrabajadores
+package com.example.tfg.Screens.PantallasClientes
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -13,11 +13,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Menu
@@ -50,15 +52,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.example.tfg.R
 import com.example.tfg.Retrofit.DataClases.Producto
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CartaTostasTrabajadores(navController: NavHostController) {
-
-
-    val scaffoldState = rememberScrollState()
+fun CartaTostasCliente(navController: NavHostController) {
     val scope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
 
@@ -74,14 +74,14 @@ fun CartaTostasTrabajadores(navController: NavHostController) {
                 ) {
                     Button(
                         onClick = {
-                            navController.navigate("Mesa1")
+                            navController.navigate("MenuTrabajadores")
                             scope.launch { drawerState.close() }
                         },
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(60.dp),
                         shape = RectangleShape,
-                        colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
+                        colors = ButtonDefaults.buttonColors(Color(0xFF0468F9))
                     ) {
                         Text(
                             text = "ejemplo",
@@ -100,18 +100,13 @@ fun CartaTostasTrabajadores(navController: NavHostController) {
                         titleContentColor = Color.White,
                     ),
                     title = { Text("CARTA TOSTAS") },
-
-                    /*EN REALIDAD NO DEBERÍA HABER UN BOTÓN QUE TE LLEVE ATRÁS
-                    * SINO QUE DEBERÍAMOS DESLIZAR PARA QUE NOS LLEVE A LA ÚLTIMA MESA
-                    * EN LA QUE HUBIÉRAMOS ESTADO Y NO A UNA DETERMINADA.*/
-
                     navigationIcon = {
-                        /*IconButton(onClick = { navController.navigate("Mesa1") }) {
+                        IconButton(onClick = { navController.navigate("MenuPrimero") }) {
                             Icon(
                                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                                 contentDescription = "Localized description"
                             )
-                        }*/
+                        }
                     },
                     actions = {
                         IconButton(onClick = { scope.launch { drawerState.open() } }) {
@@ -131,7 +126,6 @@ fun CartaTostasTrabajadores(navController: NavHostController) {
                     BottomNavigationItem(
                         selected = false,
                         onClick = { /* Acción del icono */ },
-                        modifier = Modifier.weight(1f),
                         icon = {
                             Icon(
                                 imageVector = Icons.Default.DateRange,
@@ -144,7 +138,6 @@ fun CartaTostasTrabajadores(navController: NavHostController) {
                     BottomNavigationItem(
                         selected = false,
                         onClick = { /* Acción del segundo icono */ },
-                        modifier = Modifier.weight(1f),
                         icon = {
                             Icon(
                                 imageVector = Icons.Default.AccountCircle,
@@ -161,103 +154,65 @@ fun CartaTostasTrabajadores(navController: NavHostController) {
                 verticalArrangement = Arrangement.spacedBy(20.dp),
                 modifier = Modifier.padding(innerPadding)
             ) {
-
+                item {
+                    Text(
+                        text = "CARTA ENTRANTES",
+                        style = TextStyle(
+                            color = Color.Blue,
+                            fontSize = 28.sp,
+                            fontWeight = FontWeight.Black
+                        )
+                    )
+                }
 
                 items(listaProductos) {
                     ProductoDiseño(producto = it)
                 }
 
+                itemsIndexed(listaProductos) { posicion, producto ->
+                    if (posicion % 5 == 0 && posicion != 0) {
+                        LazyRow {
+                            items(listaImagenes) {
+                                PublicidadDiseño(publicidad = it)
+                            }
+                        }
+                    } else {
+                        ProductoDiseño(producto = producto)
+                    }
                 }
             }
         }
     }
-
+}
 
 data class Publicidad(val titulo: String)
 
 private val listaProductos = listOf(
-    Producto(
-        nombre = "Tosta nóridica",
-        precio = 18.99,
-        categoria = "",
-        descripcion = "",
-        idProducto = 1,
-        imagen = ""
-    ),
-    Producto(
-        nombre = "Pera",
-        precio = 15.99,
-        categoria = "",
-        descripcion = "",
-        idProducto = 2,
-        imagen = ""
-    ),
-    Producto(
-        nombre = "Naranja",
-        precio = 12.99,
-        categoria = "",
-        descripcion = "",
-        idProducto = 3,
-        imagen = ""
-    ),
-    Producto(
-        nombre = "Plátano",
-        precio = 9.99,
-        categoria = "",
-        descripcion = "",
-        idProducto = 4,
-        imagen = ""
-    ),
-    Producto(
-        nombre = "Fresa",
-        precio = 8.99,
-        categoria = "",
-        descripcion = "",
-        idProducto = 5,
-        imagen = ""
-    ),
-    Producto(
-        nombre = "Cereza",
-        precio = 7.99,
-        categoria = "",
-        descripcion = "",
-        idProducto = 6,
-        imagen = ""
-    ),
-    Producto(
-        nombre = "Mango",
-        precio = 6.99,
-        categoria = "",
-        descripcion = "",
-        idProducto = 7,
-        imagen = ""
-    ),
-    Producto(
-        nombre = "Piña",
-        precio = 5.99,
-        categoria = "",
-        descripcion = "",
-        idProducto = 8,
-        imagen = ""
-    ),
-    Producto(
-        nombre = "Melón",
-        precio = 4.99,
-        categoria = "",
-        descripcion = "",
-        idProducto = 9,
-        imagen = ""
-    ),
+    Producto(nombre = "Manzana", precio = 18.99, categoria = "", descripcion = "", idProducto = 1, imagen = ""),
+    Producto(nombre = "Pera", precio = 15.99, categoria = "", descripcion = "", idProducto = 2, imagen = ""),
+    Producto(nombre = "Plátano", precio = 12.99, categoria = "", descripcion = "", idProducto = 3, imagen = ""),
+    Producto(nombre = "Naranja", precio = 9.99, categoria = "", descripcion = "", idProducto = 4, imagen = ""),
+    Producto(nombre = "Melón", precio = 22.99, categoria = "", descripcion = "", idProducto = 5, imagen = ""),
+    Producto(nombre = "Sandía", precio = 19.99, categoria = "", descripcion = "", idProducto = 6, imagen = ""),
+    Producto(nombre = "Fresa", precio = 25.99, categoria = "", descripcion = "", idProducto = 7, imagen = ""),
+    Producto(nombre = "Mango", precio = 17.99, categoria = "", descripcion = "", idProducto = 8, imagen = ""),
+    Producto(nombre = "Papaya", precio = 21.99, categoria = "", descripcion = "", idProducto = 9, imagen = "")
 )
 
-
+private val listaImagenes = listOf(
+    R.drawable.gazpacho_andaluz,
+    R.drawable.paella,
+    R.drawable.cocido_madrileno,
+    R.drawable.pulpo_a_la_gallega,
+    R.drawable.receta_croquetas_jamon,
+    R.drawable.tortilla_patatas
+)
 
 @Composable
 fun ProductoDiseño(producto: Producto) {
     Row(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
             text = producto.nombre,
@@ -266,10 +221,6 @@ fun ProductoDiseño(producto: Producto) {
                 fontWeight = FontWeight.Medium
             )
         )
-
-        Button(onClick = { /* Aquí va la acción del botón */ }) {
-            Text(text = "Añadir")
-        }
 
         Text(
             text = "${producto.precio} €",

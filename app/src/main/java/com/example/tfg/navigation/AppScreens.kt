@@ -4,8 +4,11 @@ package com.example.tfg.navigation
 
 // Definición de una clase sellada llamada AppScreens con una propiedad ruta
 sealed class AppScreens(val ruta: String) {
-
+    object MenuPrimero : AppScreens("MenuPrimero")
     object MenuBotones: AppScreens("MenuBotones")
+
+    object MenuClientes:AppScreens("MenuClientes")
+
     object AnadirTrabajador:AppScreens("AnadirProducto")
 
     //RUTAS MESAS
@@ -19,12 +22,12 @@ sealed class AppScreens(val ruta: String) {
     object Mesa7:AppScreens("Mesa7")
     object Mesa8:AppScreens("Mesa8")
     object Mesa9:AppScreens("Mesa9")
-    object MenuClientes:AppScreens("MenuClientes")
+
 
     //RUTAS INICIO SESION Y MENU PRINCIPAL
 
     object pantallaLogin:AppScreens("pantallaLogin")
-    object MenuPrimero : AppScreens("MenuPrimero")
+
     object LoginScreen:AppScreens("LoginScreen")
     object pantallaRegistro:AppScreens("pantallaRegistro")
 
@@ -52,5 +55,13 @@ sealed class AppScreens(val ruta: String) {
     object VisualizarCritica:AppScreens("VisualizarCritica")
 
     object CartaTostasTrabajadores:AppScreens("CartaTostasTrabajadores")
+    object CartaTostasCliente:AppScreens("CartaTostasCliente")
+    /*BEBIDAS*/
+    object CartaBebidasTrabajadores:AppScreens("CartaBebidasTrabajadores")
+    object MenuDelDia:AppScreens("MenuDelDia")
+
+
+
+
 
 }

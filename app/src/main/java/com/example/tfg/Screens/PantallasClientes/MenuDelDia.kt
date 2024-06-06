@@ -1,14 +1,17 @@
-package com.example.tfg.Screens.PantallasTrabajadores.Trabajadores
+package com.example.tfg.Screens.PantallasClientes
 
 import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.icons.Icons
@@ -20,6 +23,7 @@ import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -51,13 +55,12 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Despensa(navController: NavHostController) {
-    var productosEncontrados by remember { mutableStateOf(false) }
-    val db = FirebaseFirestore.getInstance()
-    val coleccion = "Despensa"
+fun MenuDelDia(navController: NavHostController) {
+
+    var menu by remember { mutableStateOf(false) }
+
     var datos by remember { mutableStateOf("") }
 
     val scaffoldState = rememberScrollState()
@@ -79,7 +82,7 @@ fun Despensa(navController: NavHostController) {
                     Button(
                         onClick = {
                             // Navegar a la pantalla de inicio
-                            navController.navigate("MenuBotones")
+                            navController.navigate("MenuClientes")
                             // Cerrar el cajón de navegación modal después de la navegación
                             scope.launch {
                                 drawerState.close()
@@ -112,13 +115,14 @@ fun Despensa(navController: NavHostController) {
                         titleContentColor = Color.White, // Cambia el color del título
                     ),
                     title = {
-                        Text("DESPENSA")
+                        Text("Menu del día")
                     },
                     navigationIcon = {
                         IconButton(onClick = { navController.navigate("MenuBotones") }) {
                             Icon(
                                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                                 contentDescription = "Localized description"
+
                             )
                         }
                     },
@@ -183,12 +187,13 @@ fun Despensa(navController: NavHostController) {
                     verticalArrangement = Arrangement.spacedBy(16.dp),
                 ) {
 
-                    val productos = remember { mutableStateOf(emptyList<Map<String, Any>>()) }
+                    val menuDia = remember { mutableStateOf(emptyList<Map<String, Any>>()) }
+
 
                     // Usamos LaunchedEffect para cargar los datos cuando la pantalla se carga por primera vez
                     LaunchedEffect(Unit) {
                         val db = FirebaseFirestore.getInstance()
-                        val ref = db.collection("Despensa")
+                        val ref = db.collection("MenuDia")
 
                         try {
                             val querySnapshot = ref.get().await()
@@ -200,8 +205,8 @@ fun Despensa(navController: NavHostController) {
                                 )
                             }
 
-                            productos.value = querySnapshot.documents.map { it.data ?: emptyMap() }
-                            productosEncontrados = productos.value.isNotEmpty()
+                            menuDia.value = querySnapshot.documents.map { it.data ?: emptyMap() }
+                            menu = menuDia.value.isNotEmpty()
                         } catch (exception: Exception) {
                             // Ha ocurrido un error al realizar la consulta
                             Log.e("samuLino", "Error al realizar la consulta: ${exception.message}")
@@ -209,18 +214,18 @@ fun Despensa(navController: NavHostController) {
                         }
                     }
 
-                    if (productosEncontrados) {
-                        productos.value.forEachIndexed { index, productos ->
+                    if (menu) {
+                        menuDia.value.forEach { platos ->
                             Card(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .padding(16.dp)
-                                    .height(570.dp),
-                                shape = androidx.compose.foundation.shape.RoundedCornerShape(8.dp),
-                                colors = androidx.compose.material3.CardDefaults.cardColors(
+                                    .fillMaxHeight(),
+                                shape = RoundedCornerShape(8.dp),
+                                colors = CardDefaults.cardColors(
                                     containerColor = Color.White
                                 ),
-                                elevation = androidx.compose.material3.CardDefaults.cardElevation(
+                                elevation = CardDefaults.cardElevation(
                                     defaultElevation = 4.dp
                                 )
                             ) {
@@ -230,62 +235,88 @@ fun Despensa(navController: NavHostController) {
                                         .padding(16.dp),
                                     verticalArrangement = Arrangement.spacedBy(4.dp)
                                 ) {
+
                                     Text(
-                                        text = "Productos: ",
+                                        text = "PRIMERO A ELEGIR: ",
                                         style = TextStyle(
                                             fontSize = 30.sp,
                                             fontWeight = FontWeight.Bold
                                         )
                                     )
 
+                                    Text(
+                                        text = " ${platos["Ensalada"]}",
+                                        style = TextStyle(fontSize = 25.sp)
+                                    )
+                                    Spacer(modifier = Modifier.height(7.dp))
 
                                     Text(
-                                        text = "Brandy: ${productos["Brandy"]}",
+                                        text = " ${platos["Gazpacho"]}",
                                         style = TextStyle(fontSize = 25.sp)
                                     )
 
+                                    Spacer(modifier = Modifier.height(7.dp))
                                     Text(
-                                        text = "Gin: ${productos["Gin"]}",
+                                        text = " ${platos["PaellaMixta"]}",
                                         style = TextStyle(fontSize = 25.sp)
                                     )
+                                    Spacer(modifier = Modifier.height(7.dp))
 
                                     Text(
-                                        text = "Brick de leche: ${productos["BrickDeLeche"]}",
-                                        style = TextStyle(fontSize = 25.sp)
-                                    )
-
-                                    Text(
-                                        text = "Botellines Mahou: ${productos["BotellinesMahou"]}",
-                                        style = TextStyle(fontSize = 25.sp)
-                                    )
-
-                                    Text(
-                                        text = "Zumo naranja: ${productos["ZumoNaranja"]}",
-                                        style = TextStyle(fontSize = 25.sp)
-                                    )
-
-                                    Text(
-                                        text = "Vino blanco: ${productos["VinoBlanco"]}",
-                                        style = TextStyle(fontSize = 25.sp)
-                                    )
-
-                                    Text(
-                                        text = "Vino tinto: ${productos["VinoTinto"]}",
+                                        text = " ${platos["Trigueros"]}",
                                         style = TextStyle(fontSize = 25.sp)
                                     )
 
 
 
 
+                                    Spacer(modifier = Modifier.height(29.dp))
 
+                                    Text(
+                                        text = "SEGUNDO A ELEGIR: ",
+                                        style = TextStyle(
+                                            fontSize = 30.sp,
+                                            fontWeight = FontWeight.Bold
+                                        )
+                                    )
+                                    Spacer(modifier = Modifier.height(7.dp))
 
+                                    Text(
+                                        text = " ${platos["medallones"]}",
+                                        style = TextStyle(fontSize = 25.sp)
+                                    )
+                                    Spacer(modifier = Modifier.height(7.dp))
 
+                                    Text(
+                                        text = " ${platos["pechuga"]}",
+                                        style = TextStyle(fontSize = 25.sp)
+                                    )
+                                    Spacer(modifier = Modifier.height(7.dp))
 
+                                    Text(
+                                        text = " ${platos["quesadilla"]}",
+                                        style = TextStyle(fontSize = 25.sp)
+                                    )
+                                    Spacer(modifier = Modifier.height(7.dp))
 
+                                    Text(
+                                        text = " ${platos["Platija"]}",
+                                        style = TextStyle(fontSize = 25.sp)
+                                    )
+                                    Spacer(modifier = Modifier.height(7.dp))
+
+                                    Text(
+                                        text = "Precio: ${platos["precio"]} €",
+                                        style = TextStyle(
+                                            fontSize = 25.sp,
+                                            fontWeight = FontWeight.Bold
+                                        )
+                                    )
                                 }
                             }
                         }
                     } else {
+
                         Text(
                             text = datos,
                             style = TextStyle(fontSize = 16.sp, color = Color.Red)
