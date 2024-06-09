@@ -202,7 +202,7 @@ fun Reservas(navController: NavHostController) {
                                 .width(150.dp)
                         ) {
                             IconButton(
-                                onClick = { navController.navigate("Fact") },
+                                onClick = { navController.navigate("Reservar") },
                                 modifier = Modifier.fillMaxSize()
                             ) {
                                 Icon(
@@ -224,7 +224,7 @@ fun Reservas(navController: NavHostController) {
                                 .width(150.dp)
                         ) {
                             IconButton(
-                                onClick = { navController.navigate("Reservar") },
+                                onClick = { navController.navigate("CancelarReserva") },
                                 modifier = Modifier.fillMaxSize()
                             ) {
                                 Icon(
@@ -295,7 +295,7 @@ fun Reservas(navController: NavHostController) {
                                 .width(150.dp)
                         ) {
                             IconButton(
-                                onClick = { navController.navigate("") },
+                                onClick = { navController.navigate("ConsultarReserva") },
                                 modifier = Modifier.fillMaxSize()
                             ) {
                                 Icon(
@@ -314,7 +314,7 @@ fun Reservas(navController: NavHostController) {
                                 .width(150.dp)
                         ) {
                             IconButton(
-                                onClick = { navController.navigate("Tareas") },
+                                onClick = { navController.navigate("ModificarReserva") },
                                 modifier = Modifier.fillMaxSize()
                             ) {
                                 Icon(
