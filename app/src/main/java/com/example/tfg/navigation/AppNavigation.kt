@@ -19,12 +19,12 @@ import com.example.tfg.Screens.PantallasClientes.Criticas.ConsultarCritica
 import com.example.tfg.Screens.PantallasClientes.Criticas.EliminarCritica
 import com.example.tfg.Screens.PantallasClientes.Criticas.MenuCritica
 import com.example.tfg.Screens.PantallasClientes.MenuClientes
+import com.example.tfg.Screens.PantallasClientes.MenuDelDia
 import com.example.tfg.Screens.PantallasClientes.Reservas.CancelarReserva
 import com.example.tfg.Screens.PantallasClientes.Reservas.ConsultarReserva
 import com.example.tfg.Screens.PantallasClientes.Reservas.ModificarReserva
 import com.example.tfg.Screens.PantallasClientes.Reservas.Reservar
 import com.example.tfg.Screens.PantallasClientes.Reservas.Reservas
-import com.example.tfg.Screens.PantallasTrabajadores.CriticasTrabajadores.ConsultarCriticaTrabajadores
 import com.example.tfg.Screens.PantallasTrabajadores.MenuBotones
 import com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas.Mesa1
 import com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas.Mesa2
@@ -36,7 +36,6 @@ import com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas.Mesa7
 import com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas.Mesa8
 import com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas.Mesa9
 import com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas.Mesas
-import com.example.tfg.Screens.PantallasTrabajadores.ReservasTrabajadores.ConsultarReservaTrabajadores
 import com.example.tfg.Screens.PantallasTrabajadores.Trabajadores.Despensa
 import com.example.tfg.Screens.Perfil
 import com.example.tfg.navigation.AppScreens
@@ -74,22 +73,21 @@ fun AppNavigation() {
         composable(AppScreens.MenuCritica.ruta){ MenuCritica(navigationController) }
         composable(AppScreens.CrearCritica.ruta){ CrearCritica(navigationController, viewModel()) }
         composable(AppScreens.LoginScreen.ruta){ LoginScreen(navigationController) }
-        composable(AppScreens.pantallaRegistro.ruta){
-            pantallaRegistro(navigationController) }
+        composable(AppScreens.pantallaRegistro.ruta){pantallaRegistro(navigationController) }
         composable(AppScreens.CancelarReserva.ruta){ CancelarReserva(navigationController, viewModel()) }
-        composable(AppScreens.ModificarReserva.ruta){ ModificarReserva(navigationController, viewModel(
-        )) }
+        composable(AppScreens.ModificarReserva.ruta){ ModificarReserva(navigationController, viewModel()) }
         composable(AppScreens.Reservar.ruta){ Reservar(navigationController,viewModel()) }
         composable(AppScreens.ConsultarReserva.ruta){ ConsultarReserva(navigationController) }
         composable(AppScreens.ConsultarCritica.ruta){ ConsultarCritica(navigationController) }
         composable(AppScreens.ActualizarCritica.ruta){ ActualizarCritica(navigationController, viewModel()) }
         composable(AppScreens.EliminarCritica.ruta){ EliminarCritica(navigationController, viewModel()) }
-        composable(AppScreens.ConsultarReservaTrabajadores.ruta){ ConsultarReservaTrabajadores(navigationController) }
-        composable(AppScreens.ConsultarCriticaTrabajadores.ruta){ ConsultarCriticaTrabajadores(navigationController) }
 
 
-        }
 
+
+
+
+    }
 }
 
 
