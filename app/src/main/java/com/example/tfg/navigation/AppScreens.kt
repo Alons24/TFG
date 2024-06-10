@@ -40,7 +40,7 @@ sealed class AppScreens(val ruta: String) {
     object Despensa: AppScreens("Despensa")
 
     //RUTAS RESERVAS
-    object Reservas:AppScreens("Rerservas")
+    object Reservas:AppScreens("Reservas")
     object Reservar:AppScreens("Reservar")
     object ConsultarReserva:AppScreens("ConsultarReserva")
     object ConsultarReservaTrabajadores:AppScreens("ConsultarReservaTrabajadores")

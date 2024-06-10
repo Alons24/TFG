@@ -220,7 +220,7 @@ fun MenuCritica(navController: NavHostController) {
                                 .width(150.dp)
                         ) {
                             IconButton(
-                                onClick = { navController.navigate("CrearCritica") },
+                                onClick = { navController.navigate("EliminarCritica") },
                                 modifier = Modifier.fillMaxSize()
                             ) {
                                 Icon(
@@ -290,7 +290,7 @@ fun MenuCritica(navController: NavHostController) {
                                 .width(150.dp)
                         ) {
                             IconButton(
-                                onClick = { navController.navigate("EliminarCritica") },
+                                onClick = { navController.navigate("ConsultarCritica") },
                                 modifier = Modifier.fillMaxSize()
                             ) {
                                 Icon(
@@ -309,7 +309,7 @@ fun MenuCritica(navController: NavHostController) {
                                 .width(150.dp)
                         ) {
                             IconButton(
-                                onClick = { navController.navigate("ObtenerCritica") },
+                                onClick = { navController.navigate("ActualizarCritica") },
                                 modifier = Modifier.fillMaxSize()
                             ) {
                                 Icon(
@@ -330,7 +330,7 @@ fun MenuCritica(navController: NavHostController) {
                         horizontalArrangement = Arrangement.Center
                     ) {
                         Button(
-                            onClick = { navController.navigate("ObtenerCritica") },
+                            onClick = { navController.navigate("ConsultarCritica") },
                             modifier = Modifier
                                 .height(40.dp)
                                 .width(150.dp)
