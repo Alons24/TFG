@@ -8,6 +8,7 @@ object SessionManager {
     private const val KEY_LOGGED_IN = "logged_in"
     private const val KEY_EMAIL = "email"
     private const val KEY_USER_NAME = "user_name"
+    private const val KEY_NOMBRE = "nombre"
 
 
     fun isLoggedIn(context: Context): Boolean {
@@ -47,6 +48,10 @@ object SessionManager {
         val sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         return sharedPreferences.getString(KEY_USER_NAME, "") ?: ""
     }
+
+
+
+
 
     fun clear(context: Context) {
         val sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)

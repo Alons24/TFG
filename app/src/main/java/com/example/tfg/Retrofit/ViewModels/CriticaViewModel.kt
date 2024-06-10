@@ -47,7 +47,7 @@ class CriticaViewModel : ViewModel(){
         }
     }
 
-    fun actualizarCritica(critica: Critica, idCritica: Int){
+    fun actualizarCritica(critica: Critica, idCritica: String){
         val idCriticaString = idCritica.toString()
         viewModelScope.launch(Dispatchers.IO){
             try{
@@ -64,7 +64,7 @@ class CriticaViewModel : ViewModel(){
     }
 
 
-    fun eliminarCritica(idCritica: Int){
+    fun eliminarCritica(idCritica: String){
         val idCriticaString = idCritica.toString()
         viewModelScope.launch(Dispatchers.IO){
             try{

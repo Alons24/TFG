@@ -1,4 +1,5 @@
-package com.example.tfg.Screens.PantallasClientes.Reservas
+package com.example.tfg.Screens.PantallasClientes.Criticas
+
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -46,11 +47,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.example.tfg.Retrofit.DataClases.Reserva
+import com.example.tfg.Retrofit.DataClases.Critica
 import com.example.tfg.Retrofit.SessionManager
 import com.example.tfg.navigation.AppScreens
 import com.google.firebase.firestore.FirebaseFirestore
@@ -58,15 +58,15 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ConsultarReserva(navController: NavHostController) {
-    val userEmail = SessionManager.getEmail(LocalContext.current)
+fun ConsultarCritica(navController: NavHostController) {
+    val userNombre = SessionManager.getUserName(LocalContext.current)
     val firestore = FirebaseFirestore.getInstance()
 
     val scaffoldState = rememberScrollState()
     val scope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
 
-    var reservas by remember { mutableStateOf<List<Reserva>>(emptyList()) }
+    var criticas by remember { mutableStateOf<List<Critica>>(emptyList()) }
 
     /* Inicio del cajón lateral */
     ModalNavigationDrawer(
@@ -136,7 +136,7 @@ fun ConsultarReserva(navController: NavHostController) {
                         titleContentColor = Color.White, // Cambia el color del título
                     ),
                     title = {
-                        androidx.compose.material3.Text("VER RESERVAS")
+                        androidx.compose.material3.Text("VER CRÍTICAS")
                     },
                     navigationIcon = {
                         IconButton(onClick = { navController.popBackStack() }) {
@@ -217,18 +217,17 @@ fun ConsultarReserva(navController: NavHostController) {
                     )
                 }
             },
-        ) { innerPadding ->
+        )  { innerPadding ->
 
-            LaunchedEffect(key1 = userEmail) {
-                firestore.collection("Reserva")
-                    .whereEqualTo("emailCliente", userEmail)
+            LaunchedEffect(key1 = userNombre) {
+                firestore.collection("Critica")
                     .get()
                     .addOnSuccessListener { documents ->
-                        val reservasList = mutableListOf<Reserva>()
+                        val criticasList = mutableListOf<Critica>()
                         for (document in documents) {
-                            reservasList.add(document.toObject(Reserva::class.java))
+                            criticasList.add(document.toObject(Critica::class.java))
                         }
-                        reservas = reservasList
+                        criticas = criticasList
                     }
                     .addOnFailureListener { exception ->
                         // Handle any errors here
@@ -240,7 +239,7 @@ fun ConsultarReserva(navController: NavHostController) {
                     .padding(innerPadding) // Usar innerPadding proporcionado por Scaffold
                     .padding(16.dp) // Agregar padding adicional si es necesario
             ) {
-                items(reservas) { reserva ->
+                items(criticas) { critica ->
                     Card(
                         shape = RoundedCornerShape(8.dp),
                         backgroundColor = Color.White,
@@ -253,17 +252,17 @@ fun ConsultarReserva(navController: NavHostController) {
                             modifier = Modifier.padding(16.dp)
                         ) {
                             Text(
-                                text = "ID de reserva: ${reserva.idReserva}",
+                                text = "Nombre del Usuario: ${critica.nombreUsuario}",
                                 style = MaterialTheme.typography.h6
                             )
                             Spacer(modifier = Modifier.height(4.dp))
                             Text(
-                                text = "Nombre del cliente: ${reserva.nombreCliente}",
+                                text = "Mensaje: ${critica.mensaje}",
                                 style = MaterialTheme.typography.body1
                             )
                             Spacer(modifier = Modifier.height(4.dp))
                             Text(
-                                text = "Fecha de reserva: ${reserva.fechaReserva}",
+                                text = "Valoración: ${critica.valoracion}",
                                 style = MaterialTheme.typography.body2
                             )
                             // Agrega más campos según sea necesario
@@ -275,41 +274,5 @@ fun ConsultarReserva(navController: NavHostController) {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun PreviewReservaItem() {
-    val reserva = Reserva(
-        idReserva = "123",
-        nombreCliente = "Juan",
-        fechaReserva = "2023-12-31"
-        // Añade los demás campos según sea necesario
-    )
-    Card(
-        shape = RoundedCornerShape(8.dp),
-        backgroundColor = Color.White,
-        elevation = 4.dp,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 8.dp, horizontal = 16.dp)
-    ) {
-        Column(
-            modifier = Modifier.padding(16.dp)
-        ) {
-            Text(
-                text = "ID de reserva: ${reserva.idReserva}",
-                style = MaterialTheme.typography.h6
-            )
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(
-                text = "Nombre del cliente: ${reserva.nombreCliente}",
-                style = MaterialTheme.typography.body1
-            )
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(
-                text = "Fecha de reserva: ${reserva.fechaReserva}",
-                style = MaterialTheme.typography.body2
-            )
-            // Agrega más campos según sea necesario
-        }
-    }
-}
+
+

@@ -175,6 +175,12 @@ fun LoginSection(
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
+    Text(
+        text = mensajeConfirmacion,
+        style = MaterialTheme.typography.bodyMedium,
+        color = Color.Red // Puedes cambiar el color según tus necesidades
+    )
+
     OutlinedTextField(
         modifier = modifier,
         value = email,

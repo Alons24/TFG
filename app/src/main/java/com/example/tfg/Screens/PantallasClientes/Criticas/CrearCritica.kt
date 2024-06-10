@@ -50,6 +50,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.tfg.R
 import com.example.tfg.Retrofit.DataClases.Critica
+import com.example.tfg.Retrofit.SessionManager
 import com.example.tfg.Retrofit.ViewModels.CriticaViewModel
 import com.example.tfg.navigation.AppScreens
 import kotlinx.coroutines.launch
@@ -62,6 +63,7 @@ fun CrearCritica(navController: NavHostController, viewModel: CriticaViewModel) 
     val scope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     var showDialog by remember { mutableStateOf(false) }
+    val context = LocalContext.current
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -129,7 +131,7 @@ fun CrearCritica(navController: NavHostController, viewModel: CriticaViewModel) 
                         Text("Dejar Reseña")
                     },
                     navigationIcon = {
-                        IconButton(onClick = { navController.navigate("MenuClientes") }) {
+                        IconButton(onClick = { navController.popBackStack( )}) {
                             Icon(
                                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                                 contentDescription = "Back",
@@ -191,6 +193,7 @@ fun CrearCritica(navController: NavHostController, viewModel: CriticaViewModel) 
                         modifier = Modifier.fillMaxWidth(0.8f)
                     )
 
+                    val nombreUsuario = SessionManager.getUserName(context)
                     val db = FirebaseFirestore.getInstance()
                     val coleccion = db.collection("Critica")
                     var mensajeConfirmacion by remember { mutableStateOf("") }
@@ -200,7 +203,7 @@ fun CrearCritica(navController: NavHostController, viewModel: CriticaViewModel) 
                     Button(
                         onClick = {
                             if (mensaje.isNotEmpty() && valoracion != 0f) {
-                                val critica = Critica(idCritica, mensaje, valoracion)
+                                val critica = Critica(idCritica, mensaje, valoracion, nombreUsuario)
                                 viewModel.crearCritica(critica)
                                 showDialog = true
                             } else {
