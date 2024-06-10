@@ -1,5 +1,6 @@
 package com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -13,18 +14,14 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.AccountBox
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -33,6 +30,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
@@ -58,19 +56,35 @@ import com.example.tfg.navigation.AppScreens
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
 
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Mesa1(navController: NavHostController) {
     var productosEncargados by remember { mutableStateOf(false) }
     val db = FirebaseFirestore.getInstance()
-    val coleccion = "Mesas"
+    val coleccion = "Mesa1"
     var datos by remember { mutableStateOf("") }
+    var mensajeConfirmacion by remember { mutableStateOf("") }
 
     val scaffoldState = rememberScrollState()
     val scope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
 
-    /* Inicio del cajón lateral */
+    // Función para vaciar la base de datos
+    fun vaciarBaseDeDatos() {
+        db.collection(coleccion)
+            .get()
+            .addOnSuccessListener { resultado ->
+                for (documento in resultado) {
+                    db.collection(coleccion).document(documento.id).delete()
+                }
+                mensajeConfirmacion = "Base de datos vaciada correctamente :)"
+            }
+            .addOnFailureListener {
+                mensajeConfirmacion = "No se ha podido vaciar la base de datos :("
+            }
+    }
+
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
@@ -81,21 +95,6 @@ fun Mesa1(navController: NavHostController) {
                         .padding(16.dp),
                     verticalArrangement = Arrangement.spacedBy(16.dp),
                 ) {
-                    // Botón para volver al menú de inicio
-                    Button(
-                        onClick = { navController.navigate(AppScreens.MESAS.ruta) },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(100.dp),
-                        shape = RectangleShape,
-                        colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
-                    ) {
-                        Text(
-                            text = "MESAS",
-                            fontSize = 25.sp,
-                        )
-                    }
-
                     Button(
                         onClick = { navController.navigate(AppScreens.Despensa.ruta) },
                         modifier = Modifier
@@ -106,7 +105,35 @@ fun Mesa1(navController: NavHostController) {
                     ) {
                         Text(
                             text = "DESPENSA",
-                            fontSize = 25.sp,
+                            fontSize = 50.sp,
+                        )
+                    }
+
+                    Button(
+                        onClick = { /*navController.navigate(AppScreens.Despensa.ruta)*/ },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(100.dp),
+                        shape = RectangleShape,
+                        colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
+                    ) {
+                        Text(
+                            text = "VER RESEÑAS",
+                            fontSize = 40.sp,
+                        )
+                    }
+
+                    Button(
+                        onClick = { navController.navigate(AppScreens.ConsultarReservaTrabajadores.ruta) },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(100.dp),
+                        shape = RectangleShape,
+                        colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
+                    ) {
+                        Text(
+                            text = "CONSULTAR RESERVAS",
+                            fontSize = 30.sp,
                         )
                     }
                 }
@@ -150,39 +177,35 @@ fun Mesa1(navController: NavHostController) {
                     contentColor = MaterialTheme.colorScheme.primary,
                 ) {
                     // Iconos de navegación
+
+                    // Icono Adicional
                     BottomNavigationItem(
                         selected = false,
-                        onClick = { /*TIENE QUE ENVIAR LA INFORMACIÓN A LA BASE DE DATOS TRAS PULDAR*/ },
+                        onClick = { navController.navigate("Perfil") },
                         modifier = Modifier.weight(1f),
                         icon = {
-                            Icon(imageVector = Icons.Default.MoreVert, contentDescription = "OPCIONES", tint = Color.White)
+                            Icon(
+                                imageVector = Icons.Default.AccountCircle,
+                                contentDescription = "YourIcon",
+                                tint = Color.White
+                            )
                         },
                     )
 
+                    // Icono Adicional
                     BottomNavigationItem(
                         selected = false,
-                        onClick = { /*TIENE QUE ENVIAR LA INFORMACIÓN A LA BASE DE DATOS TRAS PULDAR*/ },
-                        modifier = Modifier.weight(1f),
-                        icon = {
-                            Icon(imageVector = Icons.Default.AccountBox, contentDescription = "TICKET", tint = Color.White)
+                        onClick = {
+                            // Llama a la función para vaciar la base de datos
+                            vaciarBaseDeDatos()
                         },
-                    )
-
-                    BottomNavigationItem(
-                        selected = false,
-                        onClick = { /*TIENE QUE ENVIAR LA INFORMACIÓN A LA BASE DE DATOS TRAS PULDAR*/ },
                         modifier = Modifier.weight(1f),
                         icon = {
-                            Icon(imageVector = Icons.Default.ShoppingCart, contentDescription = "COBRAR", tint = Color.White)
-                        },
-                    )
-
-                    BottomNavigationItem(
-                        selected = false,
-                        onClick = { /*TIENE QUE ENVIAR LA INFORMACIÓN A LA BASE DE DATOS TRAS PULDAR*/ },
-                        modifier = Modifier.weight(1f),
-                        icon = {
-                            Icon(imageVector = Icons.Default.CheckCircle, contentDescription = "ENVIAR", tint = Color.White)
+                            Icon(
+                                imageVector = Icons.Default.CheckCircle,
+                                contentDescription = "Vaciar base de datos",
+                                tint = Color.White
+                            )
                         },
                     )
                 }
@@ -233,10 +256,10 @@ fun Mesa1(navController: NavHostController) {
                         // Aquí organizamos los botones en filas de dos
                         val botones = listOf(
                             Triple("Tostas", AppScreens.CartaTostasTrabajadores.ruta, Color(4, 104, 249, 255)),
-                            Triple("Bebidas", AppScreens.CartaEntrantes.ruta, Color(128, 0, 128, 255)),
+                            Triple("Bebidas", AppScreens.CartaBebidasTrabajadores.ruta, Color(128, 0, 128, 255)),
                             Triple("Bocadillos", AppScreens.CartaEntrantes.ruta, Color(24, 119, 37, 255)),
                             Triple("Cafés", AppScreens.CartaEntrantes.ruta, Color(255, 128, 0, 255)),
-                            Triple("Cervezas", AppScreens.CartaEntrantes.ruta, Color(20, 183, 25, 255)),
+                            Triple("Cervezas", AppScreens.CartaCervezasTrabajadores.ruta, Color(20, 183, 25, 255)),
                             Triple("Entrantes", AppScreens.CartaEntrantes.ruta, Color(202, 179, 3, 255)),
                             Triple("Raciones", AppScreens.CartaEntrantes.ruta, Color(255, 0, 0, 255)),
                             Triple("Pinchos", AppScreens.CartaEntrantes.ruta, Color(24, 119, 37, 255))
@@ -267,20 +290,24 @@ fun Mesa1(navController: NavHostController) {
 
                         Button(
                             onClick = {
-                                // Acción para enviar información
+                                db.collection(coleccion)
+                                    .add(hashMapOf("NumComensales" to NumComensales))
+                                    .addOnSuccessListener {
+                                        mensajeConfirmacion = "Comensales encargada correctamente :)"
+                                        NumComensales = ""
+                                    }
+                                    .addOnFailureListener {
+                                        mensajeConfirmacion = "No se han podido guardar los comensales :("
+                                    }
+
                             },
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(8.dp)
-                                .height(50.dp),
-                            shape = RectangleShape,
-                            colors = ButtonDefaults.buttonColors(Color(0xFF0468F9))
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color(0xFF4CAF50),
+                                contentColor = Color.Yellow
+                            ),
+                            border = BorderStroke(1.dp, Color.Black)
                         ) {
-                            Text(
-                                text = "Enviar",
-                                fontSize = 20.sp,
-                                color = Color.White,
-                            )
+                            Text(text = "ENVIAR")
                         }
                     }
 
@@ -307,26 +334,97 @@ fun Mesa1(navController: NavHostController) {
                     }
 
                     if (productosEncargados) {
-                        productosMesa1.value.forEachIndexed { index, pedido ->
-                            Card(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(16.dp)
-                                    .height(140.dp),
-                            ) {
-                                Column(
-                                    modifier = Modifier
-                                        .fillMaxSize()
-                                        .padding(16.dp),
-                                    verticalArrangement = Arrangement.spacedBy(4.dp)
-                                ) {
-                                    Text(
-                                        text = "Cantidad productos: ${pedido["Tomates"]}",
-                                        style = TextStyle(
-                                            fontSize = 18.sp,
-                                            fontWeight = FontWeight.Bold
+                        productosMesa1.value.forEach { pedido ->
+                            pedido.forEach { (key, value) ->
+                                when (key) {
+                                    "tosta" -> {
+                                        Text(
+                                            text = "Producto: $value",
+                                            style = TextStyle(
+                                                fontSize = 18.sp,
+                                                fontWeight = FontWeight.Bold
+                                            )
                                         )
-                                    )
+                                    }
+                                    "NumComensales" -> {
+                                        Text(
+                                            text = "Número de comensales: $value",
+                                            style = TextStyle(
+                                                fontSize = 18.sp,
+                                                fontWeight = FontWeight.Bold
+                                            )
+                                        )
+                                    }
+
+                                    "bocadillos" -> {
+                                        Text(
+                                            text = "Bocadillos: $value",
+                                            style = TextStyle(
+                                                fontSize = 18.sp,
+                                                fontWeight = FontWeight.Bold
+                                            )
+                                        )
+                                    }
+
+                                    "cafes" -> {
+                                        Text(
+                                            text = "Cafés: $value",
+                                            style = TextStyle(
+                                                fontSize = 18.sp,
+                                                fontWeight = FontWeight.Bold
+                                            )
+                                        )
+                                    }
+
+                                    "cerveza" -> {
+                                        Text(
+                                            text = "Cerveza: $value",
+                                            style = TextStyle(
+                                                fontSize = 18.sp,
+                                                fontWeight = FontWeight.Bold
+                                            )
+                                        )
+                                    }
+
+                                    "entrantes" -> {
+                                        Text(
+                                            text = "Entrantes: $value",
+                                            style = TextStyle(
+                                                fontSize = 18.sp,
+                                                fontWeight = FontWeight.Bold
+                                            )
+                                        )
+                                    }
+
+                                    "raciones" -> {
+                                        Text(
+                                            text = "Ración: $value",
+                                            style = TextStyle(
+                                                fontSize = 18.sp,
+                                                fontWeight = FontWeight.Bold
+                                            )
+                                        )
+                                    }
+
+                                    "pinchos" -> {
+                                        Text(
+                                            text = "Pincho: $value",
+                                            style = TextStyle(
+                                                fontSize = 18.sp,
+                                                fontWeight = FontWeight.Bold
+                                            )
+                                        )
+                                    }
+
+                                    "bebida" -> {
+                                        Text(
+                                            text = "Bebida: $value",
+                                            style = TextStyle(
+                                                fontSize = 18.sp,
+                                                fontWeight = FontWeight.Bold
+                                            )
+                                        )
+                                    }
                                 }
                             }
                         }
@@ -336,9 +434,9 @@ fun Mesa1(navController: NavHostController) {
                             style = TextStyle(fontSize = 16.sp, color = Color.Red)
                         )
                     }
+
                 }
             }
         }
     }
 }
-

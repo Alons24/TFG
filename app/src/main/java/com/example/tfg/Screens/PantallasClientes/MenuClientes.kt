@@ -188,6 +188,23 @@ fun MenuClientes(navController: NavHostController) {
 
 
                 Button(
+                    onClick = { navController.navigate(AppScreens.MenuDelDia.ruta) },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .width(300.dp)
+                        .height(100.dp),
+                    shape = RectangleShape,
+                    colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
+                ) {
+                    Text(
+                        text = "Menú del día",
+                        fontSize = 25.sp,
+                    )
+                }
+
+
+
+                Button(
                     onClick = { /*navController.navigate(AppScreens.DejarResena.ruta)*/ },
                     modifier = Modifier
                         .fillMaxWidth()
@@ -248,6 +265,8 @@ fun MenuClientes(navController: NavHostController) {
                         fontSize = 25.sp,
                     )
                 }
+
+
 
             }
         }
