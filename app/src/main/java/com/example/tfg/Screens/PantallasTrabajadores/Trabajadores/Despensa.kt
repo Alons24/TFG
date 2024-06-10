@@ -14,7 +14,6 @@ import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
@@ -47,6 +46,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.example.tfg.navigation.AppScreens
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
@@ -74,30 +74,49 @@ fun Despensa(navController: NavHostController) {
                         .padding(16.dp),
                     verticalArrangement = Arrangement.spacedBy(16.dp),
                 ) {
-                    //BOTÓN PARA BOLVER AL MENÚ DE INICIO
-                    // Otros elementos del menú lateral
+
                     Button(
-                        onClick = {
-                            // Navegar a la pantalla de inicio
-                            navController.navigate("MenuBotones")
-                            // Cerrar el cajón de navegación modal después de la navegación
-                            scope.launch {
-                                drawerState.close()
-                            }
-                        },
+                        onClick = { navController.navigate(AppScreens.MESAS.ruta) },
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(60.dp),
+                            .height(100.dp),
                         shape = RectangleShape,
                         colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
                     ) {
                         Text(
-                            text = "ejemplo",
-                            style = TextStyle(fontSize = 30.sp)
+                            text = "MESAS",
+                            fontSize = 50.sp,
                         )
                     }
 
-                    //FIN DE LOS BOTONES DEL MENÚ LATERAL
+                    Button(
+                        onClick = { /*navController.navigate(AppScreens.Despensa.ruta)*/ },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(100.dp),
+                        shape = RectangleShape,
+                        colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
+                    ) {
+                        Text(
+                            text = "VER RESEÑAS",
+                            fontSize = 40.sp,
+                        )
+                    }
+
+                    Button(
+                        onClick = { navController.navigate(AppScreens.ConsultarReservaTrabajadores.ruta) },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(100.dp),
+                        shape = RectangleShape,
+                        colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
+                    ) {
+                        Text(
+                            text = "CONSULTAR RESERVAS",
+                            fontSize = 30.sp,
+                        )
+                    }
+
                 }
             }
         },
@@ -118,15 +137,18 @@ fun Despensa(navController: NavHostController) {
                         IconButton(onClick = { navController.navigate("MenuBotones") }) {
                             Icon(
                                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                                contentDescription = "Localized description"
+                                contentDescription = "Back",
+                                tint = Color.White
                             )
                         }
                     },
+
                     actions = {
                         IconButton(onClick = { (run { scope.launch { drawerState.open() } }) }) {
                             Icon(
                                 imageVector = Icons.Filled.Menu,
-                                contentDescription = "Localized description"
+                                contentDescription = "Menu",
+                                tint = Color.White
                             )
                         }
                     }
@@ -137,26 +159,12 @@ fun Despensa(navController: NavHostController) {
                     containerColor = Color.Blue,
                     contentColor = MaterialTheme.colorScheme.primary,
                 ) {
-                    // Icono
-                    BottomNavigationItem(
-                        selected = false,
-                        onClick = {/*QUE HAGA ALGOOOOOOOOOOOOOOOO*/ },
-                        modifier = Modifier.weight(1f),
-                        icon = {
-                            Icon(
-                                imageVector = Icons.Default.DateRange,
-                                contentDescription = "Search",
-                                tint = Color.White
-                            )
-                        },
-                    )
+
 
                     // Icono Adicional
                     BottomNavigationItem(
                         selected = false,
-                        onClick = {
-                            /* Código para la acción del segundo ícono */
-                        },
+                        onClick = {navController.navigate("Perfil")},
                         modifier = Modifier.weight(1f),
                         icon = {
                             Icon(

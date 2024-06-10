@@ -70,7 +70,6 @@ fun Mesa6(navController: NavHostController) {
     val scope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
 
-    /* Inicio del cajón lateral */
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
@@ -81,20 +80,6 @@ fun Mesa6(navController: NavHostController) {
                         .padding(16.dp),
                     verticalArrangement = Arrangement.spacedBy(16.dp),
                 ) {
-                    // Botón para volver al menú de inicio
-                    Button(
-                        onClick = { navController.navigate(AppScreens.MESAS.ruta) },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(100.dp),
-                        shape = RectangleShape,
-                        colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
-                    ) {
-                        Text(
-                            text = "MESAS",
-                            fontSize = 25.sp,
-                        )
-                    }
 
                     Button(
                         onClick = { navController.navigate(AppScreens.Despensa.ruta) },
@@ -106,14 +91,42 @@ fun Mesa6(navController: NavHostController) {
                     ) {
                         Text(
                             text = "DESPENSA",
-                            fontSize = 25.sp,
+                            fontSize = 50.sp,
                         )
                     }
+
+                    Button(
+                        onClick = { /*navController.navigate(AppScreens.Despensa.ruta)*/ },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(100.dp),
+                        shape = RectangleShape,
+                        colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
+                    ) {
+                        Text(
+                            text = "VER RESEÑAS",
+                            fontSize = 40.sp,
+                        )
+                    }
+
+                    Button(
+                        onClick = { navController.navigate(AppScreens.ConsultarReservaTrabajadores.ruta) },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(100.dp),
+                        shape = RectangleShape,
+                        colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
+                    ) {
+                        Text(
+                            text = "CONSULTAR RESERVAS",
+                            fontSize = 30.sp,
+                        )
+                    }
+
                 }
             }
         },
     ) {
-        // Fin de los botones del menú lateral
         Scaffold(
             topBar = {
                 CenterAlignedTopAppBar(

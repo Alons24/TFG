@@ -19,7 +19,6 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Menu
@@ -100,14 +99,14 @@ fun CartaTostasCliente(navController: NavHostController) {
                         titleContentColor = Color.White,
                     ),
                     title = { Text("CARTA TOSTAS") },
-                    navigationIcon = {
+                    /*navigationIcon = {
                         IconButton(onClick = { navController.navigate("MenuPrimero") }) {
                             Icon(
                                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                                 contentDescription = "Localized description"
                             )
                         }
-                    },
+                    },*/
                     actions = {
                         IconButton(onClick = { scope.launch { drawerState.open() } }) {
                             Icon(
@@ -154,16 +153,6 @@ fun CartaTostasCliente(navController: NavHostController) {
                 verticalArrangement = Arrangement.spacedBy(20.dp),
                 modifier = Modifier.padding(innerPadding)
             ) {
-                item {
-                    Text(
-                        text = "CARTA ENTRANTES",
-                        style = TextStyle(
-                            color = Color.Blue,
-                            fontSize = 28.sp,
-                            fontWeight = FontWeight.Black
-                        )
-                    )
-                }
 
                 items(listaProductos) {
                     ProductoDiseño(producto = it)
@@ -188,15 +177,15 @@ fun CartaTostasCliente(navController: NavHostController) {
 data class Publicidad(val titulo: String)
 
 private val listaProductos = listOf(
-    Producto(nombre = "Manzana", precio = 18.99, categoria = "", descripcion = "", idProducto = 1, imagen = ""),
-    Producto(nombre = "Pera", precio = 15.99, categoria = "", descripcion = "", idProducto = 2, imagen = ""),
-    Producto(nombre = "Plátano", precio = 12.99, categoria = "", descripcion = "", idProducto = 3, imagen = ""),
-    Producto(nombre = "Naranja", precio = 9.99, categoria = "", descripcion = "", idProducto = 4, imagen = ""),
-    Producto(nombre = "Melón", precio = 22.99, categoria = "", descripcion = "", idProducto = 5, imagen = ""),
-    Producto(nombre = "Sandía", precio = 19.99, categoria = "", descripcion = "", idProducto = 6, imagen = ""),
-    Producto(nombre = "Fresa", precio = 25.99, categoria = "", descripcion = "", idProducto = 7, imagen = ""),
-    Producto(nombre = "Mango", precio = 17.99, categoria = "", descripcion = "", idProducto = 8, imagen = ""),
-    Producto(nombre = "Papaya", precio = 21.99, categoria = "", descripcion = "", idProducto = 9, imagen = "")
+    Producto(nombre = "Tosta nóridica", precio = 18.99, categoria = "", descripcion = "", idProducto = 1, imagen = ""),
+    Producto(nombre = "Tosta clasica", precio = 15.99, categoria = "", descripcion = "", idProducto = 2, imagen = ""),
+    Producto(nombre = "Tosta payes", precio = 12.99, categoria = "", descripcion = "", idProducto = 3, imagen = ""),
+    Producto(nombre = "Tosta atlántica", precio = 9.99, categoria = "", descripcion = "", idProducto = 4, imagen = ""),
+    Producto(nombre = "Tosta europea", precio = 22.99, categoria = "", descripcion = "", idProducto = 5, imagen = ""),
+    Producto(nombre = "Tosta gallega", precio = 19.99, categoria = "", descripcion = "", idProducto = 6, imagen = ""),
+    Producto(nombre = "Tosta mar del norte", precio = 25.99, categoria = "", descripcion = "", idProducto = 7, imagen = ""),
+    Producto(nombre = "Tosta mar cantabrico", precio = 17.99, categoria = "", descripcion = "", idProducto = 8, imagen = ""),
+    Producto(nombre = "Tosta castellana", precio = 21.99, categoria = "", descripcion = "", idProducto = 9, imagen = "")
 )
 
 private val listaImagenes = listOf(

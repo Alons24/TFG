@@ -1,18 +1,17 @@
-package com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas
+package com.example.tfg.Screens.PantallasTrabajadores.Trabajadores.CartaTrabajadores.CartaTostasTrabajadores
 
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.AccountCircle
@@ -33,22 +32,32 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.example.tfg.R
 import com.example.tfg.navigation.AppScreens
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Mesas(navController: NavHostController) {
+fun CartaTostasTrabajadores3(navController: NavHostController) {
+    var tosta by remember { mutableStateOf("") }
+    var mensajeConfirmacion by remember { mutableStateOf("") }
+
+    val db = FirebaseFirestore.getInstance()
+    val coleccion = "Mesa3"
+
     val scaffoldState = rememberScrollState()
     val scope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
@@ -63,7 +72,6 @@ fun Mesas(navController: NavHostController) {
                         .padding(16.dp),
                     verticalArrangement = Arrangement.spacedBy(16.dp),
                 ) {
-
                     Button(
                         onClick = { navController.navigate(AppScreens.Despensa.ruta) },
                         modifier = Modifier
@@ -105,7 +113,6 @@ fun Mesas(navController: NavHostController) {
                             fontSize = 30.sp,
                         )
                     }
-
                 }
             }
         },
@@ -117,16 +124,17 @@ fun Mesas(navController: NavHostController) {
                         containerColor = Color.Blue,
                         titleContentColor = Color.White,
                     ),
-                    title = { Text("MESAS") },
+                    title = { Text("CARTA TOSTAS TRABAJADORES") },
                     navigationIcon = {
-                        IconButton(onClick = { navController.navigate("MenuBotones") }) {
+                        IconButton(onClick = { navController.navigate(AppScreens.MESAS.ruta) }) {
                             Icon(
                                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                                contentDescription = "Back",
+                                contentDescription = "Localized description",
                                 tint = Color.White
                             )
                         }
                     },
+
                     actions = {
                         IconButton(onClick = { scope.launch { drawerState.open() } }) {
                             Icon(
@@ -143,79 +151,68 @@ fun Mesas(navController: NavHostController) {
                     containerColor = Color.Blue,
                     contentColor = MaterialTheme.colorScheme.primary,
                 ) {
+                    // Icono Adicional
                     BottomNavigationItem(
                         selected = false,
-                        onClick = { navController.navigate(AppScreens.Perfil.ruta) },
+                        onClick = { navController.navigate("Perfil") },
+                        modifier = Modifier.weight(1f),
                         icon = {
                             Icon(
-                                imageVector = Icons.Default.AccountCircle,
-                                contentDescription = "Profile",
-                                tint = Color.White
-                            )
+                                imageVector = Icons.Default.AccountCircle, contentDescription = "YourIcon", tint = Color.White)
                         },
                     )
                 }
             },
         ) { innerPadding ->
-            Box(
+            Column(
                 modifier = Modifier
                     .padding(innerPadding)
-                    .verticalScroll(state = scaffoldState)
+                    .fillMaxSize()
+                    .padding(16.dp)
+                    .background(MaterialTheme.colorScheme.background.copy(alpha = 0.8f))
+                    .padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(30.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp),
-                ) {
-                    val mesas = listOf(
-                        Triple("1", AppScreens.Mesa1.ruta, R.drawable.mesa3tuneada1),
-                        Triple("2", AppScreens.Mesa2.ruta, R.drawable.mesa3tuneada2),
-                        Triple("3", AppScreens.Mesa3.ruta, R.drawable.mesa3tuneada3),
-                        Triple("4", AppScreens.Mesa4.ruta, R.drawable.mesa3tuneada4),
-                        Triple("5", AppScreens.Mesa5.ruta, R.drawable.mesa3tuneada5),
-                        Triple("6", AppScreens.Mesa6.ruta, R.drawable.mesa3tuneada6),
-                        Triple("7", AppScreens.Mesa7.ruta, R.drawable.mesa3tuneada7),
-                        Triple("8", AppScreens.Mesa8.ruta, R.drawable.mesa3tuneada8),
-                        Triple("9", AppScreens.Mesa9.ruta, R.drawable.mesa3tuneada9)
-                    )
 
-                    mesas.chunked(3).forEach { rowItems ->
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.spacedBy(16.dp)
-                        ) {
-                            rowItems.forEach { (mesaName, route, imageRes) ->
-                                Column(
-                                    modifier = Modifier.weight(1f)
-                                ) {
-                                    Image(
-                                        painter = painterResource(imageRes),
-                                        contentDescription = mesaName,
-                                        modifier = Modifier
-                                            .padding(8.dp)
-                                            .height(150.dp)
-                                            .fillMaxWidth()
-                                    )
-                                    Button(
-                                        onClick = { navController.navigate(route) },
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .height(75.dp),
-                                        shape = RectangleShape,
-                                        colors = ButtonDefaults.buttonColors(Color(255, 215, 0, 255)) // Color dorado
-                                    ) {
-                                        Text(
-                                            text = mesaName,
-                                            fontSize = 40.sp,
-                                            modifier = Modifier.wrapContentWidth(Alignment.CenterHorizontally) // Centrar texto
-                                        )
-                                    }
-                                }
+                OutlinedTextField(
+                    value = tosta,
+                    onValueChange = { tosta = it },
+                    singleLine = true,
+                    label = { Text("Escriba el tipo de tosta") },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp),
+                    textStyle = TextStyle(fontSize = 18.sp),
+                )
+
+                Spacer(modifier = Modifier.height(15.dp))
+
+                Button(
+                    onClick = {
+                        db.collection(coleccion)
+                            .add(hashMapOf("tosta" to tosta))
+                            .addOnSuccessListener {
+                                mensajeConfirmacion = "Tosta encargada correctamente :)"
+                                tosta = ""
                             }
-                        }
-                    }
+                            .addOnFailureListener {
+                                mensajeConfirmacion = "No se ha podido encargar la tosta :("
+                            }
+                    },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFF4CAF50),
+                        contentColor = Color.Yellow
+                    ),
+                    border = BorderStroke(1.dp, Color.Black)
+                ) {
+                    Text(text = "Encargar Tosta")
                 }
+
+                Text(
+                    text = mensajeConfirmacion,
+                    style = TextStyle(color = if (mensajeConfirmacion.startsWith("Tosta encargada")) Color.Green else Color.Red)
+                )
             }
         }
     }

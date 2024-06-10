@@ -1,18 +1,18 @@
-package com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas
+package com.example.tfg.Screens.PantallasTrabajadores
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.Card
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.AccountCircle
@@ -33,26 +33,37 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.example.tfg.R
+import com.example.tfg.Retrofit.DataClases.Reserva
 import com.example.tfg.navigation.AppScreens
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Mesas(navController: NavHostController) {
+fun ConsultarReservaTrabajadores(navController: NavHostController) {
+    val firestore = FirebaseFirestore.getInstance()
+
     val scaffoldState = rememberScrollState()
     val scope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
 
+    var reservas by remember { mutableStateOf<List<Reserva>>(emptyList()) }
+
+    /* Inicio del cajón lateral */
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
@@ -93,7 +104,7 @@ fun Mesas(navController: NavHostController) {
                     }
 
                     Button(
-                        onClick = { navController.navigate(AppScreens.ConsultarReservaTrabajadores.ruta) },
+                        onClick = { navController.navigate(AppScreens.MESAS.ruta) },
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(100.dp),
@@ -101,7 +112,7 @@ fun Mesas(navController: NavHostController) {
                         colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
                     ) {
                         Text(
-                            text = "CONSULTAR RESERVAS",
+                            text = "MESAS",
                             fontSize = 30.sp,
                         )
                     }
@@ -110,19 +121,22 @@ fun Mesas(navController: NavHostController) {
             }
         },
     ) {
+        // Fin de los botones del menú lateral
         Scaffold(
             topBar = {
                 CenterAlignedTopAppBar(
                     colors = TopAppBarDefaults.mediumTopAppBarColors(
-                        containerColor = Color.Blue,
-                        titleContentColor = Color.White,
+                        containerColor = Color.Blue, // Cambia el color de fondo
+                        titleContentColor = Color.White, // Cambia el color del título
                     ),
-                    title = { Text("MESAS") },
+                    title = {
+                        Text("VER RESERVAS como trabajador")
+                    },
                     navigationIcon = {
-                        IconButton(onClick = { navController.navigate("MenuBotones") }) {
+                        IconButton(onClick = { navController.navigate(AppScreens.MenuBotones.ruta) }) {
                             Icon(
                                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                                contentDescription = "Back",
+                                contentDescription = "Localized description",
                                 tint = Color.White
                             )
                         }
@@ -143,80 +157,111 @@ fun Mesas(navController: NavHostController) {
                     containerColor = Color.Blue,
                     contentColor = MaterialTheme.colorScheme.primary,
                 ) {
+
+
+                    // Icono Adicional
                     BottomNavigationItem(
                         selected = false,
-                        onClick = { navController.navigate(AppScreens.Perfil.ruta) },
+                        onClick = {navController.navigate("Perfil")},
+                        modifier = Modifier.weight(1f),
                         icon = {
-                            Icon(
-                                imageVector = Icons.Default.AccountCircle,
-                                contentDescription = "Profile",
-                                tint = Color.White
-                            )
+                            Icon(imageVector = Icons.Default.AccountCircle, contentDescription = "YourIcon", tint = Color.White)
                         },
                     )
                 }
             },
         ) { innerPadding ->
-            Box(
-                modifier = Modifier
-                    .padding(innerPadding)
-                    .verticalScroll(state = scaffoldState)
-            ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp),
-                ) {
-                    val mesas = listOf(
-                        Triple("1", AppScreens.Mesa1.ruta, R.drawable.mesa3tuneada1),
-                        Triple("2", AppScreens.Mesa2.ruta, R.drawable.mesa3tuneada2),
-                        Triple("3", AppScreens.Mesa3.ruta, R.drawable.mesa3tuneada3),
-                        Triple("4", AppScreens.Mesa4.ruta, R.drawable.mesa3tuneada4),
-                        Triple("5", AppScreens.Mesa5.ruta, R.drawable.mesa3tuneada5),
-                        Triple("6", AppScreens.Mesa6.ruta, R.drawable.mesa3tuneada6),
-                        Triple("7", AppScreens.Mesa7.ruta, R.drawable.mesa3tuneada7),
-                        Triple("8", AppScreens.Mesa8.ruta, R.drawable.mesa3tuneada8),
-                        Triple("9", AppScreens.Mesa9.ruta, R.drawable.mesa3tuneada9)
-                    )
 
-                    mesas.chunked(3).forEach { rowItems ->
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.spacedBy(16.dp)
+            LaunchedEffect(Unit) {
+                firestore.collection("Reserva")
+                    .get()
+                    .addOnSuccessListener { documents ->
+                        val reservasList = mutableListOf<Reserva>()
+                        for (document in documents) {
+                            reservasList.add(document.toObject(Reserva::class.java))
+                        }
+                        reservas = reservasList
+                    }
+                    .addOnFailureListener { exception ->
+                        // Handle any errors here
+                    }
+            }
+
+            LazyColumn(
+                modifier = Modifier
+                    .padding(innerPadding) // Usar innerPadding proporcionado por Scaffold
+                    .padding(16.dp) // Agregar padding adicional si es necesario
+            ) {
+                items(reservas) { reserva ->
+                    Card(
+                        shape = RoundedCornerShape(8.dp),
+                        backgroundColor = Color.White,
+                        elevation = 4.dp,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 8.dp, horizontal = 16.dp)
+                    ) {
+                        Column(
+                            modifier = Modifier.padding(16.dp)
                         ) {
-                            rowItems.forEach { (mesaName, route, imageRes) ->
-                                Column(
-                                    modifier = Modifier.weight(1f)
-                                ) {
-                                    Image(
-                                        painter = painterResource(imageRes),
-                                        contentDescription = mesaName,
-                                        modifier = Modifier
-                                            .padding(8.dp)
-                                            .height(150.dp)
-                                            .fillMaxWidth()
-                                    )
-                                    Button(
-                                        onClick = { navController.navigate(route) },
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .height(75.dp),
-                                        shape = RectangleShape,
-                                        colors = ButtonDefaults.buttonColors(Color(255, 215, 0, 255)) // Color dorado
-                                    ) {
-                                        Text(
-                                            text = mesaName,
-                                            fontSize = 40.sp,
-                                            modifier = Modifier.wrapContentWidth(Alignment.CenterHorizontally) // Centrar texto
-                                        )
-                                    }
-                                }
-                            }
+                            Text(
+                                text = "ID de reserva: ${reserva.idReserva}",
+                                style = androidx.compose.material.MaterialTheme.typography.h6
+                            )
+                            Spacer(modifier = Modifier.height(4.dp))
+                            Text(
+                                text = "Nombre del cliente: ${reserva.nombreCliente}",
+                                style = androidx.compose.material.MaterialTheme.typography.body1
+                            )
+                            Spacer(modifier = Modifier.height(4.dp))
+                            Text(
+                                text = "Fecha de reserva: ${reserva.fechaReserva}",
+                                style = androidx.compose.material.MaterialTheme.typography.body2
+                            )
+                            // Agrega más campos según sea necesario
                         }
                     }
                 }
             }
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewReservaItem() {
+    val reserva = Reserva(
+        idReserva = "123",
+        nombreCliente = "Juan",
+        fechaReserva = "2023-12-31"
+        // Añade los demás campos según sea necesario
+    )
+    Card(
+        shape = RoundedCornerShape(8.dp),
+        backgroundColor = Color.White,
+        elevation = 4.dp,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp, horizontal = 16.dp)
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Text(
+                text = "ID de reserva: ${reserva.idReserva}",
+                style = androidx.compose.material.MaterialTheme.typography.h6
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = "Nombre del cliente: ${reserva.nombreCliente}",
+                style = androidx.compose.material.MaterialTheme.typography.body1
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = "Fecha de reserva: ${reserva.fechaReserva}",
+                style = androidx.compose.material.MaterialTheme.typography.body2
+            )
+            // Agrega más campos según sea necesario
         }
     }
 }

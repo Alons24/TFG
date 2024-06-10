@@ -16,7 +16,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.BottomAppBar
@@ -118,11 +117,11 @@ fun MenuDelDia(navController: NavHostController) {
                         Text("Menu del día")
                     },
                     navigationIcon = {
-                        IconButton(onClick = { navController.navigate("MenuBotones") }) {
+                        IconButton(onClick = { navController.navigate("MenuClientes") }) {
                             Icon(
                                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                                contentDescription = "Localized description"
-
+                                contentDescription = "Localized description",
+                                tint= Color.White
                             )
                         }
                     },
@@ -130,7 +129,8 @@ fun MenuDelDia(navController: NavHostController) {
                         IconButton(onClick = { (run { scope.launch { drawerState.open() } }) }) {
                             Icon(
                                 imageVector = Icons.Filled.Menu,
-                                contentDescription = "Localized description"
+                                contentDescription = "Menu",
+                                tint= Color.White
                             )
                         }
                     }
@@ -144,7 +144,7 @@ fun MenuDelDia(navController: NavHostController) {
                     // Icono
                     BottomNavigationItem(
                         selected = false,
-                        onClick = {/*QUE HAGA ALGOOOOOOOOOOOOOOOO*/ },
+                        onClick = {navController.navigate("Reservas") },
                         modifier = Modifier.weight(1f),
                         icon = {
                             Icon(
@@ -155,21 +155,7 @@ fun MenuDelDia(navController: NavHostController) {
                         },
                     )
 
-                    // Icono Adicional
-                    BottomNavigationItem(
-                        selected = false,
-                        onClick = {
-                            /* Código para la acción del segundo ícono */
-                        },
-                        modifier = Modifier.weight(1f),
-                        icon = {
-                            Icon(
-                                imageVector = Icons.Default.AccountCircle,
-                                contentDescription = "YourIcon",
-                                tint = Color.White
-                            )
-                        },
-                    )
+
 
                 }
             },
