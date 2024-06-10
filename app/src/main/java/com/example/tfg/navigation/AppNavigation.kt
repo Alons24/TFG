@@ -71,18 +71,15 @@ fun AppNavigation() {
         composable(AppScreens.MenuCritica.ruta){ MenuCritica(navigationController) }
         composable(AppScreens.CrearCritica.ruta){ CrearCritica(navigationController, viewModel()) }
         composable(AppScreens.LoginScreen.ruta){ LoginScreen(navigationController) }
-        composable(AppScreens.pantallaRegistro.ruta){
-            pantallaRegistro(navigationController) }
+        composable(AppScreens.pantallaRegistro.ruta){pantallaRegistro(navigationController) }
         composable(AppScreens.CancelarReserva.ruta){ CancelarReserva(navigationController, viewModel()) }
-        composable(AppScreens.ModificarReserva.ruta){ ModificarReserva(navigationController, viewModel(
-        )) }
+        composable(AppScreens.ModificarReserva.ruta){ ModificarReserva(navigationController, viewModel()) }
         composable(AppScreens.Reservar.ruta){ Reservar(navigationController,viewModel()) }
         composable(AppScreens.ConsultarReserva.ruta){ ConsultarReserva(navigationController) }
 
 
 
         }
-
 }
 
 
