@@ -19,11 +19,13 @@ import com.example.tfg.Screens.PantallasClientes.Criticas.ConsultarCritica
 import com.example.tfg.Screens.PantallasClientes.Criticas.EliminarCritica
 import com.example.tfg.Screens.PantallasClientes.Criticas.MenuCritica
 import com.example.tfg.Screens.PantallasClientes.MenuClientes
+import com.example.tfg.Screens.PantallasClientes.MenuDelDia
 import com.example.tfg.Screens.PantallasClientes.Reservas.CancelarReserva
 import com.example.tfg.Screens.PantallasClientes.Reservas.ConsultarReserva
 import com.example.tfg.Screens.PantallasClientes.Reservas.ModificarReserva
 import com.example.tfg.Screens.PantallasClientes.Reservas.Reservar
 import com.example.tfg.Screens.PantallasClientes.Reservas.Reservas
+import com.example.tfg.Screens.PantallasTrabajadores.ConsultarReservaTrabajadores
 import com.example.tfg.Screens.PantallasTrabajadores.MenuBotones
 import com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas.Mesa1
 import com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas.Mesa2
@@ -35,6 +37,13 @@ import com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas.Mesa7
 import com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas.Mesa8
 import com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas.Mesa9
 import com.example.tfg.Screens.PantallasTrabajadores.PantallasMesas.Mesas
+import com.example.tfg.Screens.PantallasTrabajadores.Trabajadores.CartaTrabajadores.CartaBebidasTrabajadores
+import com.example.tfg.Screens.PantallasTrabajadores.Trabajadores.CartaTrabajadores.CartaCervezasTrabajadores
+import com.example.tfg.Screens.PantallasTrabajadores.Trabajadores.CartaTrabajadores.CartaTostasTrabajadores.CartaTostasTrabajadores
+import com.example.tfg.Screens.PantallasTrabajadores.Trabajadores.CartaTrabajadores.CartaTostasTrabajadores.CartaTostasTrabajadores2
+import com.example.tfg.Screens.PantallasTrabajadores.Trabajadores.CartaTrabajadores.CartaTostasTrabajadores.CartaTostasTrabajadores3
+import com.example.tfg.Screens.PantallasTrabajadores.Trabajadores.CartaTrabajadores.CartaTostasTrabajadores.CartaTostasTrabajadores4
+import com.example.tfg.Screens.PantallasTrabajadores.Trabajadores.CartaTrabajadores.CartaTostasTrabajadores.CartaTostasTrabajadores5
 import com.example.tfg.Screens.PantallasTrabajadores.Trabajadores.Despensa
 import com.example.tfg.Screens.Perfil
 import com.example.tfg.navigation.AppScreens
@@ -83,9 +92,22 @@ fun AppNavigation() {
         composable(AppScreens.ActualizarCritica.ruta){ ActualizarCritica(navigationController, viewModel()) }
         composable(AppScreens.EliminarCritica.ruta){ EliminarCritica(navigationController, viewModel()) }
 
+        composable(AppScreens.CartaTostasTrabajadores.ruta){ CartaTostasTrabajadores(navigationController) }
+        composable(AppScreens.CartaTostasTrabajadores2.ruta){ CartaTostasTrabajadores2(navigationController) }
+        composable(AppScreens.CartaTostasTrabajadores3.ruta){ CartaTostasTrabajadores3(navigationController) }
+        composable(AppScreens.CartaTostasTrabajadores4.ruta){ CartaTostasTrabajadores4(navigationController) }
+        composable(AppScreens.CartaTostasTrabajadores5.ruta){ CartaTostasTrabajadores5(navigationController) }
+        composable(AppScreens.CartaBebidasTrabajadores.ruta){ CartaBebidasTrabajadores(navigationController) }
+        composable(AppScreens.CartaCervezasTrabajadores.ruta){ CartaCervezasTrabajadores(navigationController) }
+        composable(AppScreens.MenuDelDia.ruta){ MenuDelDia(navigationController) }
+        composable(AppScreens.ConsultarReservaTrabajadores.ruta){ ConsultarReservaTrabajadores(navigationController) }
 
 
-        }
+
+
+
+
+    }
 }
 
 
