@@ -346,7 +346,9 @@ class Empleado {
 
             val mensaje = "Has trabajado $horas horas y $minutos minutos."
             snackbarHostState.showSnackbar(mensaje)
-        }
+
+            horaEntrada.value = null
+            horaSalida.value = null}
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

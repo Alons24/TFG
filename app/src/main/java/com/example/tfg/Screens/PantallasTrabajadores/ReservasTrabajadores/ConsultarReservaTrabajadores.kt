@@ -130,7 +130,7 @@ fun ConsultarReservaTrabajadores(navController: NavHostController) {
                         titleContentColor = Color.White, // Cambia el color del título
                     ),
                     title = {
-                        Text("VER RESERVAS como trabajador")
+                        Text("RESERVAS", color = Color.White, fontSize = 20.sp, modifier = Modifier.padding(8.dp))
                     },
                     navigationIcon = {
                         IconButton(onClick = { navController.navigate(AppScreens.MenuBotones.ruta) }) {

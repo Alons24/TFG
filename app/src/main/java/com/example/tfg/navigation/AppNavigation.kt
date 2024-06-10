@@ -13,6 +13,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.tfg.INICIOSESIONYREGISTRO.LoginScreen
 import com.example.tfg.INICIOSESIONYREGISTRO.MenuPrimero
 import com.example.tfg.INICIOSESIONYREGISTRO.pantallaRegistro
+import com.example.tfg.Screens.PantallasClientes.CartaTostasCliente
 import com.example.tfg.Screens.PantallasClientes.CrearCritica
 import com.example.tfg.Screens.PantallasClientes.Criticas.ActualizarCritica
 import com.example.tfg.Screens.PantallasClientes.Criticas.ConsultarCritica
@@ -90,7 +91,7 @@ fun AppNavigation() {
         composable(AppScreens.ConsultarCritica.ruta){ ConsultarCritica(navigationController) }
         composable(AppScreens.ActualizarCritica.ruta){ ActualizarCritica(navigationController, viewModel()) }
         composable(AppScreens.EliminarCritica.ruta){ EliminarCritica(navigationController, viewModel()) }
-
+        composable(AppScreens.CartaTostasCliente.ruta){ CartaTostasCliente(navigationController) }
         composable(AppScreens.CartaTostasTrabajadores.ruta){ CartaTostasTrabajadores(navigationController) }
         composable(AppScreens.CartaTostasTrabajadores2.ruta){ CartaTostasTrabajadores2(navigationController) }
         composable(AppScreens.CartaTostasTrabajadores3.ruta){ CartaTostasTrabajadores3(navigationController) }

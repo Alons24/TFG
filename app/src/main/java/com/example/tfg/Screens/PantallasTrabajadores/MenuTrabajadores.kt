@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.AlertDialog
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -24,19 +25,48 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.example.tfg.Retrofit.SessionManager
 import com.example.tfg.navigation.AppScreens
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MenuBotones(navController: NavHostController) {
-        
+
+    val showDialog = remember { mutableStateOf(false) }
+    val context = LocalContext.current
+
+    if (showDialog.value) {
+        AlertDialog(
+            onDismissRequest = { showDialog.value = false },
+            title = { Text("Cerrar sesión") },
+            text = { Text("¿Estás seguro de que quieres cerrar la sesión?") },
+            confirmButton = {
+                Button(onClick = {
+                    showDialog.value = false
+                    SessionManager.clear(context)
+                    navController.navigate(AppScreens.LoginScreen.ruta)
+                }) {
+                    Text("Sí")
+                }
+            },
+            dismissButton = {
+                Button(onClick = { showDialog.value = false }) {
+                    Text("No")
+                }
+            }
+        )
+    }
+
         //Fin del cajón lateral y enpieza el Scaffold
         Scaffold(
             topBar = {
@@ -109,8 +139,8 @@ fun MenuBotones(navController: NavHostController) {
                     colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
                 ) {
                     Text(
-                        text = "MESAS",
-                        fontSize = 40.sp,
+                        text = "Mesas",
+                        fontSize = 30.sp,
                     )
                 }
 
@@ -124,8 +154,8 @@ fun MenuBotones(navController: NavHostController) {
                     colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
                 ) {
                     Text(
-                        text = "DESPENSA",
-                        fontSize = 40.sp,
+                        text = "Consultar Despensa",
+                        fontSize = 30.sp,
                     )
                 }
 
@@ -139,8 +169,8 @@ fun MenuBotones(navController: NavHostController) {
                     colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
                 ) {
                     Text(
-                        text = "Ver reseñas",
-                        fontSize = 40.sp,
+                        text = "Consultar reseñas",
+                        fontSize = 30.sp,
                     )
                 }
 
