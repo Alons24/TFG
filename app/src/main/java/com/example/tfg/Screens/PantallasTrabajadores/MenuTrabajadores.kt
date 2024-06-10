@@ -130,7 +130,7 @@ fun MenuBotones(navController: NavHostController) {
                 }
 
                 Button(
-                    onClick = { navController.navigate(AppScreens.Reservas.ruta) },
+                    onClick = { navController.navigate(AppScreens.ConsultarCriticaTrabajadores.ruta) },
                     modifier = Modifier
                         .fillMaxWidth()
                         .width(300.dp)
