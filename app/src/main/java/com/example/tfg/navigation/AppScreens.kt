@@ -54,6 +54,7 @@ sealed class AppScreens(val ruta: String) {
     object ActualizarCritica:AppScreens("ActualizarCritica")
     object EliminarCritica:AppScreens("EliminarCritica")
     object ConsultarCritica:AppScreens("ConsultarCritica")
+    object ConsultarCriticaTrabajadores:AppScreens("ConsultarCriticaTrabajadores")
 
     object CartaTostasTrabajadores:AppScreens("CartaTostasTrabajadores")
     object CartaTostasTrabajadores2:AppScreens("CartaTostasTrabajadores2")

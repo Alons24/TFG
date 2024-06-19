@@ -83,7 +83,7 @@ fun LoginScreen(navController: NavHostController) {
 
                 )
                 Spacer(modifier = Modifier.height(30.dp))
-                SocialMediaSection()
+               /* SocialMediaSection()*/
 
                 val uiColor = if (isSystemInDarkTheme()) Color.White else Black
                 Box(modifier = Modifier
@@ -92,31 +92,33 @@ fun LoginScreen(navController: NavHostController) {
                     contentAlignment = Alignment.BottomCenter
                 ){
 
+                   TextButton(onClick = { navController.navigate("pantallaRegistro") }) {
                     Text(
-                        text = buildAnnotatedString {
-                            withStyle(
-                                style = SpanStyle(
-                                    color = Color(0xFF94A3B8),
-                                    fontSize = 14.sp,
-                                    fontFamily = Roboto,
-                                    fontWeight = FontWeight.Normal
-                                )
-                            ){
-                                append("No tienes una cuenta?")
-                            }
-                            withStyle(
-                                style = SpanStyle(
-                                    color = uiColor,
-                                    fontSize = 14.sp,
-                                    fontFamily = Roboto,
-                                    fontWeight = FontWeight.Medium
-                                )
-                            ){
-                                append(" ")
-                                append("Regístrate")
-                            }
-                        }
-                    )
+        text = buildAnnotatedString {
+            withStyle(
+                style = SpanStyle(
+                    color = Color(0xFF94A3B8),
+                    fontSize = 14.sp,
+                    fontFamily = Roboto,
+                    fontWeight = FontWeight.Normal
+                )
+            ){
+                append("No tienes una cuenta?")
+            }
+            withStyle(
+                style = SpanStyle(
+                    color = uiColor,
+                    fontSize = 14.sp,
+                    fontFamily = Roboto,
+                    fontWeight = FontWeight.Medium
+                )
+            ){
+                append(" ")
+                append("Regístrate")
+            }
+        }
+    )
+}
 
                 }
 
@@ -126,6 +128,7 @@ fun LoginScreen(navController: NavHostController) {
     }
 }
 
+/*
 @Composable
 fun SocialMediaSection() {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -155,7 +158,7 @@ fun SocialMediaSection() {
             }
         }
     }
-}
+}*/
 
 @Composable
 fun LoginSection(
@@ -227,7 +230,7 @@ fun LoginSection(
         trailingIcon = {
             TextButton(onClick = { /*TODO*/ }) {
                 Text(
-                    text = "Olvidé mi contraseña",
+                    text = "",
                     style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Medium),
                     color = uiColor
                 )

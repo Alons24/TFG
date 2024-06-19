@@ -13,7 +13,6 @@ import androidx.navigation.compose.rememberNavController
 import com.example.tfg.INICIOSESIONYREGISTRO.LoginScreen
 import com.example.tfg.INICIOSESIONYREGISTRO.MenuPrimero
 import com.example.tfg.INICIOSESIONYREGISTRO.pantallaRegistro
-import com.example.tfg.Screens.PantallasClientes.CartaTostasCliente
 import com.example.tfg.Screens.PantallasClientes.CrearCritica
 import com.example.tfg.Screens.PantallasClientes.Criticas.ActualizarCritica
 import com.example.tfg.Screens.PantallasClientes.Criticas.ConsultarCritica
@@ -102,7 +101,6 @@ fun AppNavigation() {
         composable(AppScreens.CartaCervezasTrabajadores.ruta){ CartaCervezasTrabajadores(navigationController) }
         composable(AppScreens.MenuDelDia.ruta){ MenuDelDia(navigationController) }
         composable(AppScreens.ConsultarReservaTrabajadores.ruta){ ConsultarReservaTrabajadores(navigationController) }
-        composable(AppScreens.CartaTostasCliente.ruta){ CartaTostasCliente(navigationController) }
 
 
 

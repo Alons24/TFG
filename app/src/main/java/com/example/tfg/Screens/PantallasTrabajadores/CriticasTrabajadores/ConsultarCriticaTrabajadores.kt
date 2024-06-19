@@ -68,7 +68,6 @@ fun ConsultarCriticaTrabajadores(navController: NavHostController) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     var valoracionFiltro by remember { mutableStateOf(0f) } // Agrega esta línea para tener una variable de valoración
     var criticas by remember { mutableStateOf<List<Critica>>(emptyList()) }
-    var criticasFiltradas by remember { mutableStateOf<List<Critica>>(emptyList()) }
 
     /* Inicio del cajón lateral */
     ModalNavigationDrawer(
@@ -236,10 +235,7 @@ fun ConsultarCriticaTrabajadores(navController: NavHostController) {
                     }
             }
 
-            // Efecto secundario que se ejecuta cuando valoracionFiltro cambia
-            LaunchedEffect(key1 = valoracionFiltro) {
-                criticasFiltradas = criticas.filter { it.valoracion >= valoracionFiltro }
-            }
+
 
             Column {
                 // Agrega un Slider para seleccionar el valor del filtro
@@ -257,7 +253,7 @@ fun ConsultarCriticaTrabajadores(navController: NavHostController) {
                         .padding(innerPadding) // Usar innerPadding proporcionado por Scaffold
                         .padding(16.dp) // Agregar padding adicional si es necesario
                 ) {
-                    items(criticasFiltradas) { critica ->
+                    items(criticas) { critica ->
                         Card(
                             shape = RoundedCornerShape(8.dp),
                             backgroundColor = Color.White,

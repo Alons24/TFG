@@ -198,7 +198,7 @@ fun MenuClientes(navController: NavHostController) {
                 ) {
                     Text(
                         text = "Menú del día",
-                        fontSize = 25.sp,
+                        fontSize = 30.sp,
                     )
                 }
 
@@ -215,7 +215,7 @@ fun MenuClientes(navController: NavHostController) {
                 ) {
                     Text(
                         text = "Escaner QR",
-                        fontSize = 25.sp,
+                        fontSize = 30.sp,
                     )
                 }
 
@@ -229,8 +229,8 @@ fun MenuClientes(navController: NavHostController) {
                     colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
                 ) {
                     Text(
-                        text = "MENÚ PLATOS",
-                        fontSize = 25.sp,
+                        text = "Menú Platos",
+                        fontSize = 30.sp,
                     )
                 }
 
@@ -246,8 +246,8 @@ fun MenuClientes(navController: NavHostController) {
                     colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
                 ) {
                     Text(
-                        text = "HACER RESERVA",
-                        fontSize = 25.sp,
+                        text = "Menú Reservas",
+                        fontSize = 30.sp,
                     )
                 }
 
@@ -261,8 +261,8 @@ fun MenuClientes(navController: NavHostController) {
                     colors = ButtonDefaults.buttonColors(Color(4, 104, 249, 255))
                 ) {
                     Text(
-                        text = "Menu Criticas",
-                        fontSize = 25.sp,
+                        text = "Menú Críticas",
+                        fontSize = 30.sp,
                     )
                 }
 
